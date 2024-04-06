@@ -15,6 +15,12 @@ public class register extends javax.swing.JFrame {
      */
     public register() {
         initComponents();
+        TxtUsuario.setBackground(new java.awt.Color(0,0,0,1));
+        TxtCorreo.setBackground(new java.awt.Color(0,0,0,1));
+        TxtContra.setBackground(new java.awt.Color(0,0,0,1));
+        TxtContraConf.setBackground(new java.awt.Color(0,0,0,1));
+        TxtNumTarjeta.setBackground(new java.awt.Color(0,0,0,1));
+        TxtCcv.setBackground(new java.awt.Color(0,0,0,1));
     }
 
     /**
@@ -26,39 +32,256 @@ public class register extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        BtgTipoTarjeta = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
+        LblUsuario = new javax.swing.JLabel();
+        TxtUsuario = new javax.swing.JTextField();
+        LbUsuario = new javax.swing.JLabel();
+        LblCorreo = new javax.swing.JLabel();
+        TxtCorreo = new javax.swing.JTextField();
+        LbCorreo = new javax.swing.JLabel();
+        LblContra = new javax.swing.JLabel();
+        TxtContra = new javax.swing.JPasswordField();
+        LbContra = new javax.swing.JLabel();
+        LblOcultar = new javax.swing.JLabel();
+        LblMostrar = new javax.swing.JLabel();
+        LblContraConf = new javax.swing.JLabel();
+        TxtContraConf = new javax.swing.JPasswordField();
+        LbContraConf = new javax.swing.JLabel();
+        LblOcultarConf = new javax.swing.JLabel();
+        LblMostrarConf = new javax.swing.JLabel();
+        LblTarjeta = new javax.swing.JLabel();
+        LblNumTarjeta = new javax.swing.JLabel();
+        TxtNumTarjeta = new javax.swing.JTextField();
+        LbNumTarjeta = new javax.swing.JLabel();
+        RdoVisa = new javax.swing.JRadioButton();
+        LblVisa = new javax.swing.JLabel();
+        RdoMastercard = new javax.swing.JRadioButton();
+        LblMastercard = new javax.swing.JLabel();
+        LblCcv = new javax.swing.JLabel();
+        TxtCcv = new javax.swing.JTextField();
+        LbCcv = new javax.swing.JLabel();
+        BtnRegistro = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
+        LblUser = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAutoRequestFocus(false);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setUndecorated(true);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(0, 57, 114));
         jPanel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("Usuario");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+        LblUsuario.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        LblUsuario.setForeground(new java.awt.Color(255, 255, 255));
+        LblUsuario.setText("Usuario :");
+        jPanel1.add(LblUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
 
-        jTextField1.setBorder(null);
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 220, 20));
+        TxtUsuario.setForeground(new java.awt.Color(255, 255, 255));
+        TxtUsuario.setText("Bairon");
+        TxtUsuario.setBorder(null);
+        jPanel1.add(TxtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 240, 25));
 
-        jLabel2.setText("____________________________________________");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 220, 30));
+        LbUsuario.setText("____________________________________________");
+        jPanel1.add(LbUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 240, 20));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 514, 530));
+        LblCorreo.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        LblCorreo.setForeground(new java.awt.Color(255, 255, 255));
+        LblCorreo.setText("Correo :");
+        jPanel1.add(LblCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
 
-        jPanel2.setBackground(new java.awt.Color(0, 102, 204));
-        jPanel2.setLayout(new java.awt.BorderLayout());
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(514, 0, 590, 530));
+        TxtCorreo.setForeground(new java.awt.Color(255, 255, 255));
+        TxtCorreo.setText("Bairongaba@gmail.com");
+        TxtCorreo.setBorder(null);
+        jPanel1.add(TxtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 240, 25));
+
+        LbCorreo.setText("____________________________________________");
+        jPanel1.add(LbCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 220, 20));
+
+        LblContra.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        LblContra.setForeground(new java.awt.Color(255, 255, 255));
+        LblContra.setText("Contraseña :");
+        jPanel1.add(LblContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
+
+        TxtContra.setForeground(new java.awt.Color(255, 255, 255));
+        TxtContra.setText("!416BnGb");
+        TxtContra.setBorder(null);
+        jPanel1.add(TxtContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 240, 25));
+
+        LbContra.setText("____________________________________________");
+        jPanel1.add(LbContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 220, 20));
+
+        LblOcultar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LblOcultar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_invisible_20px_1.png"))); // NOI18N
+        LblOcultar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        LblOcultar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                LblOcultarMouseClicked(evt);
+            }
+        });
+        jPanel1.add(LblOcultar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 140, 40, 40));
+
+        LblMostrar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LblMostrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_eye_20px_1.png"))); // NOI18N
+        LblMostrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        LblMostrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                LblMostrarMouseClicked(evt);
+            }
+        });
+        jPanel1.add(LblMostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 140, 40, 40));
+
+        LblContraConf.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        LblContraConf.setForeground(new java.awt.Color(255, 255, 255));
+        LblContraConf.setText("Confirmar contraseña :");
+        jPanel1.add(LblContraConf, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, -1));
+
+        TxtContraConf.setForeground(new java.awt.Color(255, 255, 255));
+        TxtContraConf.setText("1416BnGb");
+        TxtContraConf.setBorder(null);
+        jPanel1.add(TxtContraConf, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 240, 25));
+
+        LbContraConf.setText("____________________________________________");
+        jPanel1.add(LbContraConf, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 220, 20));
+
+        LblOcultarConf.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LblOcultarConf.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_invisible_20px_1.png"))); // NOI18N
+        LblOcultarConf.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        LblOcultarConf.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                LblOcultarConfMouseClicked(evt);
+            }
+        });
+        jPanel1.add(LblOcultarConf, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 200, 40, 40));
+
+        LblMostrarConf.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LblMostrarConf.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_eye_20px_1.png"))); // NOI18N
+        LblMostrarConf.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        LblMostrarConf.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                LblMostrarConfMouseClicked(evt);
+            }
+        });
+        jPanel1.add(LblMostrarConf, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 200, 40, 40));
+
+        LblTarjeta.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        LblTarjeta.setForeground(new java.awt.Color(255, 255, 255));
+        LblTarjeta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/2200535_atm card_credit card_debit card_visa_icon.png"))); // NOI18N
+        LblTarjeta.setText("Tarjeta");
+        jPanel1.add(LblTarjeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, -1, -1));
+
+        LblNumTarjeta.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        LblNumTarjeta.setForeground(new java.awt.Color(255, 255, 255));
+        LblNumTarjeta.setText("Numero Tarjeta :");
+        jPanel1.add(LblNumTarjeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, -1, -1));
+
+        TxtNumTarjeta.setForeground(new java.awt.Color(255, 255, 255));
+        TxtNumTarjeta.setText("1234567890123456");
+        TxtNumTarjeta.setBorder(null);
+        jPanel1.add(TxtNumTarjeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 240, 25));
+
+        LbNumTarjeta.setText("____________________________________________");
+        jPanel1.add(LbNumTarjeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 240, 20));
+
+        BtgTipoTarjeta.add(RdoVisa);
+        RdoVisa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel1.add(RdoVisa, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 350, 20, 25));
+
+        LblVisa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/2200543_atm card_credit card_debit card_visa_icon.png"))); // NOI18N
+        jPanel1.add(LblVisa, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 350, -1, 25));
+
+        BtgTipoTarjeta.add(RdoMastercard);
+        RdoMastercard.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel1.add(RdoMastercard, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 350, -1, 25));
+
+        LblMastercard.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/2200534_atm card_credit card_debit card_mastercard_icon.png"))); // NOI18N
+        jPanel1.add(LblMastercard, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 350, -1, 25));
+
+        LblCcv.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        LblCcv.setForeground(new java.awt.Color(255, 255, 255));
+        LblCcv.setText("Ccv :");
+        jPanel1.add(LblCcv, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, -1, -1));
+
+        TxtCcv.setForeground(new java.awt.Color(255, 255, 255));
+        TxtCcv.setText("123");
+        TxtCcv.setBorder(null);
+        jPanel1.add(TxtCcv, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 240, 25));
+
+        LbCcv.setText("____________________________________________");
+        jPanel1.add(LbCcv, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, 240, 20));
+
+        BtnRegistro.setBackground(new java.awt.Color(255, 255, 255));
+        BtnRegistro.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        BtnRegistro.setForeground(new java.awt.Color(0, 57, 114));
+        BtnRegistro.setText("Registrarme");
+        jPanel1.add(BtnRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 450, 341, 40));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, 530));
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        LblUser.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LblUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/User Profile.png"))); // NOI18N
+        jPanel2.add(LblUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 550, 530));
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 0, 550, 530));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        for (double i = 0.0; i <= 1.0; i = i + 0.1) {
+            String val = i + "";
+            float f = Float.valueOf(val);
+            this.setOpacity(f);
+            try {
+                Thread.sleep(50);
+            } catch (Exception e) {
+
+            }
+        }
+    }//GEN-LAST:event_formWindowOpened
+
+    private void LblOcultarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LblOcultarMouseClicked
+        TxtContra.setEchoChar((char) 0);
+        LblOcultar.setVisible(false);
+        LblOcultar.setEnabled(false);
+        LblMostrar.setEnabled(true);
+        LblMostrar.setEnabled(true);
+    }//GEN-LAST:event_LblOcultarMouseClicked
+
+    private void LblMostrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LblMostrarMouseClicked
+        TxtContra.setEchoChar((char) 8226);
+        LblOcultar.setVisible(true);
+        LblOcultar.setEnabled(true);
+        LblMostrar.setEnabled(false);
+        LblMostrar.setEnabled(false);
+    }//GEN-LAST:event_LblMostrarMouseClicked
+
+    private void LblOcultarConfMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LblOcultarConfMouseClicked
+        TxtContraConf.setEchoChar((char) 0);
+        LblOcultarConf.setVisible(false);
+        LblOcultarConf.setEnabled(false);
+        LblMostrarConf.setEnabled(true);
+        LblMostrarConf.setEnabled(true);
+    }//GEN-LAST:event_LblOcultarConfMouseClicked
+
+    private void LblMostrarConfMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LblMostrarConfMouseClicked
+        TxtContraConf.setEchoChar((char) 8226);
+        LblOcultarConf.setVisible(true);
+        LblOcultarConf.setEnabled(true);
+        LblMostrarConf.setEnabled(false);
+        LblMostrarConf.setEnabled(false);
+    }//GEN-LAST:event_LblMostrarConfMouseClicked
 
     /**
      * @param args the command line arguments
@@ -96,10 +319,37 @@ public class register extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.ButtonGroup BtgTipoTarjeta;
+    private javax.swing.JButton BtnRegistro;
+    private javax.swing.JLabel LbCcv;
+    private javax.swing.JLabel LbContra;
+    private javax.swing.JLabel LbContraConf;
+    private javax.swing.JLabel LbCorreo;
+    private javax.swing.JLabel LbNumTarjeta;
+    private javax.swing.JLabel LbUsuario;
+    private javax.swing.JLabel LblCcv;
+    private javax.swing.JLabel LblContra;
+    private javax.swing.JLabel LblContraConf;
+    private javax.swing.JLabel LblCorreo;
+    private javax.swing.JLabel LblMastercard;
+    private javax.swing.JLabel LblMostrar;
+    private javax.swing.JLabel LblMostrarConf;
+    private javax.swing.JLabel LblNumTarjeta;
+    private javax.swing.JLabel LblOcultar;
+    private javax.swing.JLabel LblOcultarConf;
+    private javax.swing.JLabel LblTarjeta;
+    private javax.swing.JLabel LblUser;
+    private javax.swing.JLabel LblUsuario;
+    private javax.swing.JLabel LblVisa;
+    private javax.swing.JRadioButton RdoMastercard;
+    private javax.swing.JRadioButton RdoVisa;
+    private javax.swing.JTextField TxtCcv;
+    private javax.swing.JPasswordField TxtContra;
+    private javax.swing.JPasswordField TxtContraConf;
+    private javax.swing.JTextField TxtCorreo;
+    private javax.swing.JTextField TxtNumTarjeta;
+    private javax.swing.JTextField TxtUsuario;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }
