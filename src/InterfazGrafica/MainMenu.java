@@ -15,6 +15,10 @@ public class MainMenu extends javax.swing.JFrame {
      */
     public MainMenu() {
         initComponents();
+        BtnRestaurante.setBackground(new java.awt.Color(255, 255,255, 1));
+        BtnCarritoCompras.setBackground(new java.awt.Color(255, 255,255, 1));
+        BtnGerente.setBackground(new java.awt.Color(255, 255,255, 1));
+        BtnMantenimiento.setBackground(new java.awt.Color(255, 255,255, 1));
         BtnSalir.setBackground(new java.awt.Color(255, 255,255, 1));
     }
 
@@ -30,10 +34,11 @@ public class MainMenu extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         LblIconUsuario = new javax.swing.JLabel();
         LblUsuario = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        BtnRestaurante = new javax.swing.JButton();
+        BtnCarritoCompras = new javax.swing.JButton();
+        BtnGerente = new javax.swing.JButton();
         BtnSalir = new javax.swing.JButton();
+        BtnMantenimiento = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         LblRestaurante = new javax.swing.JLabel();
 
@@ -56,30 +61,54 @@ public class MainMenu extends javax.swing.JFrame {
         LblIconUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/172626_user_male_icon.png"))); // NOI18N
         LblIconUsuario.setPreferredSize(new java.awt.Dimension(70, 70));
 
+        LblUsuario.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        LblUsuario.setForeground(new java.awt.Color(255, 255, 255));
         LblUsuario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LblUsuario.setText("Bairon");
         LblUsuario.setPreferredSize(new java.awt.Dimension(70, 16));
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        BtnRestaurante.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        BtnRestaurante.setForeground(new java.awt.Color(0, 57, 114));
+        BtnRestaurante.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/185114_chef_restaurant_food_icon.png"))); // NOI18N
+        BtnRestaurante.setText("Restaurantes");
+        BtnRestaurante.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnRestaurante.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                BtnRestauranteActionPerformed(evt);
             }
         });
 
-        jButton2.setText("jButton2");
+        BtnCarritoCompras.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        BtnCarritoCompras.setForeground(new java.awt.Color(0, 57, 114));
+        BtnCarritoCompras.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/185101_shopping_caddie_icon.png"))); // NOI18N
+        BtnCarritoCompras.setText("Carrito");
+        BtnCarritoCompras.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
-        jButton3.setText("jButton3");
+        BtnGerente.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        BtnGerente.setForeground(new java.awt.Color(0, 57, 114));
+        BtnGerente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/2318438_boss_officeworker_worker w_ tie_businessman_manager_icon.png"))); // NOI18N
+        BtnGerente.setText("Gerente");
+        BtnGerente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         BtnSalir.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         BtnSalir.setForeground(new java.awt.Color(0, 57, 114));
         BtnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/3005766_account_door_exit_logout_icon.png"))); // NOI18N
         BtnSalir.setText("Salir");
-        BtnSalir.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         BtnSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BtnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnSalirActionPerformed(evt);
+            }
+        });
+
+        BtnMantenimiento.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        BtnMantenimiento.setForeground(new java.awt.Color(0, 57, 114));
+        BtnMantenimiento.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/10384008_digital_maintenance_cmms_system_management_icon.png"))); // NOI18N
+        BtnMantenimiento.setText("Mantenimiento");
+        BtnMantenimiento.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        BtnMantenimiento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnMantenimientoActionPerformed(evt);
             }
         });
 
@@ -91,17 +120,18 @@ public class MainMenu extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 63, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                             .addComponent(LblIconUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(LblUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(69, 69, 69))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(BtnMantenimiento, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 197, Short.MAX_VALUE)
                             .addComponent(BtnSalir, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(BtnGerente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(BtnCarritoCompras, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(BtnRestaurante, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
@@ -111,12 +141,14 @@ public class MainMenu extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(LblUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(BtnRestaurante)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
-                .addGap(12, 12, 12)
-                .addComponent(jButton3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 285, Short.MAX_VALUE)
+                .addComponent(BtnCarritoCompras)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BtnGerente)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BtnMantenimiento)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 133, Short.MAX_VALUE)
                 .addComponent(BtnSalir)
                 .addContainerGap())
         );
@@ -152,9 +184,13 @@ public class MainMenu extends javax.swing.JFrame {
         Utilitario.UtilitarioVentana.fade(this);
     }//GEN-LAST:event_formWindowOpened
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void BtnRestauranteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRestauranteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_BtnRestauranteActionPerformed
+
+    private void BtnMantenimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnMantenimientoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnMantenimientoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -192,13 +228,14 @@ public class MainMenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BtnCarritoCompras;
+    private javax.swing.JButton BtnGerente;
+    private javax.swing.JButton BtnMantenimiento;
+    private javax.swing.JButton BtnRestaurante;
     private javax.swing.JButton BtnSalir;
     private javax.swing.JLabel LblIconUsuario;
     private javax.swing.JLabel LblRestaurante;
     private javax.swing.JLabel LblUsuario;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
