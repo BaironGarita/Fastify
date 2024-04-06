@@ -4,6 +4,11 @@
  */
 package InterfazGrafica;
 
+import Utilitario.UtilitarioVentana;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import javax.swing.JFrame;
+
 /**
  *
  * @author Estudiante
@@ -15,12 +20,23 @@ public class register extends javax.swing.JFrame {
      */
     public register() {
         initComponents();
-        TxtUsuario.setBackground(new java.awt.Color(0,0,0,1));
-        TxtCorreo.setBackground(new java.awt.Color(0,0,0,1));
-        TxtContra.setBackground(new java.awt.Color(0,0,0,1));
-        TxtContraConf.setBackground(new java.awt.Color(0,0,0,1));
-        TxtNumTarjeta.setBackground(new java.awt.Color(0,0,0,1));
-        TxtCcv.setBackground(new java.awt.Color(0,0,0,1));
+        TxtUsuario.setBackground(new java.awt.Color(0, 0, 0, 1));
+        TxtCorreo.setBackground(new java.awt.Color(0, 0, 0, 1));
+        TxtContra.setBackground(new java.awt.Color(0, 0, 0, 1));
+        TxtContraConf.setBackground(new java.awt.Color(0, 0, 0, 1));
+        TxtNumTarjeta.setBackground(new java.awt.Color(0, 0, 0, 1));
+        TxtCcv.setBackground(new java.awt.Color(0, 0, 0, 1));
+        
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                fadeOutAndClose();
+            }
+
+            private void fadeOutAndClose() {
+                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            }
+        });
     }
 
     /**
@@ -69,6 +85,7 @@ public class register extends javax.swing.JFrame {
         setAutoRequestFocus(false);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(920, 530));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -90,6 +107,7 @@ public class register extends javax.swing.JFrame {
         TxtUsuario.setBorder(null);
         jPanel1.add(TxtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 240, 25));
 
+        LbUsuario.setForeground(new java.awt.Color(255, 255, 255));
         LbUsuario.setText("____________________________________________");
         jPanel1.add(LbUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 240, 20));
 
@@ -103,6 +121,7 @@ public class register extends javax.swing.JFrame {
         TxtCorreo.setBorder(null);
         jPanel1.add(TxtCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 240, 25));
 
+        LbCorreo.setForeground(new java.awt.Color(255, 255, 255));
         LbCorreo.setText("____________________________________________");
         jPanel1.add(LbCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 220, 20));
 
@@ -116,6 +135,7 @@ public class register extends javax.swing.JFrame {
         TxtContra.setBorder(null);
         jPanel1.add(TxtContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 240, 25));
 
+        LbContra.setForeground(new java.awt.Color(255, 255, 255));
         LbContra.setText("____________________________________________");
         jPanel1.add(LbContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 220, 20));
 
@@ -149,6 +169,7 @@ public class register extends javax.swing.JFrame {
         TxtContraConf.setBorder(null);
         jPanel1.add(TxtContraConf, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 240, 25));
 
+        LbContraConf.setForeground(new java.awt.Color(255, 255, 255));
         LbContraConf.setText("____________________________________________");
         jPanel1.add(LbContraConf, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 220, 20));
 
@@ -188,6 +209,7 @@ public class register extends javax.swing.JFrame {
         TxtNumTarjeta.setBorder(null);
         jPanel1.add(TxtNumTarjeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 240, 25));
 
+        LbNumTarjeta.setForeground(new java.awt.Color(255, 255, 255));
         LbNumTarjeta.setText("____________________________________________");
         jPanel1.add(LbNumTarjeta, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, 240, 20));
 
@@ -215,6 +237,7 @@ public class register extends javax.swing.JFrame {
         TxtCcv.setBorder(null);
         jPanel1.add(TxtCcv, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, 240, 25));
 
+        LbCcv.setForeground(new java.awt.Color(255, 255, 255));
         LbCcv.setText("____________________________________________");
         jPanel1.add(LbCcv, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, 240, 20));
 
@@ -222,6 +245,11 @@ public class register extends javax.swing.JFrame {
         BtnRegistro.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         BtnRegistro.setForeground(new java.awt.Color(0, 57, 114));
         BtnRegistro.setText("Registrarme");
+        BtnRegistro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnRegistroActionPerformed(evt);
+            }
+        });
         jPanel1.add(BtnRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 450, 341, 40));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, 530));
@@ -239,16 +267,7 @@ public class register extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        for (double i = 0.0; i <= 1.0; i = i + 0.1) {
-            String val = i + "";
-            float f = Float.valueOf(val);
-            this.setOpacity(f);
-            try {
-                Thread.sleep(50);
-            } catch (Exception e) {
-
-            }
-        }
+        UtilitarioVentana.fade(this);
     }//GEN-LAST:event_formWindowOpened
 
     private void LblOcultarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LblOcultarMouseClicked
@@ -282,6 +301,10 @@ public class register extends javax.swing.JFrame {
         LblMostrarConf.setEnabled(false);
         LblMostrarConf.setEnabled(false);
     }//GEN-LAST:event_LblMostrarConfMouseClicked
+
+    private void BtnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRegistroActionPerformed
+        UtilitarioVentana.fadeOutAndClose(this);
+    }//GEN-LAST:event_BtnRegistroActionPerformed
 
     /**
      * @param args the command line arguments

@@ -8,19 +8,22 @@ package InterfazGrafica;
 import javax.swing.JFrame;
 import InterfazGrafica.register;
 import Utilitario.UtilitarioVentana;
+
 /**
  *
  * @author ME1
  */
 public class login extends javax.swing.JFrame {
 
+    static JFrame Ventana;
+
     /**
      * Creates new form login
      */
     public login() {
         initComponents();
-        TxtUsuario.setBackground(new java.awt.Color(0,0,0,1));
-        TxtContra.setBackground(new java.awt.Color(0,0,0,1));
+        TxtUsuario.setBackground(new java.awt.Color(0, 0, 0, 1));
+        TxtContra.setBackground(new java.awt.Color(0, 0, 0, 1));
     }
 
     /**
@@ -184,11 +187,11 @@ public class login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void LblEquisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LblEquisMouseClicked
-        System.exit(0);
+        UtilitarioVentana.fadeOutAndExit(this);
     }//GEN-LAST:event_LblEquisMouseClicked
 
     private void LblOcultarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LblOcultarMouseClicked
-        TxtContra.setEchoChar((char)0);
+        TxtContra.setEchoChar((char) 0);
         LblOcultar.setVisible(false);
         LblOcultar.setEnabled(false);
         LblMostrar.setEnabled(true);
@@ -196,7 +199,7 @@ public class login extends javax.swing.JFrame {
     }//GEN-LAST:event_LblOcultarMouseClicked
 
     private void LblMostrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LblMostrarMouseClicked
-        TxtContra.setEchoChar((char)8226);
+        TxtContra.setEchoChar((char) 8226);
         LblOcultar.setVisible(true);
         LblOcultar.setEnabled(true);
         LblMostrar.setEnabled(false);
@@ -205,16 +208,7 @@ public class login extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         UtilitarioVentana.centrarVentanaJFrame(this, false);
-        for (double i = 0.0; i <=1.0; i = i+0.1){
-            String val = i+ "";
-            float f = Float.valueOf(val);
-            this.setOpacity(f);
-            try{
-                Thread.sleep(50);
-            }catch(Exception e){
-                
-            }
-        }
+        UtilitarioVentana.fade(this);
     }//GEN-LAST:event_formWindowOpened
 
     private void BtnInicioSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnInicioSesionActionPerformed
@@ -222,7 +216,7 @@ public class login extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnInicioSesionActionPerformed
 
     private void LblRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LblRegistroMouseClicked
-        UtilitarioVentana.centrarVentanaJFrame(new register(), false);
+        UtilitarioVentana.centrarVentanaJFrame(this.Ventana = new register(), false);
     }//GEN-LAST:event_LblRegistroMouseClicked
 
     /**
