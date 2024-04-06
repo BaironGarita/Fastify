@@ -4,6 +4,7 @@
  */
 package Utilitario;
 
+import InterfazGrafica.login;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -126,11 +127,11 @@ public class UtilitarioVentana {
         }
     }
 
-    public static void fade(JFrame component) {
+    public static void fade(JFrame componente) {
         for (double i = 0.0; i <= 1.0; i = i + 0.1) {
             String val = i + "";
             float f = Float.valueOf(val);
-            component.setOpacity(f);
+            componente.setOpacity(f);
             try {
                 Thread.sleep(50);
             } catch (Exception e) {
@@ -138,7 +139,7 @@ public class UtilitarioVentana {
             }
         }
     }
-    
+
     public static void fadeOutAndClose(JFrame componente) {
         for (double i = 1.0; i >= 0.0; i = i - 0.1) {
             String val = i + "";
@@ -150,11 +151,11 @@ public class UtilitarioVentana {
                 e.printStackTrace();
             }
         }
-        
+
         // Cerrar la ventana después de la animación
         componente.dispose();
     }
-    
+
     public static void fadeOutAndExit(JFrame componente) {
         for (double i = 1.0; i >= 0.0; i = i - 0.1) {
             String val = i + "";
@@ -166,9 +167,30 @@ public class UtilitarioVentana {
                 e.printStackTrace();
             }
         }
-        
+
         // Cerrar la ventana después de la animación
         System.exit(0);
     }
 
+    public static void fadeOutAndClosing(JFrame componente) {
+        for (double i = 1.0; i >= 0.0; i = i - 0.1) {
+            String val = i + "";
+            float f = Float.valueOf(val);
+            componente.setOpacity(f);
+            try {
+                Thread.sleep(50);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        // Cerrar la ventana después de la animación
+        componente.setVisible(false);
+    }
+
+    public static void fadeRegistro(JFrame componente) {
+        componente.dispose(); 
+        JFrame nuevoComponente = new InterfazGrafica.login();
+        nuevoComponente.setVisible(true); // Muestra el nuevo JFrame
+    }
 }

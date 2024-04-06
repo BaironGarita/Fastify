@@ -6,7 +6,6 @@
 package InterfazGrafica;
 
 import javax.swing.JFrame;
-import InterfazGrafica.register;
 import Utilitario.UtilitarioVentana;
 
 /**
@@ -15,7 +14,8 @@ import Utilitario.UtilitarioVentana;
  */
 public class login extends javax.swing.JFrame {
 
-    static JFrame Ventana;
+    static JFrame Registro;
+    static JFrame Main;
 
     /**
      * Creates new form login
@@ -56,6 +56,7 @@ public class login extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -212,11 +213,13 @@ public class login extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void BtnInicioSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnInicioSesionActionPerformed
-        // TODO add your handling code here:
+        Utilitario.UtilitarioVentana.fadeOutAndClose(this);
+        UtilitarioVentana.centrarVentanaJFrame(this.Main = new MainMenu(), false);
     }//GEN-LAST:event_BtnInicioSesionActionPerformed
 
     private void LblRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LblRegistroMouseClicked
-        UtilitarioVentana.centrarVentanaJFrame(this.Ventana = new register(), false);
+        Utilitario.UtilitarioVentana.fadeOutAndClose(this);
+        UtilitarioVentana.centrarVentanaJFrame(this.Registro = new register(this), false);
     }//GEN-LAST:event_LblRegistroMouseClicked
 
     /**

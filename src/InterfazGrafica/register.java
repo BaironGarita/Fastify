@@ -5,8 +5,6 @@
 package InterfazGrafica;
 
 import Utilitario.UtilitarioVentana;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 
 /**
@@ -15,10 +13,11 @@ import javax.swing.JFrame;
  */
 public class register extends javax.swing.JFrame {
 
+    static JFrame Login;
     /**
      * Creates new form register
      */
-    public register() {
+    public register(JFrame componente) {
         initComponents();
         TxtUsuario.setBackground(new java.awt.Color(0, 0, 0, 1));
         TxtCorreo.setBackground(new java.awt.Color(0, 0, 0, 1));
@@ -26,17 +25,8 @@ public class register extends javax.swing.JFrame {
         TxtContraConf.setBackground(new java.awt.Color(0, 0, 0, 1));
         TxtNumTarjeta.setBackground(new java.awt.Color(0, 0, 0, 1));
         TxtCcv.setBackground(new java.awt.Color(0, 0, 0, 1));
-        
-        addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                fadeOutAndClose();
-            }
-
-            private void fadeOutAndClose() {
-                throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-            }
-        });
+        this.Login = componente;
+        UtilitarioVentana.fade(this);
     }
 
     /**
@@ -86,6 +76,7 @@ public class register extends javax.swing.JFrame {
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setUndecorated(true);
         setPreferredSize(new java.awt.Dimension(920, 530));
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -303,7 +294,10 @@ public class register extends javax.swing.JFrame {
     }//GEN-LAST:event_LblMostrarConfMouseClicked
 
     private void BtnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRegistroActionPerformed
-        UtilitarioVentana.fadeOutAndClose(this);
+        Utilitario.UtilitarioVentana.fadeOutAndClose(this);
+        UtilitarioVentana.fadeRegistro(Login);
+        
+
     }//GEN-LAST:event_BtnRegistroActionPerformed
 
     /**
@@ -336,7 +330,7 @@ public class register extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new register().setVisible(true);
+                new register(Login).setVisible(true);
             }
         });
     }
