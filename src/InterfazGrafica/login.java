@@ -5,8 +5,11 @@
  */
 package InterfazGrafica;
 
+import LogicaNegocio.Usuario;
 import javax.swing.JFrame;
 import Utilitario.UtilitarioVentana;
+import javax.swing.JOptionPane;
+import PersistenciaDatos.PersistenciaUsuarios;
 
 /**
  *
@@ -14,6 +17,7 @@ import Utilitario.UtilitarioVentana;
  */
 public class login extends javax.swing.JFrame {
 
+    private int intentos = 0;
     static JFrame Registro;
     static JFrame Main;
 
@@ -213,6 +217,26 @@ public class login extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void BtnInicioSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnInicioSesionActionPerformed
+        Usuario oUsuario = PersistenciaUsuarios.getUsuario(TxtUsuario.getText().trim());
+        if (oUsuario != null) {
+            //obtener la constraseña del control
+            char[] contraseña = TxtContra.getPassword();
+            if (oUsuario.getConstraseña().equals(String.valueOf(contraseña))) {
+                PrincipalFastify.setoUsuario(oUsuario);
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Contraseña invalida");
+                ++intentos;
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "El usuario no existe");
+            ++intentos;
+        }
+        //validar los intentos
+        if (intentos == 3) {
+            JOptionPane.showMessageDialog(this, "Supero la cantidad de intentos");
+            System.exit(0);
+        }
         Utilitario.UtilitarioVentana.fadeOutAndClose(this);
         UtilitarioVentana.centrarVentanaJFrame(this.Main = new MainMenu(), false);
     }//GEN-LAST:event_BtnInicioSesionActionPerformed

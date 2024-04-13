@@ -5,7 +5,9 @@
 package InterfazGrafica;
 
 import Utilitario.UtilitarioVentana;
+import java.awt.Color;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -14,6 +16,7 @@ import javax.swing.JFrame;
 public class register extends javax.swing.JFrame {
 
     static JFrame Login;
+
     /**
      * Creates new form register
      */
@@ -42,7 +45,7 @@ public class register extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         LblUsuario = new javax.swing.JLabel();
         TxtUsuario = new javax.swing.JTextField();
-        LbUsuario = new javax.swing.JLabel();
+        LbUsuarioUnder = new javax.swing.JLabel();
         LblCorreo = new javax.swing.JLabel();
         TxtCorreo = new javax.swing.JTextField();
         LbCorreo = new javax.swing.JLabel();
@@ -98,9 +101,9 @@ public class register extends javax.swing.JFrame {
         TxtUsuario.setBorder(null);
         jPanel1.add(TxtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 240, 25));
 
-        LbUsuario.setForeground(new java.awt.Color(255, 255, 255));
-        LbUsuario.setText("____________________________________________");
-        jPanel1.add(LbUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 240, 20));
+        LbUsuarioUnder.setForeground(new java.awt.Color(255, 255, 255));
+        LbUsuarioUnder.setText("____________________________________________");
+        jPanel1.add(LbUsuarioUnder, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 50, 240, 20));
 
         LblCorreo.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
         LblCorreo.setForeground(new java.awt.Color(255, 255, 255));
@@ -294,9 +297,30 @@ public class register extends javax.swing.JFrame {
     }//GEN-LAST:event_LblMostrarConfMouseClicked
 
     private void BtnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRegistroActionPerformed
+        if (TxtUsuario.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Debe indicar el nombre de usuario ");
+            LbUsuarioUnder.setForeground(Color.red);
+            return;
+        }
+        if (TxtCorreo.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Debe indicar el Correo del usuario ");
+            LbCorreo.setForeground(Color.red);
+            return;
+        }
+        if (TxtNumTarjeta.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Debe indicar el numero de tarjeta");
+            LbNumTarjeta.setForeground(Color.red);
+            return;
+        }
+        if (TxtCcv.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Debe indicar el numero de Ccv");
+            LbCcv.setForeground(Color.red);
+            return;
+        }
+
         Utilitario.UtilitarioVentana.fadeOutAndClose(this);
         UtilitarioVentana.fadeRegistro(Login);
-        
+
 
     }//GEN-LAST:event_BtnRegistroActionPerformed
 
@@ -343,7 +367,7 @@ public class register extends javax.swing.JFrame {
     private javax.swing.JLabel LbContraConf;
     private javax.swing.JLabel LbCorreo;
     private javax.swing.JLabel LbNumTarjeta;
-    private javax.swing.JLabel LbUsuario;
+    private javax.swing.JLabel LbUsuarioUnder;
     private javax.swing.JLabel LblCcv;
     private javax.swing.JLabel LblContra;
     private javax.swing.JLabel LblContraConf;
