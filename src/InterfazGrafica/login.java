@@ -10,13 +10,16 @@ import javax.swing.JFrame;
 import Utilitario.UtilitarioVentana;
 import javax.swing.JOptionPane;
 import PersistenciaDatos.PersistenciaUsuarios;
+import LogicaNegocio.TipoUsuario;
 
 /**
  *
  * @author ME1
  */
 public class login extends javax.swing.JFrame {
-
+    public static String nombre;
+    public static TipoUsuario rol;
+    public static Usuario Usuariolog;
     private int intentos = 0;
     static JFrame Registro;
     static JFrame Main;
@@ -106,7 +109,7 @@ public class login extends javax.swing.JFrame {
 
         LblUsuario.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         LblUsuario.setForeground(new java.awt.Color(199, 226, 255));
-        LblUsuario.setText("Usuario");
+        LblUsuario.setText("Correo");
         jPanel2.add(LblUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 123, 341, -1));
 
         TxtUsuario.setFont(TxtUsuario.getFont().deriveFont(TxtUsuario.getFont().getSize()+2f));
@@ -238,8 +241,11 @@ public class login extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Supero la cantidad de intentos");
             System.exit(0);
         }
-//        Utilitario.UtilitarioVentana.fadeOutAndClose(this);
-//        UtilitarioVentana.centrarVentanaJFrame(this.Main = new MainMenu(), false);
+        this.nombre = oUsuario.getNombre();
+        this.rol = oUsuario.getRol();
+        this.Usuariolog = oUsuario;
+        Utilitario.UtilitarioVentana.fadeOutAndClose(this);
+        UtilitarioVentana.centrarVentanaJFrame(this.Main = new MainMenu(), false);
     }//GEN-LAST:event_BtnInicioSesionActionPerformed
 
     private void LblRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LblRegistroMouseClicked

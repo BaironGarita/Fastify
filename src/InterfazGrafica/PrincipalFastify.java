@@ -22,8 +22,8 @@ public class PrincipalFastify {
 //      Login.setLocationRelativeTo(null);
     }
     public static void crearUsuarios(){
-        PersistenciaUsuarios.setUsuario(new Usuario("admin@google.com",
-                "123456", "Administrador", TipoUsuario.ADMINISTRADOR));
+        PersistenciaUsuarios.setUsuario(new Usuario("admin@gmail.com",
+                "1234", "Administrador", TipoUsuario.ADMINISTRADOR));
          PersistenciaUsuarios.setUsuario(new Usuario("lagueroc@utn.ac.cr",
                 "123456", "Laura Aguero", TipoUsuario.REGULAR));
     }

@@ -20,6 +20,18 @@ public class MainMenu extends javax.swing.JFrame {
         BtnGerente.setBackground(new java.awt.Color(255, 255,255, 1));
         BtnMantenimiento.setBackground(new java.awt.Color(255, 255,255, 1));
         BtnSalir.setBackground(new java.awt.Color(255, 255,255, 1));
+        LblUsuario.setText(login.nombre);
+        switch (login.rol) {
+            case REGULAR:
+                BtnGerente.setVisible(false);
+                BtnMantenimiento.setVisible(false);
+                break;
+            case GERENTE:
+                BtnMantenimiento.setVisible(false);
+                break;
+            default:
+                break;
+        }
     }
 
     /**
@@ -51,8 +63,17 @@ public class MainMenu extends javax.swing.JFrame {
         LblImgGerente = new javax.swing.JLabel();
         PnlMantenimiento = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
+        PnlInfoUsuario = new javax.swing.JPanel();
+        LblInfoNameUser = new javax.swing.JLabel();
+        LtlCorreo = new javax.swing.JLabel();
+        lblInfoCorreo = new javax.swing.JLabel();
+        LTlContra = new javax.swing.JLabel();
+        LblInfoContra = new javax.swing.JLabel();
+        LtlTarjeta = new javax.swing.JLabel();
+        LblInfoNumTar = new javax.swing.JLabel();
+        LblDecoUsuario = new javax.swing.JLabel();
+        LtlRol = new javax.swing.JLabel();
+        LblInfoRol = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(830, 530));
@@ -155,12 +176,11 @@ public class MainMenu extends javax.swing.JFrame {
             .addGroup(PnlUsuarioLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(PnlUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(LblUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(PnlUsuarioLayout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(PnlUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(LblIconUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(LblUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(LblIconUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(69, 69, 69))
                     .addGroup(PnlUsuarioLayout.createSequentialGroup()
                         .addGroup(PnlUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -309,30 +329,106 @@ public class MainMenu extends javax.swing.JFrame {
 
         TpnVentanas.addTab("5", PnlMantenimiento);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        PnlInfoUsuario.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 57, 114));
-        jLabel5.setText("Usuario");
+        LblInfoNameUser.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        LblInfoNameUser.setForeground(new java.awt.Color(0, 57, 114));
+        LblInfoNameUser.setText("Usuario");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(262, 262, 262)
-                .addComponent(jLabel5)
-                .addContainerGap(322, Short.MAX_VALUE))
+        LtlCorreo.setFont(LtlCorreo.getFont().deriveFont(LtlCorreo.getFont().getSize()+6f));
+        LtlCorreo.setForeground(new java.awt.Color(0, 57, 114));
+        LtlCorreo.setText("Correo :");
+
+        lblInfoCorreo.setFont(lblInfoCorreo.getFont().deriveFont(lblInfoCorreo.getFont().getSize()+2f));
+        lblInfoCorreo.setForeground(new java.awt.Color(0, 57, 114));
+        lblInfoCorreo.setText("Info 1");
+
+        LTlContra.setFont(LTlContra.getFont().deriveFont(LTlContra.getFont().getSize()+6f));
+        LTlContra.setForeground(new java.awt.Color(0, 57, 114));
+        LTlContra.setText("Contraseña :");
+
+        LblInfoContra.setFont(LblInfoContra.getFont().deriveFont(LblInfoContra.getFont().getSize()+2f));
+        LblInfoContra.setForeground(new java.awt.Color(0, 57, 114));
+        LblInfoContra.setText("Info 2");
+
+        LtlTarjeta.setFont(LtlTarjeta.getFont().deriveFont(LtlTarjeta.getFont().getSize()+6f));
+        LtlTarjeta.setForeground(new java.awt.Color(0, 57, 114));
+        LtlTarjeta.setText("Num.Tarjeta :");
+
+        LblInfoNumTar.setFont(LblInfoNumTar.getFont().deriveFont(LblInfoNumTar.getFont().getSize()+2f));
+        LblInfoNumTar.setForeground(new java.awt.Color(0, 57, 114));
+        LblInfoNumTar.setText("Info 3");
+
+        LblDecoUsuario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LblDecoUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/User Profile.png"))); // NOI18N
+        LblDecoUsuario.setToolTipText("");
+
+        LtlRol.setFont(LtlRol.getFont().deriveFont(LtlRol.getFont().getSize()+6f));
+        LtlRol.setForeground(new java.awt.Color(0, 57, 114));
+        LtlRol.setText("Rol :");
+
+        LblInfoRol.setFont(LblInfoRol.getFont().deriveFont(LblInfoRol.getFont().getSize()+2f));
+        LblInfoRol.setForeground(new java.awt.Color(0, 57, 114));
+        LblInfoRol.setText("Info 4");
+
+        javax.swing.GroupLayout PnlInfoUsuarioLayout = new javax.swing.GroupLayout(PnlInfoUsuario);
+        PnlInfoUsuario.setLayout(PnlInfoUsuarioLayout);
+        PnlInfoUsuarioLayout.setHorizontalGroup(
+            PnlInfoUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PnlInfoUsuarioLayout.createSequentialGroup()
+                .addGroup(PnlInfoUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PnlInfoUsuarioLayout.createSequentialGroup()
+                        .addGroup(PnlInfoUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(PnlInfoUsuarioLayout.createSequentialGroup()
+                                .addGap(276, 276, 276)
+                                .addComponent(LblInfoNameUser))
+                            .addGroup(PnlInfoUsuarioLayout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addGroup(PnlInfoUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(PnlInfoUsuarioLayout.createSequentialGroup()
+                                        .addComponent(LtlTarjeta)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(LblInfoNumTar))
+                                    .addGroup(PnlInfoUsuarioLayout.createSequentialGroup()
+                                        .addComponent(LTlContra)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(LblInfoContra))
+                                    .addGroup(PnlInfoUsuarioLayout.createSequentialGroup()
+                                        .addComponent(LtlCorreo)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(lblInfoCorreo)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(LtlRol)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(LblInfoRol)))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(LblDecoUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 629, Short.MAX_VALUE))
+                .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        PnlInfoUsuarioLayout.setVerticalGroup(
+            PnlInfoUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PnlInfoUsuarioLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel5)
-                .addContainerGap(504, Short.MAX_VALUE))
+                .addComponent(LblInfoNameUser)
+                .addGap(18, 18, 18)
+                .addGroup(PnlInfoUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LtlCorreo)
+                    .addComponent(lblInfoCorreo)
+                    .addComponent(LtlRol)
+                    .addComponent(LblInfoRol))
+                .addGap(18, 18, 18)
+                .addGroup(PnlInfoUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LTlContra)
+                    .addComponent(LblInfoContra))
+                .addGap(18, 18, 18)
+                .addGroup(PnlInfoUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LtlTarjeta)
+                    .addComponent(LblInfoNumTar))
+                .addGap(18, 18, 18)
+                .addComponent(LblDecoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 357, Short.MAX_VALUE))
         );
 
-        TpnVentanas.addTab("6", jPanel1);
+        TpnVentanas.addTab("6", PnlInfoUsuario);
 
         getContentPane().add(TpnVentanas, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, 670, 530));
 
@@ -369,6 +465,11 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void LblIconUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LblIconUsuarioMouseClicked
         TpnVentanas.setSelectedIndex(5);
+        LblInfoNameUser.setText(login.Usuariolog.getNombre());
+        lblInfoCorreo.setText(login.Usuariolog.getLogin());
+        LblInfoContra.setText(login.Usuariolog.getConstraseña());
+        LblInfoRol.setText(String.valueOf(login.Usuariolog.getRol()));
+        LblInfoNumTar.setText(login.Usuariolog.getNumTarjeta());
     }//GEN-LAST:event_LblIconUsuarioMouseClicked
 
     /**
@@ -412,13 +513,23 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JButton BtnMantenimiento;
     private javax.swing.JButton BtnRestaurante;
     private javax.swing.JButton BtnSalir;
+    private javax.swing.JLabel LTlContra;
+    private javax.swing.JLabel LblDecoUsuario;
     private javax.swing.JLabel LblIconUsuario;
     private javax.swing.JLabel LblImgDefault;
     private javax.swing.JLabel LblImgGerente;
+    private javax.swing.JLabel LblInfoContra;
+    private javax.swing.JLabel LblInfoNameUser;
+    private javax.swing.JLabel LblInfoNumTar;
+    private javax.swing.JLabel LblInfoRol;
     private javax.swing.JLabel LblUsuario;
+    private javax.swing.JLabel LtlCorreo;
+    private javax.swing.JLabel LtlRol;
+    private javax.swing.JLabel LtlTarjeta;
     private javax.swing.JPanel PnlCarritoCompras;
     private javax.swing.JPanel PnlDefault;
     private javax.swing.JPanel PnlGerente;
+    private javax.swing.JPanel PnlInfoUsuario;
     private javax.swing.JPanel PnlMantenimiento;
     private javax.swing.JPanel PnlRestaurante;
     private javax.swing.JPanel PnlUsuario;
@@ -427,7 +538,6 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblInfoCorreo;
     // End of variables declaration//GEN-END:variables
 }

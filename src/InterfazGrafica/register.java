@@ -4,8 +4,10 @@
  */
 package InterfazGrafica;
 
+import LogicaNegocio.TipoTarjeta;
 import LogicaNegocio.TipoUsuario;
 import LogicaNegocio.Usuario;
+import LogicaNegocio.ValidarTarjeta;
 import Utilitario.UtilitarioVentana;
 import java.awt.Color;
 import javax.swing.JFrame;
@@ -16,6 +18,7 @@ import javax.swing.JOptionPane;
  * @author Estudiante
  */
 public class register extends javax.swing.JFrame {
+
     Usuario oUsuario = null;
     static JFrame Login;
 
@@ -27,7 +30,6 @@ public class register extends javax.swing.JFrame {
         TxtUsuario.setBackground(new java.awt.Color(0, 0, 0, 1));
         TxtCorreo.setBackground(new java.awt.Color(0, 0, 0, 1));
         TxtContra.setBackground(new java.awt.Color(0, 0, 0, 1));
-        TxtContraConf.setBackground(new java.awt.Color(0, 0, 0, 1));
         TxtNumTarjeta.setBackground(new java.awt.Color(0, 0, 0, 1));
         TxtCcv.setBackground(new java.awt.Color(0, 0, 0, 1));
         this.Login = componente;
@@ -56,11 +58,6 @@ public class register extends javax.swing.JFrame {
         LbContra = new javax.swing.JLabel();
         LblOcultar = new javax.swing.JLabel();
         LblMostrar = new javax.swing.JLabel();
-        LblContraConf = new javax.swing.JLabel();
-        TxtContraConf = new javax.swing.JPasswordField();
-        LbContraConf = new javax.swing.JLabel();
-        LblOcultarConf = new javax.swing.JLabel();
-        LblMostrarConf = new javax.swing.JLabel();
         LblTarjeta = new javax.swing.JLabel();
         LblNumTarjeta = new javax.swing.JLabel();
         TxtNumTarjeta = new javax.swing.JTextField();
@@ -155,40 +152,6 @@ public class register extends javax.swing.JFrame {
         });
         jPanel1.add(LblMostrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 140, 40, 40));
 
-        LblContraConf.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
-        LblContraConf.setForeground(new java.awt.Color(255, 255, 255));
-        LblContraConf.setText("Confirmar contraseña :");
-        jPanel1.add(LblContraConf, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, -1));
-
-        TxtContraConf.setForeground(new java.awt.Color(255, 255, 255));
-        TxtContraConf.setText("1416BnGb");
-        TxtContraConf.setBorder(null);
-        jPanel1.add(TxtContraConf, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 240, 25));
-
-        LbContraConf.setForeground(new java.awt.Color(255, 255, 255));
-        LbContraConf.setText("____________________________________________");
-        jPanel1.add(LbContraConf, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 220, 20));
-
-        LblOcultarConf.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        LblOcultarConf.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_invisible_20px_1.png"))); // NOI18N
-        LblOcultarConf.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        LblOcultarConf.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                LblOcultarConfMouseClicked(evt);
-            }
-        });
-        jPanel1.add(LblOcultarConf, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 200, 40, 40));
-
-        LblMostrarConf.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        LblMostrarConf.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_eye_20px_1.png"))); // NOI18N
-        LblMostrarConf.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        LblMostrarConf.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                LblMostrarConfMouseClicked(evt);
-            }
-        });
-        jPanel1.add(LblMostrarConf, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 200, 40, 40));
-
         LblTarjeta.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
         LblTarjeta.setForeground(new java.awt.Color(255, 255, 255));
         LblTarjeta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/2200535_atm card_credit card_debit card_visa_icon.png"))); // NOI18N
@@ -282,50 +245,48 @@ public class register extends javax.swing.JFrame {
         LblMostrar.setEnabled(false);
     }//GEN-LAST:event_LblMostrarMouseClicked
 
-    private void LblOcultarConfMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LblOcultarConfMouseClicked
-        TxtContraConf.setEchoChar((char) 0);
-        LblOcultarConf.setVisible(false);
-        LblOcultarConf.setEnabled(false);
-        LblMostrarConf.setEnabled(true);
-        LblMostrarConf.setEnabled(true);
-    }//GEN-LAST:event_LblOcultarConfMouseClicked
-
-    private void LblMostrarConfMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LblMostrarConfMouseClicked
-        TxtContraConf.setEchoChar((char) 8226);
-        LblOcultarConf.setVisible(true);
-        LblOcultarConf.setEnabled(true);
-        LblMostrarConf.setEnabled(false);
-        LblMostrarConf.setEnabled(false);
-    }//GEN-LAST:event_LblMostrarConfMouseClicked
-
     private void BtnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRegistroActionPerformed
-        if (oUsuario == null) {
-            if (TxtUsuario.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Debe indicar el nombre de usuario ");
-                LbUsuarioUnder.setForeground(Color.red);
-                return;
-            }
-            if (TxtCorreo.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Debe indicar el Correo del usuario ");
-                LbCorreo.setForeground(Color.red);
-                return;
-            }
-            if (TxtNumTarjeta.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Debe indicar el numero de tarjeta");
-                LbNumTarjeta.setForeground(Color.red);
-                return;
-            }
-            if (TxtCcv.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Debe indicar el numero de Ccv");
-                LbCcv.setForeground(Color.red);
-                return;
-            }
+        TipoTarjeta tarjeta;
+        char[] contra = TxtContra.getPassword();
+        if (TxtUsuario.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Debe indicar el nombre de usuario ");
+            LbUsuarioUnder.setForeground(Color.red);
+            return;
+        }
+        if (TxtCorreo.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Debe indicar el Correo del usuario ");
+            LbCorreo.setForeground(Color.red);
+            return;
+        }
+        if (TxtNumTarjeta.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Debe indicar el numero de tarjeta");
+            LbNumTarjeta.setForeground(Color.red);
+            return;
+        }
+        if (TxtCcv.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Debe indicar el numero de Ccv");
+            LbCcv.setForeground(Color.red);
+            return;
         }
 
+        if (RdoVisa.isSelected()) {
+            tarjeta = TipoTarjeta.VISA;
+        } else if (RdoMastercard.isSelected()) {
+            tarjeta = TipoTarjeta.MASTERCARD;
+        } else {
+            JOptionPane.showMessageDialog(this, "Debe indicar el tipo de tarjeta");
+            return;
+        }
+        if (!(ValidarTarjeta.validarTarjeta(TxtNumTarjeta.getText(), TxtCcv.getText()))) {
+            JOptionPane.showMessageDialog(this, "Debe indicar el Numero de tarjeta o el CCV Correcto");
+            LbNumTarjeta.setForeground(Color.red);
+            LbCcv.setForeground(Color.red);
+            return;
+        }
+        Usuario Usuario = new Usuario(TxtCorreo.getText(), String.valueOf(contra), TxtUsuario.getText(), TipoUsuario.REGULAR, tarjeta, TxtNumTarjeta.getText());
+        PersistenciaDatos.PersistenciaUsuarios.setUsuario(Usuario);
         Utilitario.UtilitarioVentana.fadeOutAndClose(this);
         UtilitarioVentana.fadeRegistro(Login);
-
-
     }//GEN-LAST:event_BtnRegistroActionPerformed
 
     /**
@@ -368,20 +329,16 @@ public class register extends javax.swing.JFrame {
     private javax.swing.JButton BtnRegistro;
     private javax.swing.JLabel LbCcv;
     private javax.swing.JLabel LbContra;
-    private javax.swing.JLabel LbContraConf;
     private javax.swing.JLabel LbCorreo;
     private javax.swing.JLabel LbNumTarjeta;
     private javax.swing.JLabel LbUsuarioUnder;
     private javax.swing.JLabel LblCcv;
     private javax.swing.JLabel LblContra;
-    private javax.swing.JLabel LblContraConf;
     private javax.swing.JLabel LblCorreo;
     private javax.swing.JLabel LblMastercard;
     private javax.swing.JLabel LblMostrar;
-    private javax.swing.JLabel LblMostrarConf;
     private javax.swing.JLabel LblNumTarjeta;
     private javax.swing.JLabel LblOcultar;
-    private javax.swing.JLabel LblOcultarConf;
     private javax.swing.JLabel LblTarjeta;
     private javax.swing.JLabel LblUser;
     private javax.swing.JLabel LblUsuario;
@@ -390,7 +347,6 @@ public class register extends javax.swing.JFrame {
     private javax.swing.JRadioButton RdoVisa;
     private javax.swing.JTextField TxtCcv;
     private javax.swing.JPasswordField TxtContra;
-    private javax.swing.JPasswordField TxtContraConf;
     private javax.swing.JTextField TxtCorreo;
     private javax.swing.JTextField TxtNumTarjeta;
     private javax.swing.JTextField TxtUsuario;

@@ -9,16 +9,28 @@ package LogicaNegocio;
  * @author Usuario
  */
 public class Usuario {
+
     private final String login;
+    private String NumTar;
     private String constraseña;
     private String nombre;
     private TipoUsuario rol;
+    private TipoTarjeta tarjeta;
 
     public Usuario(String login, String constraseña, String nombre, TipoUsuario rol) {
         this.login = login;
         this.constraseña = constraseña;
         this.nombre = nombre;
         this.rol = rol;
+    }
+
+    public Usuario(String login, String constraseña, String nombre, TipoUsuario rol,TipoTarjeta tarjeta,String NumTarjeta) {
+        this.login = login;
+        this.constraseña = constraseña;
+        this.nombre = nombre;
+        this.rol = rol;
+        this.tarjeta = tarjeta;
+        this.NumTar = NumTarjeta;
     }
 
     public String getConstraseña() {
@@ -48,4 +60,17 @@ public class Usuario {
     public String getLogin() {
         return login;
     }
+
+    public TipoTarjeta getTarjeta() {
+        return tarjeta;
+    }
+
+    public void setTarjeta(TipoTarjeta tarjeta) {
+        this.tarjeta = tarjeta;
+    }
+
+    public String getNumTarjeta() {
+        return NumTar;
+    }
+    
 }
