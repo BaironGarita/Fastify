@@ -4,6 +4,8 @@
  */
 package InterfazGrafica;
 
+import LogicaNegocio.TipoUsuario;
+import LogicaNegocio.Usuario;
 import Utilitario.UtilitarioVentana;
 import java.awt.Color;
 import javax.swing.JFrame;
@@ -14,7 +16,7 @@ import javax.swing.JOptionPane;
  * @author Estudiante
  */
 public class register extends javax.swing.JFrame {
-
+    Usuario oUsuario = null;
     static JFrame Login;
 
     /**
@@ -297,25 +299,27 @@ public class register extends javax.swing.JFrame {
     }//GEN-LAST:event_LblMostrarConfMouseClicked
 
     private void BtnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRegistroActionPerformed
-        if (TxtUsuario.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Debe indicar el nombre de usuario ");
-            LbUsuarioUnder.setForeground(Color.red);
-            return;
-        }
-        if (TxtCorreo.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Debe indicar el Correo del usuario ");
-            LbCorreo.setForeground(Color.red);
-            return;
-        }
-        if (TxtNumTarjeta.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Debe indicar el numero de tarjeta");
-            LbNumTarjeta.setForeground(Color.red);
-            return;
-        }
-        if (TxtCcv.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Debe indicar el numero de Ccv");
-            LbCcv.setForeground(Color.red);
-            return;
+        if (oUsuario == null) {
+            if (TxtUsuario.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Debe indicar el nombre de usuario ");
+                LbUsuarioUnder.setForeground(Color.red);
+                return;
+            }
+            if (TxtCorreo.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Debe indicar el Correo del usuario ");
+                LbCorreo.setForeground(Color.red);
+                return;
+            }
+            if (TxtNumTarjeta.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Debe indicar el numero de tarjeta");
+                LbNumTarjeta.setForeground(Color.red);
+                return;
+            }
+            if (TxtCcv.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Debe indicar el numero de Ccv");
+                LbCcv.setForeground(Color.red);
+                return;
+            }
         }
 
         Utilitario.UtilitarioVentana.fadeOutAndClose(this);

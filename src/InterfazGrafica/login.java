@@ -28,6 +28,7 @@ public class login extends javax.swing.JFrame {
         initComponents();
         TxtUsuario.setBackground(new java.awt.Color(0, 0, 0, 1));
         TxtContra.setBackground(new java.awt.Color(0, 0, 0, 1));
+        PrincipalFastify.crearUsuarios();
     }
 
     /**
@@ -237,8 +238,8 @@ public class login extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Supero la cantidad de intentos");
             System.exit(0);
         }
-        Utilitario.UtilitarioVentana.fadeOutAndClose(this);
-        UtilitarioVentana.centrarVentanaJFrame(this.Main = new MainMenu(), false);
+//        Utilitario.UtilitarioVentana.fadeOutAndClose(this);
+//        UtilitarioVentana.centrarVentanaJFrame(this.Main = new MainMenu(), false);
     }//GEN-LAST:event_BtnInicioSesionActionPerformed
 
     private void LblRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LblRegistroMouseClicked
