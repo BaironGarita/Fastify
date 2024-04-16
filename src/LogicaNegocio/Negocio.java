@@ -13,7 +13,7 @@ import javax.print.DocFlavor;
  */
 public class Negocio{
     private final Tipoempresa Tipo;
-    ArrayList<String> ListaProductos = new ArrayList<>();
+    ArrayList<Producto> ListaProductos = new ArrayList<>();
     private final Usuario Gerente;
     private String Nombre;
     
@@ -23,7 +23,7 @@ public class Negocio{
         this.Nombre = Nombre;
     }
     
-    public void agregarProducto(String Producto){
+    public void agregarProducto(Producto Producto){
         ListaProductos.add(Producto);
     }
 
@@ -33,6 +33,10 @@ public class Negocio{
 
     public Usuario getGerente() {
         return Gerente;
+    }
+
+    public String getLogin() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
     

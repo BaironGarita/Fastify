@@ -17,6 +17,7 @@ import LogicaNegocio.TipoUsuario;
  * @author ME1
  */
 public class login extends javax.swing.JFrame {
+
     public static String nombre;
     public static TipoUsuario rol;
     public static Usuario Usuariolog;
@@ -224,9 +225,8 @@ public class login extends javax.swing.JFrame {
 
     private void BtnInicioSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnInicioSesionActionPerformed
         Usuario oUsuario = PersistenciaUsuarios.getUsuario(TxtUsuario.getText().trim());
+        char[] contraseña = TxtContra.getPassword();
         if (oUsuario != null) {
-            //obtener la constraseña del control
-            char[] contraseña = TxtContra.getPassword();
             if (oUsuario.getConstraseña().equals(String.valueOf(contraseña))) {
                 PrincipalFastify.setoUsuario(oUsuario);
                 this.dispose();
@@ -242,12 +242,13 @@ public class login extends javax.swing.JFrame {
         if (intentos == 3) {
             JOptionPane.showMessageDialog(this, "Supero la cantidad de intentos");
             System.exit(0);
+        } else if (oUsuario.getConstraseña().equals(String.valueOf(contraseña))) {
+            this.nombre = oUsuario.getNombre();
+            this.rol = oUsuario.getRol();
+            this.Usuariolog = oUsuario;
+            Utilitario.UtilitarioVentana.fadeOutAndClose(this);
+            UtilitarioVentana.centrarVentanaJFrame(this.Main = new MainMenu(), false);
         }
-        this.nombre = oUsuario.getNombre();
-        this.rol = oUsuario.getRol();
-        this.Usuariolog = oUsuario;
-        Utilitario.UtilitarioVentana.fadeOutAndClose(this);
-        UtilitarioVentana.centrarVentanaJFrame(this.Main = new MainMenu(), false);
     }//GEN-LAST:event_BtnInicioSesionActionPerformed
 
     private void LblRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LblRegistroMouseClicked

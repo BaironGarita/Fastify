@@ -4,6 +4,7 @@
  */
 package InterfazGrafica;
 
+import LogicaNegocio.TipoRestaurante;
 import LogicaNegocio.Tipoempresa;
 import javax.swing.JOptionPane;
 
@@ -12,7 +13,9 @@ import javax.swing.JOptionPane;
  * @author Usuario
  */
 public class MainMenu extends javax.swing.JFrame {
+
     Tipoempresa Tipo;
+
     /**
      * Creates new form MainMenu
      */
@@ -50,6 +53,7 @@ public class MainMenu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        BtgTipoEmpacado = new javax.swing.ButtonGroup();
         PnlUsuario = new javax.swing.JPanel();
         LblIconUsuario = new javax.swing.JLabel();
         LblUsuario = new javax.swing.JLabel();
@@ -77,6 +81,9 @@ public class MainMenu extends javax.swing.JFrame {
         jComboBox2 = new javax.swing.JComboBox<>();
         LblTipoRestaurante = new javax.swing.JLabel();
         CboTipoRestaurante = new javax.swing.JComboBox<>();
+        LblTipoEmpacado = new javax.swing.JLabel();
+        RdoPerecedero = new javax.swing.JRadioButton();
+        RdoNoPerecedero = new javax.swing.JRadioButton();
         PnlCarritoCompras = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         PnlGerente = new javax.swing.JPanel();
@@ -98,7 +105,6 @@ public class MainMenu extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(830, 530));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(830, 530));
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
@@ -344,8 +350,21 @@ public class MainMenu extends javax.swing.JFrame {
         CboTipoRestaurante.setBackground(new java.awt.Color(255, 255, 255));
         CboTipoRestaurante.setFont(CboTipoRestaurante.getFont().deriveFont(CboTipoRestaurante.getFont().getSize()+2f));
         CboTipoRestaurante.setForeground(new java.awt.Color(0, 57, 114));
-        CboTipoRestaurante.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         CboTipoRestaurante.setBorder(null);
+
+        LblTipoEmpacado.setFont(LblTipoEmpacado.getFont().deriveFont(LblTipoEmpacado.getFont().getSize()+2f));
+        LblTipoEmpacado.setForeground(new java.awt.Color(0, 57, 114));
+        LblTipoEmpacado.setText("Tipo de Empacado");
+
+        BtgTipoEmpacado.add(RdoPerecedero);
+        RdoPerecedero.setFont(RdoPerecedero.getFont().deriveFont(RdoPerecedero.getFont().getSize()+2f));
+        RdoPerecedero.setForeground(new java.awt.Color(0, 57, 114));
+        RdoPerecedero.setText("Perecedero");
+
+        BtgTipoEmpacado.add(RdoNoPerecedero);
+        RdoNoPerecedero.setFont(RdoNoPerecedero.getFont().deriveFont(RdoNoPerecedero.getFont().getSize()+2f));
+        RdoNoPerecedero.setForeground(new java.awt.Color(0, 57, 114));
+        RdoNoPerecedero.setText("No Perecedero");
 
         javax.swing.GroupLayout PnlRestauranteLayout = new javax.swing.GroupLayout(PnlRestaurante);
         PnlRestaurante.setLayout(PnlRestauranteLayout);
@@ -356,8 +375,6 @@ public class MainMenu extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addGroup(PnlRestauranteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(BtnComprarProducto)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LblProductos)
                     .addGroup(PnlRestauranteLayout.createSequentialGroup()
                         .addComponent(BtnMenos, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -369,14 +386,25 @@ public class MainMenu extends javax.swing.JFrame {
                     .addGroup(PnlRestauranteLayout.createSequentialGroup()
                         .addGroup(PnlRestauranteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(LblTipoEmpresa)
-                            .addComponent(CboTipoDeEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(CboTipoDeEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(LblSeleccion)
+                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(PnlRestauranteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(LblSeleccion)
-                            .addComponent(LblTipoRestaurante)
-                            .addComponent(CboTipoRestaurante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(390, Short.MAX_VALUE))
+                            .addGroup(PnlRestauranteLayout.createSequentialGroup()
+                                .addGroup(PnlRestauranteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(LblTipoRestaurante)
+                                    .addComponent(CboTipoRestaurante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(PnlRestauranteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(PnlRestauranteLayout.createSequentialGroup()
+                                        .addComponent(RdoPerecedero)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(RdoNoPerecedero))
+                                    .addComponent(LblTipoEmpacado)))
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(LblProductos))))
+                .addContainerGap(152, Short.MAX_VALUE))
         );
         PnlRestauranteLayout.setVerticalGroup(
             PnlRestauranteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -385,11 +413,14 @@ public class MainMenu extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(PnlRestauranteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LblTipoEmpresa)
-                    .addComponent(LblTipoRestaurante))
+                    .addComponent(LblTipoRestaurante)
+                    .addComponent(LblTipoEmpacado))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PnlRestauranteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CboTipoDeEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CboTipoRestaurante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(CboTipoRestaurante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(RdoPerecedero)
+                    .addComponent(RdoNoPerecedero))
                 .addGap(18, 18, 18)
                 .addGroup(PnlRestauranteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LblProductos)
@@ -585,6 +616,14 @@ public class MainMenu extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void ActivaroDesactivarRest(boolean bool) {
+        LblTipoRestaurante.setVisible(bool);
+        CboTipoRestaurante.setVisible(bool);
+        LblTipoEmpacado.setVisible(bool);
+        RdoNoPerecedero.setVisible(bool);
+        RdoPerecedero.setVisible(bool);
+    }
+
     private void BtnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSalirActionPerformed
         Utilitario.UtilitarioVentana.fadeOutAndExit(this);
     }//GEN-LAST:event_BtnSalirActionPerformed
@@ -593,6 +632,9 @@ public class MainMenu extends javax.swing.JFrame {
         Utilitario.UtilitarioVentana.fade(this);
         for (Tipoempresa tipoempresa : Tipoempresa.values()) {
             CboTipoDeEmpresa.addItem(tipoempresa.getNombreTipo());
+        }
+        for (TipoRestaurante tipoRestaurante : TipoRestaurante.values()) {
+            CboTipoRestaurante.addItem(tipoRestaurante.getTipoRest());
         }
     }//GEN-LAST:event_formWindowOpened
 
@@ -627,16 +669,19 @@ public class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_LblIconUsuarioMouseClicked
 
     private void CboTipoDeEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CboTipoDeEmpresaActionPerformed
-        
+
         switch (CboTipoDeEmpresa.getSelectedIndex()) {
             case 0:
                 LblImagenRestaurante.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Restaurante.jpg")));
+                ActivaroDesactivarRest(true);
                 break;
             case 1:
                 LblImagenRestaurante.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Cafeteria.jpg")));
+                ActivaroDesactivarRest(false);
                 break;
             case 2:
                 LblImagenRestaurante.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Empresa.jpg")));
+                ActivaroDesactivarRest(false);
                 break;
             default:
                 break;
@@ -697,6 +742,7 @@ public class MainMenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup BtgTipoEmpacado;
     private javax.swing.JButton BtnCarritoCompras;
     private javax.swing.JButton BtnComprarProducto;
     private javax.swing.JButton BtnGerente;
@@ -720,6 +766,7 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JLabel LblInfoRol;
     private javax.swing.JLabel LblProductos;
     private javax.swing.JLabel LblSeleccion;
+    private javax.swing.JLabel LblTipoEmpacado;
     private javax.swing.JLabel LblTipoEmpresa;
     private javax.swing.JLabel LblTipoRestaurante;
     private javax.swing.JLabel LblUsuario;
@@ -733,6 +780,8 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JPanel PnlMantenimiento;
     private javax.swing.JPanel PnlRestaurante;
     private javax.swing.JPanel PnlUsuario;
+    private javax.swing.JRadioButton RdoNoPerecedero;
+    private javax.swing.JRadioButton RdoPerecedero;
     private javax.swing.JTabbedPane TpnVentanas;
     private javax.swing.JTextField TxtCantidadProductos;
     private javax.swing.JComboBox<String> jComboBox1;

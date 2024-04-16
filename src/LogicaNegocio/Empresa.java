@@ -8,10 +8,11 @@ package LogicaNegocio;
  *
  * @author Estudiante
  */
-public class Empresa {
+public class Empresa  extends Negocio{
     private final String login;
 
-    public Empresa(String login) {
+    public Empresa(String login, Tipoempresa Tipo, Usuario Gerente, String Nombre) {
+        super(Tipo, Gerente, Nombre);
         this.login = login;
     }
     

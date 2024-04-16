@@ -4,9 +4,11 @@
  */
 package InterfazGrafica;
 
+import LogicaNegocio.Negocio;
 import LogicaNegocio.TipoUsuario;
 import LogicaNegocio.Usuario;
 import PersistenciaDatos.PersistenciaUsuarios;
+import java.util.ArrayList;
 
 /**
  *
@@ -14,6 +16,7 @@ import PersistenciaDatos.PersistenciaUsuarios;
  */
 public class PrincipalFastify {
     private static Usuario oUsuario = null;
+    private static ArrayList<Negocio> ListaNegocios = new ArrayList<>();
    
     public static void main(String[] args) {
       crearUsuarios();
@@ -26,6 +29,10 @@ public class PrincipalFastify {
                 "1234", "Administrador", TipoUsuario.ADMINISTRADOR));
          PersistenciaUsuarios.setUsuario(new Usuario("lagueroc@utn.ac.cr",
                 "123456", "Laura Aguero", TipoUsuario.REGULAR));
+    }
+    
+    public static void CrearNegocios(){
+        
     }
 
     public static Usuario getoUsuario() {

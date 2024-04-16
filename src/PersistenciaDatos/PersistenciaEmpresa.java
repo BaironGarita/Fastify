@@ -5,6 +5,7 @@
 package PersistenciaDatos;
 
 import LogicaNegocio.Empresa;
+import LogicaNegocio.Negocio;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,15 +15,15 @@ import java.util.List;
  * @author Usuario
  */
 public class PersistenciaEmpresa {
-    private static HashMap<String,Empresa> listado = new HashMap<String, Empresa>();
+    private static HashMap<String,Negocio> listado = new HashMap<String, Negocio>();
     
-    public static void setUsuario(Empresa oEmpresa){
-        listado.put(oEmpresa.getLogin(), oEmpresa);
+    public static void setUsuario(Negocio oNegocio){
+        listado.put(oNegocio.getLogin(), oNegocio);
     }
-    public static Empresa getUsuario(String pLogin){
+    public static Negocio getUsuario(String pLogin){
         return listado.get(pLogin);
     }
-    public List<Empresa> getListado(){
+    public List<Negocio> getListado(){
         return new ArrayList<>(listado.values());
     }
 }
