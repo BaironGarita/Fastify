@@ -114,6 +114,7 @@ public class login extends javax.swing.JFrame {
 
         TxtUsuario.setFont(TxtUsuario.getFont().deriveFont(TxtUsuario.getFont().getSize()+2f));
         TxtUsuario.setForeground(new java.awt.Color(255, 255, 255));
+        TxtUsuario.setText("admin@gmail.com");
         TxtUsuario.setBorder(null);
         jPanel2.add(TxtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(39, 140, 240, 30));
 
@@ -132,6 +133,7 @@ public class login extends javax.swing.JFrame {
 
         TxtContra.setFont(TxtContra.getFont().deriveFont(TxtContra.getFont().getSize()+2f));
         TxtContra.setForeground(new java.awt.Color(255, 255, 255));
+        TxtContra.setText("1234");
         TxtContra.setBorder(null);
         TxtContra.setCaretColor(new java.awt.Color(255, 255, 255));
         jPanel2.add(TxtContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, 240, 30));

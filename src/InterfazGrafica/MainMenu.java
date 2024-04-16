@@ -4,22 +4,28 @@
  */
 package InterfazGrafica;
 
+import LogicaNegocio.Tipoempresa;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Usuario
  */
 public class MainMenu extends javax.swing.JFrame {
-
+    Tipoempresa Tipo;
     /**
      * Creates new form MainMenu
      */
     public MainMenu() {
         initComponents();
-        BtnRestaurante.setBackground(new java.awt.Color(255, 255,255, 1));
-        BtnCarritoCompras.setBackground(new java.awt.Color(255, 255,255, 1));
-        BtnGerente.setBackground(new java.awt.Color(255, 255,255, 1));
-        BtnMantenimiento.setBackground(new java.awt.Color(255, 255,255, 1));
-        BtnSalir.setBackground(new java.awt.Color(255, 255,255, 1));
+        BtnRestaurante.setBackground(new java.awt.Color(255, 255, 255, 1));
+        BtnCarritoCompras.setBackground(new java.awt.Color(255, 255, 255, 1));
+        BtnGerente.setBackground(new java.awt.Color(255, 255, 255, 1));
+        BtnMantenimiento.setBackground(new java.awt.Color(255, 255, 255, 1));
+        BtnSalir.setBackground(new java.awt.Color(255, 255, 255, 1));
+        BtnMenos.setBackground(new java.awt.Color(0, 114, 255, 255));
+        BtnMas.setBackground(new java.awt.Color(0, 114, 255, 255));
+        BtnComprarProducto.setBackground(new java.awt.Color(0, 114, 255, 255));
         LblUsuario.setText(login.nombre);
         switch (login.rol) {
             case REGULAR:
@@ -27,6 +33,7 @@ public class MainMenu extends javax.swing.JFrame {
                 BtnMantenimiento.setVisible(false);
                 break;
             case GERENTE:
+                BtnCarritoCompras.setVisible(false);
                 BtnMantenimiento.setVisible(false);
                 break;
             default:
@@ -56,7 +63,20 @@ public class MainMenu extends javax.swing.JFrame {
         PnlDefault = new javax.swing.JPanel();
         LblImgDefault = new javax.swing.JLabel();
         PnlRestaurante = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        LblImagenRestaurante = new javax.swing.JLabel();
+        CboTipoDeEmpresa = new javax.swing.JComboBox<>();
+        LblTipoEmpresa = new javax.swing.JLabel();
+        LblProductos = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        LblCantidad = new javax.swing.JLabel();
+        TxtCantidadProductos = new javax.swing.JTextField();
+        BtnMas = new javax.swing.JButton();
+        BtnMenos = new javax.swing.JButton();
+        BtnComprarProducto = new javax.swing.JButton();
+        LblSeleccion = new javax.swing.JLabel();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        LblTipoRestaurante = new javax.swing.JLabel();
+        CboTipoRestaurante = new javax.swing.JComboBox<>();
         PnlCarritoCompras = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         PnlGerente = new javax.swing.JPanel();
@@ -184,7 +204,7 @@ public class MainMenu extends javax.swing.JFrame {
                         .addGap(69, 69, 69))
                     .addGroup(PnlUsuarioLayout.createSequentialGroup()
                         .addGroup(PnlUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(BtnMantenimiento, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
+                            .addComponent(BtnMantenimiento, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(BtnSalir, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(BtnGerente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(BtnCarritoCompras, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -230,7 +250,7 @@ public class MainMenu extends javax.swing.JFrame {
         PnlDefaultLayout.setHorizontalGroup(
             PnlDefaultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PnlDefaultLayout.createSequentialGroup()
-                .addComponent(LblImgDefault, javax.swing.GroupLayout.DEFAULT_SIZE, 629, Short.MAX_VALUE)
+                .addComponent(LblImgDefault, javax.swing.GroupLayout.DEFAULT_SIZE, 633, Short.MAX_VALUE)
                 .addContainerGap())
         );
         PnlDefaultLayout.setVerticalGroup(
@@ -242,22 +262,152 @@ public class MainMenu extends javax.swing.JFrame {
 
         PnlRestaurante.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/185114_chef_restaurant_food_icon.png"))); // NOI18N
+        LblImagenRestaurante.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LblImagenRestaurante.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/185114_chef_restaurant_food_icon.png"))); // NOI18N
+
+        CboTipoDeEmpresa.setBackground(new java.awt.Color(255, 255, 255));
+        CboTipoDeEmpresa.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        CboTipoDeEmpresa.setForeground(new java.awt.Color(0, 57, 114));
+        CboTipoDeEmpresa.setBorder(null);
+        CboTipoDeEmpresa.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        CboTipoDeEmpresa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CboTipoDeEmpresaActionPerformed(evt);
+            }
+        });
+
+        LblTipoEmpresa.setFont(LblTipoEmpresa.getFont().deriveFont(LblTipoEmpresa.getFont().getSize()+2f));
+        LblTipoEmpresa.setForeground(new java.awt.Color(0, 57, 114));
+        LblTipoEmpresa.setText("Tipo de Empresa");
+
+        LblProductos.setFont(LblProductos.getFont().deriveFont(LblProductos.getFont().getSize()+2f));
+        LblProductos.setForeground(new java.awt.Color(0, 57, 114));
+        LblProductos.setText("Productos");
+
+        jComboBox1.setBackground(new java.awt.Color(255, 255, 255));
+        jComboBox1.setFont(jComboBox1.getFont().deriveFont(jComboBox1.getFont().getSize()+2f));
+        jComboBox1.setForeground(new java.awt.Color(0, 57, 114));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setBorder(null);
+
+        LblCantidad.setFont(LblCantidad.getFont().deriveFont(LblCantidad.getFont().getSize()+2f));
+        LblCantidad.setForeground(new java.awt.Color(0, 57, 114));
+        LblCantidad.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LblCantidad.setText("Cantidad");
+
+        TxtCantidadProductos.setBackground(new java.awt.Color(255, 255, 255));
+        TxtCantidadProductos.setFont(TxtCantidadProductos.getFont().deriveFont(TxtCantidadProductos.getFont().getSize()+6f));
+        TxtCantidadProductos.setForeground(new java.awt.Color(0, 57, 114));
+        TxtCantidadProductos.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        TxtCantidadProductos.setText("1");
+        TxtCantidadProductos.setBorder(null);
+        TxtCantidadProductos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        BtnMas.setFont(BtnMas.getFont().deriveFont(BtnMas.getFont().getSize()+2f));
+        BtnMas.setForeground(new java.awt.Color(255, 255, 255));
+        BtnMas.setText("+");
+        BtnMas.setBorder(null);
+        BtnMas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnMasActionPerformed(evt);
+            }
+        });
+
+        BtnMenos.setFont(BtnMenos.getFont().deriveFont(BtnMenos.getFont().getSize()+2f));
+        BtnMenos.setForeground(new java.awt.Color(255, 255, 255));
+        BtnMenos.setText("-");
+        BtnMenos.setBorder(null);
+        BtnMenos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnMenosActionPerformed(evt);
+            }
+        });
+
+        BtnComprarProducto.setForeground(new java.awt.Color(255, 255, 255));
+        BtnComprarProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Pagar.png"))); // NOI18N
+        BtnComprarProducto.setText("Comprar");
+
+        LblSeleccion.setFont(LblSeleccion.getFont().deriveFont(LblSeleccion.getFont().getSize()+2f));
+        LblSeleccion.setForeground(new java.awt.Color(0, 57, 114));
+        LblSeleccion.setText("Info");
+
+        jComboBox2.setBackground(new java.awt.Color(255, 255, 255));
+        jComboBox2.setFont(jComboBox2.getFont().deriveFont(jComboBox2.getFont().getSize()+2f));
+        jComboBox2.setForeground(new java.awt.Color(0, 57, 114));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox2.setBorder(null);
+
+        LblTipoRestaurante.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        LblTipoRestaurante.setForeground(new java.awt.Color(0, 57, 114));
+        LblTipoRestaurante.setText("Tipo Restaurante");
+
+        CboTipoRestaurante.setBackground(new java.awt.Color(255, 255, 255));
+        CboTipoRestaurante.setFont(CboTipoRestaurante.getFont().deriveFont(CboTipoRestaurante.getFont().getSize()+2f));
+        CboTipoRestaurante.setForeground(new java.awt.Color(0, 57, 114));
+        CboTipoRestaurante.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        CboTipoRestaurante.setBorder(null);
 
         javax.swing.GroupLayout PnlRestauranteLayout = new javax.swing.GroupLayout(PnlRestaurante);
         PnlRestaurante.setLayout(PnlRestauranteLayout);
         PnlRestauranteLayout.setHorizontalGroup(
             PnlRestauranteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(LblImagenRestaurante, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 639, Short.MAX_VALUE)
             .addGroup(PnlRestauranteLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addContainerGap(581, Short.MAX_VALUE))
+                .addGap(27, 27, 27)
+                .addGroup(PnlRestauranteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(BtnComprarProducto)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LblProductos)
+                    .addGroup(PnlRestauranteLayout.createSequentialGroup()
+                        .addComponent(BtnMenos, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(PnlRestauranteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(LblCantidad, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(TxtCantidadProductos))
+                        .addGap(18, 18, 18)
+                        .addComponent(BtnMas, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PnlRestauranteLayout.createSequentialGroup()
+                        .addGroup(PnlRestauranteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(LblTipoEmpresa)
+                            .addComponent(CboTipoDeEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(PnlRestauranteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(LblSeleccion)
+                            .addComponent(LblTipoRestaurante)
+                            .addComponent(CboTipoRestaurante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(390, Short.MAX_VALUE))
         );
         PnlRestauranteLayout.setVerticalGroup(
             PnlRestauranteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PnlRestauranteLayout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addGap(0, 482, Short.MAX_VALUE))
+                .addComponent(LblImagenRestaurante, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(PnlRestauranteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LblTipoEmpresa)
+                    .addComponent(LblTipoRestaurante))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(PnlRestauranteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CboTipoDeEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CboTipoRestaurante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(PnlRestauranteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LblProductos)
+                    .addComponent(LblSeleccion))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(PnlRestauranteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
+                .addComponent(LblCantidad)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(PnlRestauranteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TxtCantidadProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtnMenos, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtnMas, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
+                .addComponent(BtnComprarProducto)
+                .addContainerGap())
         );
 
         TpnVentanas.addTab("2", PnlRestaurante);
@@ -273,7 +423,7 @@ public class MainMenu extends javax.swing.JFrame {
             .addGroup(PnlCarritoComprasLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2)
-                .addContainerGap(581, Short.MAX_VALUE))
+                .addContainerGap(585, Short.MAX_VALUE))
         );
         PnlCarritoComprasLayout.setVerticalGroup(
             PnlCarritoComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -295,7 +445,7 @@ public class MainMenu extends javax.swing.JFrame {
             .addGroup(PnlGerenteLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(LblImgGerente)
-                .addContainerGap(581, Short.MAX_VALUE))
+                .addContainerGap(585, Short.MAX_VALUE))
         );
         PnlGerenteLayout.setVerticalGroup(
             PnlGerenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -318,7 +468,7 @@ public class MainMenu extends javax.swing.JFrame {
             .addGroup(PnlMantenimientoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel3)
-                .addContainerGap(581, Short.MAX_VALUE))
+                .addContainerGap(585, Short.MAX_VALUE))
         );
         PnlMantenimientoLayout.setVerticalGroup(
             PnlMantenimientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -402,7 +552,7 @@ public class MainMenu extends javax.swing.JFrame {
                                         .addGap(18, 18, 18)
                                         .addComponent(LblInfoRol)))))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(LblDecoUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 629, Short.MAX_VALUE))
+                    .addComponent(LblDecoUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 633, Short.MAX_VALUE))
                 .addContainerGap())
         );
         PnlInfoUsuarioLayout.setVerticalGroup(
@@ -441,10 +591,14 @@ public class MainMenu extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         Utilitario.UtilitarioVentana.fade(this);
+        for (Tipoempresa tipoempresa : Tipoempresa.values()) {
+            CboTipoDeEmpresa.addItem(tipoempresa.getNombreTipo());
+        }
     }//GEN-LAST:event_formWindowOpened
 
     private void BtnRestauranteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRestauranteActionPerformed
         TpnVentanas.setSelectedIndex(1);
+
     }//GEN-LAST:event_BtnRestauranteActionPerformed
 
     private void BtnMantenimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnMantenimientoActionPerformed
@@ -471,6 +625,41 @@ public class MainMenu extends javax.swing.JFrame {
         LblInfoRol.setText(String.valueOf(login.Usuariolog.getRol()));
         LblInfoNumTar.setText(login.Usuariolog.getNumTarjeta());
     }//GEN-LAST:event_LblIconUsuarioMouseClicked
+
+    private void CboTipoDeEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CboTipoDeEmpresaActionPerformed
+        
+        switch (CboTipoDeEmpresa.getSelectedIndex()) {
+            case 0:
+                LblImagenRestaurante.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Restaurante.jpg")));
+                break;
+            case 1:
+                LblImagenRestaurante.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Cafeteria.jpg")));
+                break;
+            case 2:
+                LblImagenRestaurante.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Empresa.jpg")));
+                break;
+            default:
+                break;
+        }
+        LblSeleccion.setText(CboTipoDeEmpresa.getItemAt(CboTipoDeEmpresa.getSelectedIndex()));
+    }//GEN-LAST:event_CboTipoDeEmpresaActionPerformed
+
+    private void BtnMenosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnMenosActionPerformed
+        int Numero = Integer.parseInt(TxtCantidadProductos.getText());
+        if (Numero <= 1) {
+            JOptionPane.showMessageDialog(this, "No Puede Existir Numeros Negativos");
+            TxtCantidadProductos.setText("1");
+        } else {
+            Numero -= 1;
+            TxtCantidadProductos.setText(String.valueOf(Numero));
+        }
+    }//GEN-LAST:event_BtnMenosActionPerformed
+
+    private void BtnMasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnMasActionPerformed
+        int Numero = Integer.parseInt(TxtCantidadProductos.getText());
+        Numero += 1;
+        TxtCantidadProductos.setText(String.valueOf(Numero));
+    }//GEN-LAST:event_BtnMasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -509,19 +698,30 @@ public class MainMenu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnCarritoCompras;
+    private javax.swing.JButton BtnComprarProducto;
     private javax.swing.JButton BtnGerente;
     private javax.swing.JButton BtnMantenimiento;
+    private javax.swing.JButton BtnMas;
+    private javax.swing.JButton BtnMenos;
     private javax.swing.JButton BtnRestaurante;
     private javax.swing.JButton BtnSalir;
+    private javax.swing.JComboBox<String> CboTipoDeEmpresa;
+    private javax.swing.JComboBox<String> CboTipoRestaurante;
     private javax.swing.JLabel LTlContra;
+    private javax.swing.JLabel LblCantidad;
     private javax.swing.JLabel LblDecoUsuario;
     private javax.swing.JLabel LblIconUsuario;
+    private javax.swing.JLabel LblImagenRestaurante;
     private javax.swing.JLabel LblImgDefault;
     private javax.swing.JLabel LblImgGerente;
     private javax.swing.JLabel LblInfoContra;
     private javax.swing.JLabel LblInfoNameUser;
     private javax.swing.JLabel LblInfoNumTar;
     private javax.swing.JLabel LblInfoRol;
+    private javax.swing.JLabel LblProductos;
+    private javax.swing.JLabel LblSeleccion;
+    private javax.swing.JLabel LblTipoEmpresa;
+    private javax.swing.JLabel LblTipoRestaurante;
     private javax.swing.JLabel LblUsuario;
     private javax.swing.JLabel LtlCorreo;
     private javax.swing.JLabel LtlRol;
@@ -534,7 +734,9 @@ public class MainMenu extends javax.swing.JFrame {
     private javax.swing.JPanel PnlRestaurante;
     private javax.swing.JPanel PnlUsuario;
     private javax.swing.JTabbedPane TpnVentanas;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JTextField TxtCantidadProductos;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
