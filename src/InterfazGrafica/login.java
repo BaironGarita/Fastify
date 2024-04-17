@@ -5,12 +5,14 @@
  */
 package InterfazGrafica;
 
+import LogicaNegocio.Negocio;
 import LogicaNegocio.Usuario;
 import javax.swing.JFrame;
 import Utilitario.UtilitarioVentana;
 import javax.swing.JOptionPane;
 import PersistenciaDatos.PersistenciaUsuarios;
 import LogicaNegocio.TipoUsuario;
+import PersistenciaDatos.PersistenciaEmpresa;
 
 /**
  *
@@ -21,6 +23,7 @@ public class login extends javax.swing.JFrame {
     public static String nombre;
     public static TipoUsuario rol;
     public static Usuario Usuariolog;
+    public static Negocio Gerente; 
     private int intentos = 0;
     static JFrame Registro;
     static JFrame Main;
@@ -32,7 +35,10 @@ public class login extends javax.swing.JFrame {
         initComponents();
         TxtUsuario.setBackground(new java.awt.Color(0, 0, 0, 1));
         TxtContra.setBackground(new java.awt.Color(0, 0, 0, 1));
-        PrincipalFastify.crearUsuarios();
+        PrincipalFastify.CrearUsuarios();
+        PrincipalFastify.CrearTiendas();
+        PrincipalFastify.CrearRestaurantes();
+        PrincipalFastify.CrearCafeterias();
     }
 
     /**
@@ -242,7 +248,14 @@ public class login extends javax.swing.JFrame {
         if (intentos == 3) {
             JOptionPane.showMessageDialog(this, "Supero la cantidad de intentos");
             System.exit(0);
-        } else if (oUsuario.getConstraseña().equals(String.valueOf(contraseña))) {
+        } else if (oUsuario.getConstraseña().equals(String.valueOf(contraseña))&& oUsuario.getRol().equals(TipoUsuario.GERENTE)) {
+            Gerente = PersistenciaEmpresa.getNegocioPorGerente(oUsuario.getCorreo());
+            this.nombre = oUsuario.getNombre();
+            this.rol = oUsuario.getRol();
+            this.Usuariolog = oUsuario;
+            Utilitario.UtilitarioVentana.fadeOutAndClose(this);
+            UtilitarioVentana.centrarVentanaJFrame(this.Main = new MainMenu(), false);
+        }else if (oUsuario.getConstraseña().equals(String.valueOf(contraseña))) {
             this.nombre = oUsuario.getNombre();
             this.rol = oUsuario.getRol();
             this.Usuariolog = oUsuario;

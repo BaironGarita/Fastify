@@ -34,6 +34,14 @@ public class Negocio{
     public void agregarProducto(Producto Producto){
         ListaProductos.add(Producto);
     }
+    
+    public void EliminarProducto(String NombreProducto){
+        for (Producto Producto : ListaProductos) {
+            if (Producto.getNombre().equals(NombreProducto)) {
+                ListaProductos.remove(Producto);
+            }
+        }
+    }
 
     public Tipoempresa getTipo() {
         return Tipo;

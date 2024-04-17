@@ -22,7 +22,9 @@ class Producto {
         this.cantidad = cantidad;
         this.Impuestos = Impuestos;
     }
-    
-    
+
+    public String getNombre() {
+        return Nombre;
+    }
     
 }

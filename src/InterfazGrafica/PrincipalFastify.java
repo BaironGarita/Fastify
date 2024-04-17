@@ -5,7 +5,6 @@
 package InterfazGrafica;
 
 import LogicaNegocio.Negocio;
-import LogicaNegocio.Restaurante;
 import LogicaNegocio.TipoRestaurante;
 import LogicaNegocio.TipoUsuario;
 import LogicaNegocio.Tipoempresa;
@@ -24,13 +23,12 @@ public class PrincipalFastify {
     private static ArrayList<Negocio> ListaNegocios = new ArrayList<>();
 
     public static void main(String[] args) {
-        crearUsuarios();
+        CrearUsuarios();
         login Login = new login();
         Login.setVisible(true);
-//      Login.setLocationRelativeTo(null);
     }
 
-    public static void crearUsuarios() {
+    public static void CrearUsuarios() {
         PersistenciaUsuarios.setUsuario(new Usuario("admin@gmail.com",
                 "1234", "Administrador", TipoUsuario.ADMINISTRADOR));
         PersistenciaUsuarios.setUsuario(new Usuario("gerenterest@gmail.com",
@@ -57,7 +55,7 @@ public class PrincipalFastify {
                 "1234", "Bairon Garita", TipoUsuario.REGULAR));
     }
 
-    public static void crearRestaurantes() {
+    public static void CrearRestaurantes() {
         PersistenciaEmpresa.setnNegocio(new Negocio(Tipoempresa.RESTAURANTE, PersistenciaUsuarios.getUsuario("gerenterest@gmail.com"),
                 "Las Catrinas", TipoRestaurante.MEXICANA));
         PersistenciaEmpresa.setnNegocio(new Negocio(Tipoempresa.RESTAURANTE, PersistenciaUsuarios.getUsuario("gerenterest1@gmail.com"),
@@ -84,10 +82,6 @@ public class PrincipalFastify {
                 PersistenciaUsuarios.getUsuario("gerentetind@gmail.com"), "Walmart"));
         PersistenciaEmpresa.setnNegocio(new Negocio(Tipoempresa.EMPRESA,
                 PersistenciaUsuarios.getUsuario("gerentetind1@gmail.com"), "Pequeño Mundo"));
-    }
-
-    public static void CrearNegocios() {
-
     }
 
     public static Usuario getoUsuario() {
