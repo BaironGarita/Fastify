@@ -17,7 +17,7 @@ public class PersistenciaUsuarios {
     private static HashMap<String,Usuario> listado = new HashMap<String, Usuario>();
     
     public static void setUsuario(Usuario pUsuario){
-        listado.put(pUsuario.getLogin(), pUsuario);
+        listado.put(pUsuario.getCorreo(), pUsuario);
     }
     public static Usuario getUsuario(String pLogin){
         return listado.get(pLogin);

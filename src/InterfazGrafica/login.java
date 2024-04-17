@@ -115,7 +115,7 @@ public class login extends javax.swing.JFrame {
 
         TxtUsuario.setFont(TxtUsuario.getFont().deriveFont(TxtUsuario.getFont().getSize()+2f));
         TxtUsuario.setForeground(new java.awt.Color(255, 255, 255));
-        TxtUsuario.setText("admin@gmail.com");
+        TxtUsuario.setText("gerenterest@gmail.com");
         TxtUsuario.setBorder(null);
         jPanel2.add(TxtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(39, 140, 240, 30));
 

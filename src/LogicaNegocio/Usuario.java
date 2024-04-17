@@ -10,7 +10,7 @@ package LogicaNegocio;
  */
 public class Usuario {
 
-    private final String login;
+    private final String Correo;
     private String NumTar;
     private String constraseña;
     private String nombre;
@@ -18,14 +18,14 @@ public class Usuario {
     private TipoTarjeta tarjeta;
 
     public Usuario(String login, String constraseña, String nombre, TipoUsuario rol) {
-        this.login = login;
+        this.Correo = login;
         this.constraseña = constraseña;
         this.nombre = nombre;
         this.rol = rol;
     }
 
     public Usuario(String login, String constraseña, String nombre, TipoUsuario rol,TipoTarjeta tarjeta,String NumTarjeta) {
-        this.login = login;
+        this.Correo = login;
         this.constraseña = constraseña;
         this.nombre = nombre;
         this.rol = rol;
@@ -57,8 +57,8 @@ public class Usuario {
         this.rol = rol;
     }
 
-    public String getLogin() {
-        return login;
+    public String getCorreo() {
+        return Correo;
     }
 
     public TipoTarjeta getTarjeta() {

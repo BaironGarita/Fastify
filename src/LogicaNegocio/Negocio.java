@@ -16,11 +16,19 @@ public class Negocio{
     ArrayList<Producto> ListaProductos = new ArrayList<>();
     private final Usuario Gerente;
     private String Nombre;
+    private TipoRestaurante TipoRest;
     
     public Negocio(Tipoempresa Tipo, Usuario Gerente, String Nombre) {
         this.Tipo = Tipo;
         this.Gerente = Gerente;
         this.Nombre = Nombre;
+    }
+
+    public Negocio(Tipoempresa Tipo, Usuario Gerente, String Nombre, TipoRestaurante TipoRest) {
+        this.Tipo = Tipo;
+        this.Gerente = Gerente;
+        this.Nombre = Nombre;
+        this.TipoRest = TipoRest;
     }
     
     public void agregarProducto(Producto Producto){
@@ -34,10 +42,23 @@ public class Negocio{
     public Usuario getGerente() {
         return Gerente;
     }
-
-    public String getLogin() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    
+    public String getNombre() {
+        return Nombre;
     }
+
+    public void setNombre(String Nombre) {
+        this.Nombre = Nombre;
+    }
+
+    public TipoRestaurante getTipoRest() {
+        return TipoRest;
+    }
+
+    public void setTipoRest(TipoRestaurante TipoRest) {
+        this.TipoRest = TipoRest;
+    }
+    
     
     
     
