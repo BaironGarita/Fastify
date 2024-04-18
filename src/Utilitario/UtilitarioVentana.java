@@ -166,6 +166,22 @@ public class UtilitarioVentana {
         System.exit(0);
     }
 
+    public static void fadeOutAndDispose(JFrame componente) {
+        for (double i = 1.0; i >= 0.0; i = i - 0.1) {
+            String val = i + "";
+            float f = Float.valueOf(val);
+            componente.setOpacity(f);
+            try {
+                Thread.sleep(50);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        // Cerrar la ventana después de la animación
+        componente.dispose();
+    }
+
     public static void fadeOutAndClosing(JFrame componente) {
         for (double i = 1.0; i >= 0.0; i = i - 0.1) {
             String val = i + "";
@@ -183,7 +199,7 @@ public class UtilitarioVentana {
     }
 
     public static void fadeRegistro(JFrame componente) {
-        componente.dispose(); 
+        componente.dispose();
         JFrame nuevoComponente = new InterfazGrafica.login();
         nuevoComponente.setVisible(true); // Muestra el nuevo JFrame
     }

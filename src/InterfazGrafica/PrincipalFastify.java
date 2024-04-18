@@ -5,11 +5,13 @@
 package InterfazGrafica;
 
 import LogicaNegocio.Negocio;
+import LogicaNegocio.Producto;
 import LogicaNegocio.TipoRestaurante;
 import LogicaNegocio.TipoUsuario;
 import LogicaNegocio.Tipoempresa;
 import LogicaNegocio.Usuario;
 import PersistenciaDatos.PersistenciaEmpresa;
+import PersistenciaDatos.PersistenciaProductos;
 import PersistenciaDatos.PersistenciaUsuarios;
 import java.util.ArrayList;
 
@@ -39,6 +41,8 @@ public class PrincipalFastify {
                 "1234", "Gerente", TipoUsuario.GERENTE));
         PersistenciaUsuarios.setUsuario(new Usuario("gerenterest3@gmail.com",
                 "1234", "Gerente", TipoUsuario.GERENTE));
+        PersistenciaUsuarios.setUsuario(new Usuario("gerenterest4@gmail.com",
+                "1234", "Gerente", TipoUsuario.GERENTE));
         PersistenciaUsuarios.setUsuario(new Usuario("gerentecaf@gmail.com",
                 "1234", "Gerente", TipoUsuario.GERENTE));
         PersistenciaUsuarios.setUsuario(new Usuario("gerentecaf1@gmail.com",
@@ -56,32 +60,42 @@ public class PrincipalFastify {
     }
 
     public static void CrearRestaurantes() {
-        PersistenciaEmpresa.setnNegocio(new Negocio(Tipoempresa.RESTAURANTE, PersistenciaUsuarios.getUsuario("gerenterest@gmail.com"),
+        PersistenciaEmpresa.setNegocio(new Negocio(Tipoempresa.RESTAURANTE, PersistenciaUsuarios.getUsuario("gerenterest@gmail.com"),
                 "Las Catrinas", TipoRestaurante.MEXICANA));
-        PersistenciaEmpresa.setnNegocio(new Negocio(Tipoempresa.RESTAURANTE, PersistenciaUsuarios.getUsuario("gerenterest1@gmail.com"),
+        PersistenciaEmpresa.setNegocio(new Negocio(Tipoempresa.RESTAURANTE, PersistenciaUsuarios.getUsuario("gerenterest1@gmail.com"),
                 "Lleguele", TipoRestaurante.COMIDARAPIDA));
-        PersistenciaEmpresa.setnNegocio(new Negocio(Tipoempresa.RESTAURANTE, PersistenciaUsuarios.getUsuario("gerenterest2@gmail.com"),
+        PersistenciaEmpresa.setNegocio(new Negocio(Tipoempresa.RESTAURANTE, PersistenciaUsuarios.getUsuario("gerenterest2@gmail.com"),
                 "Mama-mia", TipoRestaurante.ITALIANO));
-        PersistenciaEmpresa.setnNegocio(new Negocio(Tipoempresa.RESTAURANTE, PersistenciaUsuarios.getUsuario("gerenterest3@gmail.com"),
+        PersistenciaEmpresa.setNegocio(new Negocio(Tipoempresa.RESTAURANTE, PersistenciaUsuarios.getUsuario("gerenterest3@gmail.com"),
+                "Don Jose", TipoRestaurante.ITALIANO));
+        PersistenciaEmpresa.setNegocio(new Negocio(Tipoempresa.RESTAURANTE, PersistenciaUsuarios.getUsuario("gerenterest4@gmail.com"),
                 "Primer Sabor", TipoRestaurante.ASIATICA));
     }
 
     public static void CrearCafeterias() {
-        PersistenciaEmpresa.setnNegocio(new Negocio(Tipoempresa.CAFETERIA,
+        PersistenciaEmpresa.setNegocio(new Negocio(Tipoempresa.CAFETERIA,
                 PersistenciaUsuarios.getUsuario("gerentecaf@gmail.com"), "starbucks"));
-        PersistenciaEmpresa.setnNegocio(new Negocio(Tipoempresa.CAFETERIA,
+        PersistenciaEmpresa.setNegocio(new Negocio(Tipoempresa.CAFETERIA,
                 PersistenciaUsuarios.getUsuario("gerentecaf1@gmail.com"), "Cafe a la moda"));
-        PersistenciaEmpresa.setnNegocio(new Negocio(Tipoempresa.CAFETERIA,
+        PersistenciaEmpresa.setNegocio(new Negocio(Tipoempresa.CAFETERIA,
                 PersistenciaUsuarios.getUsuario("gerentecaf2@gmail.com"), "Kawah Cafe"));
-        PersistenciaEmpresa.setnNegocio(new Negocio(Tipoempresa.CAFETERIA,
+        PersistenciaEmpresa.setNegocio(new Negocio(Tipoempresa.CAFETERIA,
                 PersistenciaUsuarios.getUsuario("gerentecaf3@gmail.com"), "Mocapan"));
     }
 
     public static void CrearTiendas() {
-        PersistenciaEmpresa.setnNegocio(new Negocio(Tipoempresa.EMPRESA,
+        PersistenciaEmpresa.setNegocio(new Negocio(Tipoempresa.EMPRESA,
                 PersistenciaUsuarios.getUsuario("gerentetind@gmail.com"), "Walmart"));
-        PersistenciaEmpresa.setnNegocio(new Negocio(Tipoempresa.EMPRESA,
+        PersistenciaEmpresa.setNegocio(new Negocio(Tipoempresa.EMPRESA,
                 PersistenciaUsuarios.getUsuario("gerentetind1@gmail.com"), "Pequeño Mundo"));
+    }
+    
+    public static void CrearProductos() {
+        PersistenciaProductos.setProducto(new Producto(false, "Coca-Cola", 1000, 0.13));
+    }
+    
+    public static void AgregarProducto(){
+        PersistenciaEmpresa.getNegocioPorGerente("gerenterest@gmail.com").agregarProducto(PersistenciaProductos.getNegocio("Coca-Cola"));
     }
 
     public static Usuario getoUsuario() {

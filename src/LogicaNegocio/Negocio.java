@@ -66,6 +66,11 @@ public class Negocio{
     public void setTipoRest(TipoRestaurante TipoRest) {
         this.TipoRest = TipoRest;
     }
+
+    public ArrayList<Producto> getListaProductos() {
+        return ListaProductos;
+    }
+    
     
     
     

@@ -4,7 +4,9 @@
  */
 package InterfazGrafica;
 
+import static InterfazGrafica.register.Login;
 import LogicaNegocio.Negocio;
+import LogicaNegocio.Producto;
 import LogicaNegocio.TipoRestaurante;
 import LogicaNegocio.Tipoempresa;
 import LogicaNegocio.Usuario;
@@ -33,6 +35,8 @@ public final class MainMenu extends javax.swing.JFrame {
         PrincipalFastify.CrearRestaurantes();
         PrincipalFastify.CrearCafeterias();
         PrincipalFastify.CrearTiendas();
+        PrincipalFastify.CrearProductos();
+        PrincipalFastify.AgregarProducto();
         ColoresBotones();
         LblUsuario.setText(login.nombre);
         switch (login.rol) {
@@ -196,7 +200,7 @@ public final class MainMenu extends javax.swing.JFrame {
         BtnSalir.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         BtnSalir.setForeground(new java.awt.Color(0, 57, 114));
         BtnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/3005766_account_door_exit_logout_icon.png"))); // NOI18N
-        BtnSalir.setText("Salir");
+        BtnSalir.setText("Cerrar Sesion");
         BtnSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         BtnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -891,29 +895,23 @@ public final class MainMenu extends javax.swing.JFrame {
             }
         }
     }
-
-    private void llenarTablaRest() {
-//        Object[] fila = new Object[6];
-//        //expresion lambda para recorrer la lista
-//        modeloTabla.setRowCount(0);
-//        PersistenciaEmpresa.getListado().forEach(oNegocio
-//                -> {
-//            fila[0] = oNegocio.getNumeroCuenta();
-//            fila[1] = oNegocio.getDuenno().getNombre();
-//            fila[2] = String.format("%.2f", oNegocio.getSaldo());
-//            fila[3] = oNegocio.getMoneda().toString();
-//            fila[4] = oNegocio.totalBeneficiarios();
-//            fila[5] = (oNegocio instanceof CuentaAhorroEspecial)
-//                    ? "Cuenta Ahorro Especial"
-//                    : (oNegocio instanceof CuentaCorriente ? "Cuenta Corriente"
-//                            : "Cuenta Ahorro");
-//            //fila[5] = oCuenta.getNombreCuenta();
-//            modeloTabla.addRow(fila);
-//        });
+    
+    private void ContadorProductos(){
+        int contador = 0;
+        List<Producto> lista = SucursalGerente.getListaProductos();
+        for (Producto producto : lista) {
+            if(producto!=null){
+                contador++;
+            }
+        }
+        InfoCantidadDeProductos.setText(String.valueOf(contador));
     }
 
     private void BtnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSalirActionPerformed
-        Utilitario.UtilitarioVentana.fadeOutAndExit(this);
+        Login = new login();
+        Login.setVisible(true);
+        Utilitario.UtilitarioVentana.fade(Login);
+        Utilitario.UtilitarioVentana.fadeOutAndDispose(this);
     }//GEN-LAST:event_BtnSalirActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -943,6 +941,7 @@ public final class MainMenu extends javax.swing.JFrame {
         TpnVentanas.setSelectedIndex(3);
         LblGerente.setText("Gerente : " + user.getNombre());
         InfoGenteNegocio.setText(SucursalGerente.getNombre());
+        ContadorProductos();
     }//GEN-LAST:event_BtnGerenteActionPerformed
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked

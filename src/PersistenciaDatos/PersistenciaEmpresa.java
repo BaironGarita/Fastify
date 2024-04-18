@@ -19,7 +19,7 @@ public class PersistenciaEmpresa {
 
     private static HashMap<String, Negocio> listado = new HashMap<String, Negocio>();
 
-    public static void setnNegocio(Negocio oNegocio) {
+    public static void setNegocio(Negocio oNegocio) {
         listado.put(String.valueOf(oNegocio.getGerente()), oNegocio);
     }
 
