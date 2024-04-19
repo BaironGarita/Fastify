@@ -13,6 +13,8 @@ import LogicaNegocio.Usuario;
 import PersistenciaDatos.PersistenciaEmpresa;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -22,35 +24,38 @@ import javax.swing.table.DefaultTableModel;
  */
 public final class MainMenu extends javax.swing.JFrame {
 
-    private DefaultTableModel modeloTabla;
-    private Tipoempresa Tipo;
+    private Producto ProductMantenimiento = null;
+    DefaultTableModel modeloTabla = new DefaultTableModel();
     private Usuario user = login.Usuariolog;
     private Negocio SucursalGerente = login.Gerente;
 
     /**
      * Creates new form MainMenu
+     *
+     * @throws java.lang.Exception
      */
-    public MainMenu() {
+    public MainMenu() throws Exception {
         initComponents();
+        modeloTabla = (DefaultTableModel) TblProductoRestaurantes.getModel();
+        tablaProductos();
         PrincipalFastify.CrearRestaurantes();
         PrincipalFastify.CrearCafeterias();
         PrincipalFastify.CrearTiendas();
         PrincipalFastify.CrearProductos();
-        PrincipalFastify.AgregarProducto();
+        PrincipalFastify.AgregarProducto(user);
         ColoresBotones();
         LblUsuario.setText(login.nombre);
         switch (login.rol) {
-            case REGULAR:
+            case REGULAR -> {
                 BtnGerente.setVisible(false);
                 BtnMantenimiento.setVisible(false);
-                break;
-            case GERENTE:
+            }
+            case GERENTE -> {
                 BtnCarritoCompras.setVisible(false);
                 BtnMantenimiento.setVisible(false);
-
-                break;
-            default:
-                break;
+            }
+            default -> {
+            }
         }
     }
     private Tipoempresa Empresa;
@@ -75,6 +80,7 @@ public final class MainMenu extends javax.swing.JFrame {
         BtnSalir = new javax.swing.JButton();
         BtnMantenimiento = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+        LblExit = new javax.swing.JLabel();
         TpnVentanas = new javax.swing.JTabbedPane();
         PnlDefault = new javax.swing.JPanel();
         LblImgDefault = new javax.swing.JLabel();
@@ -94,10 +100,14 @@ public final class MainMenu extends javax.swing.JFrame {
         LblTipoRestaurante = new javax.swing.JLabel();
         CboTipoRestaurante = new javax.swing.JComboBox<>();
         LblTipoEmpacado = new javax.swing.JLabel();
-        RdoPerecedero = new javax.swing.JRadioButton();
-        RdoNoPerecedero = new javax.swing.JRadioButton();
+        RdoEmpacadoCompra = new javax.swing.JRadioButton();
+        RdoPreparadoCompra = new javax.swing.JRadioButton();
         PnlCarritoCompras = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        TblCarritoCompras = new javax.swing.JTable();
+        LblCarritoCompras = new javax.swing.JLabel();
+        infoMontoCompra = new javax.swing.JLabel();
+        BtnPagarCompras = new javax.swing.JButton();
         PnlGerente = new javax.swing.JPanel();
         LblImgGerente = new javax.swing.JLabel();
         LblGerente = new javax.swing.JLabel();
@@ -105,7 +115,7 @@ public final class MainMenu extends javax.swing.JFrame {
         InfoGenteNegocio = new javax.swing.JLabel();
         LblNumeroDeProductos = new javax.swing.JLabel();
         InfoCantidadDeProductos = new javax.swing.JLabel();
-        BtnAgregarProducto = new javax.swing.JButton();
+        BtnAgregar = new javax.swing.JButton();
         BtnEliminarProductos = new javax.swing.JButton();
         BtnEditar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -131,8 +141,10 @@ public final class MainMenu extends javax.swing.JFrame {
         LblImpuesto = new javax.swing.JLabel();
         TxtPrecioProducto = new javax.swing.JTextField();
         TxtImpuestoProducto = new javax.swing.JTextField();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        RdoEmpacado = new javax.swing.JRadioButton();
+        RdoPreparado = new javax.swing.JRadioButton();
+        BtnAgregarProducto = new javax.swing.JButton();
+        BtnEditarProducto = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(830, 530));
@@ -227,6 +239,17 @@ public final class MainMenu extends javax.swing.JFrame {
             }
         });
 
+        LblExit.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        LblExit.setForeground(new java.awt.Color(255, 255, 255));
+        LblExit.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LblExit.setText("X");
+        LblExit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        LblExit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                LblExitMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout PnlUsuarioLayout = new javax.swing.GroupLayout(PnlUsuario);
         PnlUsuario.setLayout(PnlUsuarioLayout);
         PnlUsuarioLayout.setHorizontalGroup(
@@ -236,17 +259,18 @@ public final class MainMenu extends javax.swing.JFrame {
                 .addGroup(PnlUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(LblUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(PnlUsuarioLayout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(LblIconUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(69, 69, 69))
-                    .addGroup(PnlUsuarioLayout.createSequentialGroup()
-                        .addGroup(PnlUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(BtnMantenimiento, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(BtnSalir, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(BtnGerente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(BtnCarritoCompras, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(BtnRestaurante, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(PnlUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(PnlUsuarioLayout.createSequentialGroup()
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(LblIconUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(40, 40, 40)
+                                .addComponent(LblExit, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(BtnMantenimiento, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
+                            .addComponent(BtnSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(BtnGerente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(BtnCarritoCompras, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(BtnRestaurante, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())))
         );
         PnlUsuarioLayout.setVerticalGroup(
@@ -256,7 +280,9 @@ public final class MainMenu extends javax.swing.JFrame {
                     .addComponent(LblIconUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(PnlUsuarioLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel4)))
+                        .addGroup(PnlUsuarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(LblExit, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))))
                 .addGap(18, 18, 18)
                 .addComponent(LblUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -267,7 +293,7 @@ public final class MainMenu extends javax.swing.JFrame {
                 .addComponent(BtnGerente)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(BtnMantenimiento)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 121, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
                 .addComponent(BtnSalir)
                 .addContainerGap())
         );
@@ -287,7 +313,7 @@ public final class MainMenu extends javax.swing.JFrame {
         PnlDefault.setLayout(PnlDefaultLayout);
         PnlDefaultLayout.setHorizontalGroup(
             PnlDefaultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(LblImgDefault, javax.swing.GroupLayout.DEFAULT_SIZE, 621, Short.MAX_VALUE)
+            .addComponent(LblImgDefault, javax.swing.GroupLayout.DEFAULT_SIZE, 639, Short.MAX_VALUE)
         );
         PnlDefaultLayout.setVerticalGroup(
             PnlDefaultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -390,15 +416,15 @@ public final class MainMenu extends javax.swing.JFrame {
         LblTipoEmpacado.setForeground(new java.awt.Color(0, 57, 114));
         LblTipoEmpacado.setText("Tipo de Empacado");
 
-        BtgTipoEmpacado.add(RdoPerecedero);
-        RdoPerecedero.setFont(RdoPerecedero.getFont().deriveFont(RdoPerecedero.getFont().getSize()+2f));
-        RdoPerecedero.setForeground(new java.awt.Color(0, 57, 114));
-        RdoPerecedero.setText("Perecedero");
+        BtgTipoEmpacado.add(RdoEmpacadoCompra);
+        RdoEmpacadoCompra.setFont(RdoEmpacadoCompra.getFont().deriveFont(RdoEmpacadoCompra.getFont().getSize()+2f));
+        RdoEmpacadoCompra.setForeground(new java.awt.Color(0, 57, 114));
+        RdoEmpacadoCompra.setText("Empacado");
 
-        BtgTipoEmpacado.add(RdoNoPerecedero);
-        RdoNoPerecedero.setFont(RdoNoPerecedero.getFont().deriveFont(RdoNoPerecedero.getFont().getSize()+2f));
-        RdoNoPerecedero.setForeground(new java.awt.Color(0, 57, 114));
-        RdoNoPerecedero.setText("No Perecedero");
+        BtgTipoEmpacado.add(RdoPreparadoCompra);
+        RdoPreparadoCompra.setFont(RdoPreparadoCompra.getFont().deriveFont(RdoPreparadoCompra.getFont().getSize()+2f));
+        RdoPreparadoCompra.setForeground(new java.awt.Color(0, 57, 114));
+        RdoPreparadoCompra.setText("Preparado");
 
         javax.swing.GroupLayout PnlRestauranteLayout = new javax.swing.GroupLayout(PnlRestaurante);
         PnlRestaurante.setLayout(PnlRestauranteLayout);
@@ -432,13 +458,13 @@ public final class MainMenu extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addGroup(PnlRestauranteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(PnlRestauranteLayout.createSequentialGroup()
-                                        .addComponent(RdoPerecedero)
+                                        .addComponent(RdoEmpacadoCompra)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(RdoNoPerecedero))
+                                        .addComponent(RdoPreparadoCompra))
                                     .addComponent(LblTipoEmpacado)))
                             .addComponent(CboProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(LblProductos))))
-                .addContainerGap(152, Short.MAX_VALUE))
+                .addContainerGap(184, Short.MAX_VALUE))
         );
         PnlRestauranteLayout.setVerticalGroup(
             PnlRestauranteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -453,8 +479,8 @@ public final class MainMenu extends javax.swing.JFrame {
                 .addGroup(PnlRestauranteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CboTipoDeEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(CboTipoRestaurante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(RdoPerecedero)
-                    .addComponent(RdoNoPerecedero))
+                    .addComponent(RdoEmpacadoCompra)
+                    .addComponent(RdoPreparadoCompra))
                 .addGap(18, 18, 18)
                 .addGroup(PnlRestauranteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LblProductos)
@@ -479,7 +505,30 @@ public final class MainMenu extends javax.swing.JFrame {
 
         PnlCarritoCompras.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/185101_shopping_caddie_icon.png"))); // NOI18N
+        TblCarritoCompras.setFont(TblCarritoCompras.getFont().deriveFont(TblCarritoCompras.getFont().getSize()+2f));
+        TblCarritoCompras.setForeground(new java.awt.Color(255, 255, 255));
+        TblCarritoCompras.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Nombre", "Cantidad", "Precio", "Empacado", "Preparado"
+            }
+        ));
+        TblCarritoCompras.setSelectionBackground(new java.awt.Color(0, 57, 114));
+        jScrollPane3.setViewportView(TblCarritoCompras);
+
+        LblCarritoCompras.setFont(LblCarritoCompras.getFont().deriveFont(LblCarritoCompras.getFont().getSize()+2f));
+        LblCarritoCompras.setForeground(new java.awt.Color(0, 57, 114));
+        LblCarritoCompras.setText("Monto Compra :");
+
+        infoMontoCompra.setFont(infoMontoCompra.getFont().deriveFont(infoMontoCompra.getFont().getSize()+2f));
+        infoMontoCompra.setForeground(new java.awt.Color(0, 57, 114));
+        infoMontoCompra.setText("Info");
+
+        BtnPagarCompras.setFont(BtnPagarCompras.getFont().deriveFont(BtnPagarCompras.getFont().getSize()+2f));
+        BtnPagarCompras.setForeground(new java.awt.Color(255, 255, 255));
+        BtnPagarCompras.setText("Pagar");
 
         javax.swing.GroupLayout PnlCarritoComprasLayout = new javax.swing.GroupLayout(PnlCarritoCompras);
         PnlCarritoCompras.setLayout(PnlCarritoComprasLayout);
@@ -487,14 +536,30 @@ public final class MainMenu extends javax.swing.JFrame {
             PnlCarritoComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PnlCarritoComprasLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2)
-                .addContainerGap(581, Short.MAX_VALUE))
+                .addGroup(PnlCarritoComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 627, Short.MAX_VALUE)
+                    .addGroup(PnlCarritoComprasLayout.createSequentialGroup()
+                        .addComponent(LblCarritoCompras)
+                        .addGap(18, 18, 18)
+                        .addComponent(infoMontoCompra)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PnlCarritoComprasLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(BtnPagarCompras)))
+                .addContainerGap())
         );
         PnlCarritoComprasLayout.setVerticalGroup(
             PnlCarritoComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PnlCarritoComprasLayout.createSequentialGroup()
-                .addComponent(jLabel2)
-                .addGap(0, 482, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(PnlCarritoComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LblCarritoCompras)
+                    .addComponent(infoMontoCompra))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addComponent(BtnPagarCompras)
+                .addContainerGap())
         );
 
         TpnVentanas.addTab("3", PnlCarritoCompras);
@@ -524,13 +589,13 @@ public final class MainMenu extends javax.swing.JFrame {
         InfoCantidadDeProductos.setForeground(new java.awt.Color(0, 57, 114));
         InfoCantidadDeProductos.setText("Info");
 
-        BtnAgregarProducto.setFont(BtnAgregarProducto.getFont().deriveFont(BtnAgregarProducto.getFont().getSize()+2f));
-        BtnAgregarProducto.setForeground(new java.awt.Color(255, 255, 255));
-        BtnAgregarProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Agregar.png"))); // NOI18N
-        BtnAgregarProducto.setText("Agregra");
-        BtnAgregarProducto.addActionListener(new java.awt.event.ActionListener() {
+        BtnAgregar.setFont(BtnAgregar.getFont().deriveFont(BtnAgregar.getFont().getSize()+2f));
+        BtnAgregar.setForeground(new java.awt.Color(255, 255, 255));
+        BtnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Agregar.png"))); // NOI18N
+        BtnAgregar.setText("Agregra");
+        BtnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnAgregarProductoActionPerformed(evt);
+                BtnAgregarActionPerformed(evt);
             }
         });
 
@@ -538,6 +603,11 @@ public final class MainMenu extends javax.swing.JFrame {
         BtnEliminarProductos.setForeground(new java.awt.Color(255, 255, 255));
         BtnEliminarProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Remover.png"))); // NOI18N
         BtnEliminarProductos.setText("Eliminar");
+        BtnEliminarProductos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnEliminarProductosActionPerformed(evt);
+            }
+        });
 
         BtnEditar.setFont(BtnEditar.getFont().deriveFont(BtnEditar.getFont().getSize()+2f));
         BtnEditar.setForeground(new java.awt.Color(255, 255, 255));
@@ -550,7 +620,7 @@ public final class MainMenu extends javax.swing.JFrame {
         });
 
         TblProductoRestaurantes.setFont(TblProductoRestaurantes.getFont().deriveFont(TblProductoRestaurantes.getFont().getSize()+2f));
-        TblProductoRestaurantes.setForeground(new java.awt.Color(255, 255, 255));
+        TblProductoRestaurantes.setForeground(new java.awt.Color(0, 0, 0));
         TblProductoRestaurantes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null}
@@ -580,7 +650,7 @@ public final class MainMenu extends javax.swing.JFrame {
                             .addGroup(PnlGerenteLayout.createSequentialGroup()
                                 .addGroup(PnlGerenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(PnlGerenteLayout.createSequentialGroup()
-                                        .addComponent(BtnAgregarProducto)
+                                        .addComponent(BtnAgregar)
                                         .addGap(18, 18, 18)
                                         .addComponent(BtnEliminarProductos)
                                         .addGap(18, 18, 18)
@@ -612,7 +682,7 @@ public final class MainMenu extends javax.swing.JFrame {
                     .addComponent(InfoCantidadDeProductos))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(PnlGerenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BtnAgregarProducto)
+                    .addComponent(BtnAgregar)
                     .addComponent(BtnEliminarProductos)
                     .addComponent(BtnEditar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -773,15 +843,33 @@ public final class MainMenu extends javax.swing.JFrame {
         TxtImpuestoProducto.setFont(TxtImpuestoProducto.getFont().deriveFont(TxtImpuestoProducto.getFont().getSize()+2f));
         TxtImpuestoProducto.setForeground(new java.awt.Color(0, 57, 114));
 
-        BtgTipoEmpacado.add(jRadioButton1);
-        jRadioButton1.setFont(jRadioButton1.getFont().deriveFont(jRadioButton1.getFont().getSize()+2f));
-        jRadioButton1.setForeground(new java.awt.Color(0, 57, 114));
-        jRadioButton1.setText("Perecedero");
+        BtgTipoEmpacado.add(RdoEmpacado);
+        RdoEmpacado.setFont(RdoEmpacado.getFont().deriveFont(RdoEmpacado.getFont().getSize()+2f));
+        RdoEmpacado.setForeground(new java.awt.Color(0, 57, 114));
+        RdoEmpacado.setText("Empacado");
 
-        BtgTipoEmpacado.add(jRadioButton2);
-        jRadioButton2.setFont(jRadioButton2.getFont().deriveFont(jRadioButton2.getFont().getSize()+2f));
-        jRadioButton2.setForeground(new java.awt.Color(0, 57, 114));
-        jRadioButton2.setText("No Perecedero");
+        BtgTipoEmpacado.add(RdoPreparado);
+        RdoPreparado.setFont(RdoPreparado.getFont().deriveFont(RdoPreparado.getFont().getSize()+2f));
+        RdoPreparado.setForeground(new java.awt.Color(0, 57, 114));
+        RdoPreparado.setText("Prepadaro");
+
+        BtnAgregarProducto.setFont(BtnAgregarProducto.getFont().deriveFont(BtnAgregarProducto.getFont().getSize()+2f));
+        BtnAgregarProducto.setForeground(new java.awt.Color(255, 255, 255));
+        BtnAgregarProducto.setText("Agregar");
+        BtnAgregarProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnAgregarProductoActionPerformed(evt);
+            }
+        });
+
+        BtnEditarProducto.setFont(BtnEditarProducto.getFont().deriveFont(BtnEditarProducto.getFont().getSize()+2f));
+        BtnEditarProducto.setForeground(new java.awt.Color(255, 255, 255));
+        BtnEditarProducto.setText("Editar");
+        BtnEditarProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnEditarProductoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout PnlAgregarEditarLayout = new javax.swing.GroupLayout(PnlAgregarEditar);
         PnlAgregarEditar.setLayout(PnlAgregarEditarLayout);
@@ -789,26 +877,31 @@ public final class MainMenu extends javax.swing.JFrame {
             PnlAgregarEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PnlAgregarEditarLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(PnlAgregarEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(PnlAgregarEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PnlAgregarEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(PnlAgregarEditarLayout.createSequentialGroup()
+                            .addComponent(LblPerecedero)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(RdoEmpacado)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(RdoPreparado))
+                        .addGroup(PnlAgregarEditarLayout.createSequentialGroup()
+                            .addComponent(LblPrecio)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(TxtPrecioProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(PnlAgregarEditarLayout.createSequentialGroup()
+                            .addComponent(LblNombreProducto)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(TxtNombreProducto))
+                        .addGroup(PnlAgregarEditarLayout.createSequentialGroup()
+                            .addComponent(LblImpuesto)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(TxtImpuestoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(PnlAgregarEditarLayout.createSequentialGroup()
-                        .addComponent(LblImpuesto)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(TxtImpuestoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(PnlAgregarEditarLayout.createSequentialGroup()
-                        .addComponent(LblPerecedero)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jRadioButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jRadioButton2))
-                    .addGroup(PnlAgregarEditarLayout.createSequentialGroup()
-                        .addComponent(LblPrecio)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(TxtPrecioProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(PnlAgregarEditarLayout.createSequentialGroup()
-                        .addComponent(LblNombreProducto)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(TxtNombreProducto)))
-                .addContainerGap(312, Short.MAX_VALUE))
+                        .addComponent(BtnAgregarProducto)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BtnEditarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(344, Short.MAX_VALUE))
         );
         PnlAgregarEditarLayout.setVerticalGroup(
             PnlAgregarEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -824,13 +917,17 @@ public final class MainMenu extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(PnlAgregarEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LblPerecedero)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2))
+                    .addComponent(RdoEmpacado)
+                    .addComponent(RdoPreparado))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(PnlAgregarEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LblImpuesto)
                     .addComponent(TxtImpuestoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(375, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 342, Short.MAX_VALUE)
+                .addGroup(PnlAgregarEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BtnAgregarProducto)
+                    .addComponent(BtnEditarProducto))
+                .addContainerGap())
         );
 
         TpnVentanas.addTab("7", PnlAgregarEditar);
@@ -849,12 +946,14 @@ public final class MainMenu extends javax.swing.JFrame {
         BtnMenos.setBackground(new java.awt.Color(0, 114, 255, 255));
         BtnMas.setBackground(new java.awt.Color(0, 114, 255, 255));
         BtnComprarProducto.setBackground(new java.awt.Color(0, 114, 255, 255));
-        BtnAgregarProducto.setBackground(new java.awt.Color(0, 114, 255, 255));
+        BtnAgregar.setBackground(new java.awt.Color(0, 114, 255, 255));
         BtnEditar.setBackground(new java.awt.Color(0, 114, 255, 255));
         BtnEliminarProductos.setBackground(new java.awt.Color(0, 114, 255, 255));
         TxtNombreProducto.setBackground(new java.awt.Color(255, 255, 255, 1));
         TxtPrecioProducto.setBackground(new java.awt.Color(255, 255, 255, 1));
         TxtImpuestoProducto.setBackground(new java.awt.Color(255, 255, 255, 1));
+        BtnAgregarProducto.setBackground(new java.awt.Color(0, 114, 255, 255));
+        BtnEditarProducto.setBackground(new java.awt.Color(0, 114, 255, 255));
 
     }
 
@@ -862,8 +961,8 @@ public final class MainMenu extends javax.swing.JFrame {
         LblTipoRestaurante.setVisible(bool);
         CboTipoRestaurante.setVisible(bool);
         LblTipoEmpacado.setVisible(bool);
-        RdoNoPerecedero.setVisible(bool);
-        RdoPerecedero.setVisible(bool);
+        RdoPreparadoCompra.setVisible(bool);
+        RdoEmpacadoCompra.setVisible(bool);
     }
 
     private void Informacion() {
@@ -895,21 +994,59 @@ public final class MainMenu extends javax.swing.JFrame {
             }
         }
     }
-    
-    private void ContadorProductos(){
+
+    private void ContadorProductos() {
         int contador = 0;
         List<Producto> lista = SucursalGerente.getListaProductos();
         for (Producto producto : lista) {
-            if(producto!=null){
+            if (producto != null) {
                 contador++;
             }
         }
         InfoCantidadDeProductos.setText(String.valueOf(contador));
     }
 
+    private void tablaProductos() {
+        Object[] fila = new Object[4];
+        //expresion lambda para recorrer la lista
+        modeloTabla.setRowCount(0);
+        SucursalGerente.getListaProductos().forEach(oProducto
+                -> {
+            fila[0] = oProducto.getNombre();
+            fila[1] = oProducto.getPrecio();
+            fila[2] = String.format("%.2f", oProducto.getImpuestos());
+            fila[3] = oProducto.isEmpacado();
+            modeloTabla.addRow(fila);
+        });
+    }
+
+    private void llenaTablaDeProductos() {
+        try {
+            //Llama al método que llena la lista con los Departamentos del ArrayList
+            //Llena la tabla con los Departamentos que se grabaron en el ArrayList
+            modeloTabla.setRowCount(0);//Limpia la tabla
+            Object[] datos = new Object[4];
+            //Obtiene el arrayList con la lista de los departamentos que están en el archivo
+            ArrayList<Producto> lista = (ArrayList<Producto>) SucursalGerente.getListaProductos();
+            //llenar la tabla a partir del ArrayList que viene del archivo
+            for (int i = 0; i < lista.size(); i++) {
+                datos[0] = lista.get(i).getNombre();
+                datos[1] = lista.get(i).getPrecio();
+                datos[2] = lista.get(i).getImpuestos();
+                datos[3] = lista.get(i).isEmpacado();
+                modeloTabla.addRow(datos);//Agrega el arreglo como una nueva fila de la tabla
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al listar el Producto\n"
+                    + "el programa se cerrará consulte con el administrador\n"
+                    + e.toString());
+        }
+    }
+
     private void BtnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSalirActionPerformed
         Login = new login();
         Login.setVisible(true);
+        CboRestaurante.removeAllItems();
         Utilitario.UtilitarioVentana.fade(Login);
         Utilitario.UtilitarioVentana.fadeOutAndDispose(this);
     }//GEN-LAST:event_BtnSalirActionPerformed
@@ -942,6 +1079,8 @@ public final class MainMenu extends javax.swing.JFrame {
         LblGerente.setText("Gerente : " + user.getNombre());
         InfoGenteNegocio.setText(SucursalGerente.getNombre());
         ContadorProductos();
+        llenaTablaDeProductos();
+        modeloTabla = (DefaultTableModel) TblProductoRestaurantes.getModel();
     }//GEN-LAST:event_BtnGerenteActionPerformed
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
@@ -1012,16 +1151,142 @@ public final class MainMenu extends javax.swing.JFrame {
             default:
                 JOptionPane.showMessageDialog(this, "Debe Escoger Un tipo de Restaurante");
         }
-        llenarRestaurantes();
+        ContadorProductos();
+        llenaTablaDeProductos();
     }//GEN-LAST:event_CboTipoRestauranteActionPerformed
 
-    private void BtnAgregarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAgregarProductoActionPerformed
+    private void BtnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAgregarActionPerformed
         TpnVentanas.setSelectedIndex(6);
-    }//GEN-LAST:event_BtnAgregarProductoActionPerformed
+        BtnAgregarProducto.setVisible(true);
+        BtnEditarProducto.setVisible(false);
+    }//GEN-LAST:event_BtnAgregarActionPerformed
 
     private void BtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditarActionPerformed
         TpnVentanas.setSelectedIndex(6);
+        BtnAgregarProducto.setVisible(false);
+        BtnEditarProducto.setVisible(true);
     }//GEN-LAST:event_BtnEditarActionPerformed
+
+    private void LblExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LblExitMouseClicked
+        Utilitario.UtilitarioVentana.fadeOutAndExit(this);
+    }//GEN-LAST:event_LblExitMouseClicked
+
+    private void BtnAgregarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAgregarProductoActionPerformed
+        boolean empacado = false;
+        String nombre = TxtNombreProducto.getText();
+        int precio = Integer.parseInt(TxtPrecioProducto.getText());
+        double impuesto = Double.parseDouble(TxtImpuestoProducto.getText());
+
+        if (TxtNombreProducto.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Debes Indicar el nombre del producto");
+            return;
+        }
+        if (TxtPrecioProducto.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Debes Indicar el precio del producto");
+            return;
+        }
+        if (TxtImpuestoProducto.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Debes Indicar el Impuesto del producto");
+            return;
+        }
+        if (BtgTipoEmpacado.getSelection() == null) {
+            JOptionPane.showMessageDialog(this, "Debes Indicar si es empacado o preparado del producto");
+            return;
+        }
+        if (RdoEmpacado.isSelected()) {
+            empacado = true;
+        }
+        setProductMantenimiento(new Producto(empacado, nombre, precio, impuesto));
+        SucursalGerente.agregarProducto(ProductMantenimiento);
+        if (ProductMantenimiento != null) {
+            try {
+                Producto.agregarProducto(ProductMantenimiento);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Error al guardar el Producto\n"
+                        + "el programa se cerrará consulte con el administrador\n"
+                        + e.toString());
+                //e.printStackTrace();
+                System.exit(0);
+            }
+            //actualiza la tabla de manera que se vea el nuevo departamento
+            llenaTablaDeProductos();
+            TpnVentanas.setSelectedIndex(3);
+            ContadorProductos();
+        }
+    }//GEN-LAST:event_BtnAgregarProductoActionPerformed
+
+    private void BtnEditarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditarProductoActionPerformed
+        boolean empacado = false;
+        String nombre = TxtNombreProducto.getText();
+        int precio = Integer.parseInt(TxtPrecioProducto.getText());
+        double impuesto = Double.parseDouble(TxtImpuestoProducto.getText());
+
+        if (TxtNombreProducto.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Debes Indicar el nombre del producto");
+            return;
+        }
+        if (TxtPrecioProducto.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Debes Indicar el precio del producto");
+            return;
+        }
+        if (TxtImpuestoProducto.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Debes Indicar el Impuesto del producto");
+            return;
+        }
+        if (BtgTipoEmpacado.getSelection() == null) {
+            JOptionPane.showMessageDialog(this, "Debes Indicar si es empacado o preparado del producto");
+            return;
+        }
+        if (RdoEmpacado.isSelected()) {
+            empacado = true;
+        }
+        setProductMantenimiento(new Producto(empacado, nombre, precio, impuesto));
+        if (TblProductoRestaurantes.getSelectedRow() >= 0) {
+            String Nombre = TblProductoRestaurantes.getValueAt(TblProductoRestaurantes.getSelectedRow(), 0).toString();
+            String Precio = TblProductoRestaurantes.getValueAt(TblProductoRestaurantes.getSelectedRow(), 1).toString();
+            String Impuesto = TblProductoRestaurantes.getValueAt(TblProductoRestaurantes.getSelectedRow(), 2).toString();
+            TxtNombreProducto.setText(Nombre);
+            TxtPrecioProducto.setText(Precio);
+            TxtImpuestoProducto.setText(Impuesto);
+            if (this.ProductMantenimiento != null) {
+                //Modifica el producto del archivo
+                try {
+                    Producto.modificarProducto(ProductMantenimiento);
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(this, "Error al modificar el Producto\n"
+                            + "el programa se cerrará consulte con el administrador\n"
+                            + e.toString());
+                    System.exit(0);
+                }
+                llenaTablaDeProductos(); //actualiza la tabla con el nuevo departamento
+                TpnVentanas.setSelectedIndex(3);
+                ContadorProductos();
+            }
+            TblProductoRestaurantes.clearSelection();//Quita la selección de la fila en la tabla 
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar el departamento a modificar");
+            return;
+        }
+    }//GEN-LAST:event_BtnEditarProductoActionPerformed
+
+    private void BtnEliminarProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarProductosActionPerformed
+        if (TblProductoRestaurantes.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar el departamento a eliminar");
+            return;
+        }
+
+        String codigo = TblProductoRestaurantes.getValueAt(TblProductoRestaurantes.getSelectedRow(), 0).toString();
+
+        try {
+            Producto.eliminarProducto(codigo);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al eliminar el Producto\n"
+                    + "el programa se cerrará consulte con el administrador\n"
+                    + e.toString());
+            System.exit(0);
+        }
+        llenaTablaDeProductos();
+    }//GEN-LAST:event_BtnEliminarProductosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1053,22 +1318,33 @@ public final class MainMenu extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainMenu().setVisible(true);
+                try {
+                    new MainMenu().setVisible(true);
+                } catch (Exception ex) {
+                    Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
 
+    public void setProductMantenimiento(Producto ProductMantenimiento) {
+        this.ProductMantenimiento = ProductMantenimiento;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup BtgTipoEmpacado;
+    private javax.swing.JButton BtnAgregar;
     private javax.swing.JButton BtnAgregarProducto;
     private javax.swing.JButton BtnCarritoCompras;
     private javax.swing.JButton BtnComprarProducto;
     private javax.swing.JButton BtnEditar;
+    private javax.swing.JButton BtnEditarProducto;
     private javax.swing.JButton BtnEliminarProductos;
     private javax.swing.JButton BtnGerente;
     private javax.swing.JButton BtnMantenimiento;
     private javax.swing.JButton BtnMas;
     private javax.swing.JButton BtnMenos;
+    private javax.swing.JButton BtnPagarCompras;
     private javax.swing.JButton BtnRestaurante;
     private javax.swing.JButton BtnSalir;
     private javax.swing.JComboBox<String> CboProductos;
@@ -1079,7 +1355,9 @@ public final class MainMenu extends javax.swing.JFrame {
     private javax.swing.JLabel InfoGenteNegocio;
     private javax.swing.JLabel LTlContra;
     private javax.swing.JLabel LblCantidad;
+    private javax.swing.JLabel LblCarritoCompras;
     private javax.swing.JLabel LblDecoUsuario;
+    private javax.swing.JLabel LblExit;
     private javax.swing.JLabel LblGerente;
     private javax.swing.JLabel LblIconUsuario;
     private javax.swing.JLabel LblImagenRestaurante;
@@ -1112,20 +1390,22 @@ public final class MainMenu extends javax.swing.JFrame {
     private javax.swing.JPanel PnlMantenimiento;
     private javax.swing.JPanel PnlRestaurante;
     private javax.swing.JPanel PnlUsuario;
-    private javax.swing.JRadioButton RdoNoPerecedero;
-    private javax.swing.JRadioButton RdoPerecedero;
+    private javax.swing.JRadioButton RdoEmpacado;
+    private javax.swing.JRadioButton RdoEmpacadoCompra;
+    private javax.swing.JRadioButton RdoPreparado;
+    private javax.swing.JRadioButton RdoPreparadoCompra;
+    private javax.swing.JTable TblCarritoCompras;
     private javax.swing.JTable TblProductoRestaurantes;
     private javax.swing.JTabbedPane TpnVentanas;
     private javax.swing.JTextField TxtCantidadProductos;
     private javax.swing.JTextField TxtImpuestoProducto;
     private javax.swing.JTextField TxtNombreProducto;
     private javax.swing.JTextField TxtPrecioProducto;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel infoMontoCompra;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblInfoCorreo;
     // End of variables declaration//GEN-END:variables
 }

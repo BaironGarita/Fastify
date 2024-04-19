@@ -26,15 +26,15 @@ public class ValidarTarjeta {
         return (sum % 10 == 0);
     }
     
-    private static boolean validarCCV(String ccv) {
-        return ccv.matches("\\d{3}");
+    private static boolean validarCVC(String cvc) {
+        return cvc.matches("\\d{3}");
     }
     
-    public static boolean validarTarjeta(String numeroTarjeta, String ccv) {
+    public static boolean validarTarjeta(String numeroTarjeta, String cvc) {
         if (!validarNumeroTarjeta(numeroTarjeta)) {
             return false;
         }
-        if (!validarCCV(ccv)) {
+        if (!validarCVC(cvc)) {
             return false;
         }
         return true;

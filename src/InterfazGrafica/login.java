@@ -13,6 +13,8 @@ import javax.swing.JOptionPane;
 import PersistenciaDatos.PersistenciaUsuarios;
 import LogicaNegocio.TipoUsuario;
 import PersistenciaDatos.PersistenciaEmpresa;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -121,8 +123,13 @@ public class login extends javax.swing.JFrame {
 
         TxtUsuario.setFont(TxtUsuario.getFont().deriveFont(TxtUsuario.getFont().getSize()+2f));
         TxtUsuario.setForeground(new java.awt.Color(255, 255, 255));
-        TxtUsuario.setText("gerenterest@gmail.com");
+        TxtUsuario.setText("gerentetind@gmail.com");
         TxtUsuario.setBorder(null);
+        TxtUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TxtUsuarioActionPerformed(evt);
+            }
+        });
         jPanel2.add(TxtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(39, 140, 240, 30));
 
         LbUsario.setForeground(new java.awt.Color(255, 255, 255));
@@ -254,13 +261,21 @@ public class login extends javax.swing.JFrame {
             this.rol = oUsuario.getRol();
             this.Usuariolog = oUsuario;
             Utilitario.UtilitarioVentana.fadeOutAndClose(this);
-            UtilitarioVentana.centrarVentanaJFrame(this.Main = new MainMenu(), false);
+            try {
+                UtilitarioVentana.centrarVentanaJFrame(this.Main = new MainMenu(), false);
+            } catch (Exception ex) {
+                Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }else if (oUsuario.getConstraseña().equals(String.valueOf(contraseña))) {
             this.nombre = oUsuario.getNombre();
             this.rol = oUsuario.getRol();
             this.Usuariolog = oUsuario;
             Utilitario.UtilitarioVentana.fadeOutAndClose(this);
-            UtilitarioVentana.centrarVentanaJFrame(this.Main = new MainMenu(), false);
+            try {
+                UtilitarioVentana.centrarVentanaJFrame(this.Main = new MainMenu(), false);
+            } catch (Exception ex) {
+                Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_BtnInicioSesionActionPerformed
 
@@ -268,6 +283,10 @@ public class login extends javax.swing.JFrame {
         Utilitario.UtilitarioVentana.fadeOutAndClose(this);
         UtilitarioVentana.centrarVentanaJFrame(this.Registro = new register(this), false);
     }//GEN-LAST:event_LblRegistroMouseClicked
+
+    private void TxtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtUsuarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TxtUsuarioActionPerformed
 
     /**
      * @param args the command line arguments

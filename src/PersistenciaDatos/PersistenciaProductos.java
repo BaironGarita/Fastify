@@ -21,11 +21,11 @@ public class PersistenciaProductos {
         listado.put(String.valueOf(oProducto.getNombre()), oProducto);
     }
 
-    public static Producto getNegocio(String prodName) {
+    public static Producto getProducto(String prodName) {
         return listado.get(prodName);
     }
 
-    public static Producto getNegocioPorGerente(String Producto) {
+    public static Producto getProductoPorNombre(String Producto) {
         for (Producto producto : listado.values()) {
             if (producto.getNombre().equals(Producto)) {
                 return producto;

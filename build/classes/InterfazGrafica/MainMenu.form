@@ -60,18 +60,19 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="LblUsuario" alignment="0" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
-                          <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="LblIconUsuario" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="BtnMantenimiento" alignment="0" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="jLabel4" min="-2" pref="20" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="LblIconUsuario" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                                  <Component id="LblExit" min="-2" pref="20" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="BtnMantenimiento" alignment="0" pref="196" max="32767" attributes="0"/>
                               <Component id="BtnSalir" alignment="0" max="32767" attributes="0"/>
                               <Component id="BtnGerente" alignment="0" max="32767" attributes="0"/>
                               <Component id="BtnCarritoCompras" alignment="0" max="32767" attributes="0"/>
-                              <Component id="BtnRestaurante" max="32767" attributes="0"/>
+                              <Component id="BtnRestaurante" alignment="1" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -84,9 +85,12 @@
               <Group type="102" alignment="0" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="LblIconUsuario" min="-2" max="-2" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
+                      <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="LblExit" alignment="0" min="-2" pref="20" max="-2" attributes="0"/>
+                              <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -99,7 +103,7 @@
                   <Component id="BtnGerente" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="BtnMantenimiento" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="121" max="32767" attributes="0"/>
+                  <EmptySpace pref="126" max="32767" attributes="0"/>
                   <Component id="BtnSalir" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -252,6 +256,24 @@
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabel4MouseClicked"/>
           </Events>
         </Component>
+        <Component class="javax.swing.JLabel" name="LblExit">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="18" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+            <Property name="text" type="java.lang.String" value="X"/>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Hand Cursor"/>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="LblExitMouseClicked"/>
+          </Events>
+        </Component>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JTabbedPane" name="TpnVentanas">
@@ -287,7 +309,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="LblImgDefault" alignment="0" pref="621" max="32767" attributes="0"/>
+                  <Component id="LblImgDefault" alignment="0" pref="639" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -356,9 +378,9 @@
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" attributes="0">
-                                              <Component id="RdoPerecedero" min="-2" max="-2" attributes="0"/>
+                                              <Component id="RdoEmpacadoCompra" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                              <Component id="RdoNoPerecedero" min="-2" max="-2" attributes="0"/>
+                                              <Component id="RdoPreparadoCompra" min="-2" max="-2" attributes="0"/>
                                           </Group>
                                           <Component id="LblTipoEmpacado" min="-2" max="-2" attributes="0"/>
                                       </Group>
@@ -368,7 +390,7 @@
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="152" max="32767" attributes="0"/>
+                      <EmptySpace pref="184" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -386,8 +408,8 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="CboTipoDeEmpresa" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="CboTipoRestaurante" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="RdoPerecedero" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="RdoNoPerecedero" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="RdoEmpacadoCompra" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="RdoPreparadoCompra" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -680,36 +702,36 @@
                 <Property name="text" type="java.lang.String" value="Tipo de Empacado"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JRadioButton" name="RdoPerecedero">
+            <Component class="javax.swing.JRadioButton" name="RdoEmpacadoCompra">
               <Properties>
                 <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                   <ComponentRef name="BtgTipoEmpacado"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.editors2.FontEditor">
                   <FontInfo relative="true">
-                    <Font component="RdoPerecedero" property="font" relativeSize="true" size="2"/>
+                    <Font component="RdoEmpacadoCompra" property="font" relativeSize="true" size="2"/>
                   </FontInfo>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="72" green="39" red="0" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Perecedero"/>
+                <Property name="text" type="java.lang.String" value="Empacado"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JRadioButton" name="RdoNoPerecedero">
+            <Component class="javax.swing.JRadioButton" name="RdoPreparadoCompra">
               <Properties>
                 <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                   <ComponentRef name="BtgTipoEmpacado"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.editors2.FontEditor">
                   <FontInfo relative="true">
-                    <Font component="RdoNoPerecedero" property="font" relativeSize="true" size="2"/>
+                    <Font component="RdoPreparadoCompra" property="font" relativeSize="true" size="2"/>
                   </FontInfo>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="72" green="39" red="0" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="No Perecedero"/>
+                <Property name="text" type="java.lang.String" value="Preparado"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -731,28 +753,145 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="581" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jScrollPane3" alignment="0" pref="627" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="LblCarritoCompras" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="infoMontoCompra" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="BtnPagarCompras" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="482" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPane3" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="LblCarritoCompras" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="infoMontoCompra" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="27" max="32767" attributes="0"/>
+                      <Component id="BtnPagarCompras" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="jLabel2">
+            <Container class="javax.swing.JScrollPane" name="jScrollPane3">
+              <AuxValues>
+                <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+              </AuxValues>
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+              <SubComponents>
+                <Component class="javax.swing.JTable" name="TblCarritoCompras">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.editors2.FontEditor">
+                      <FontInfo relative="true">
+                        <Font component="TblCarritoCompras" property="font" relativeSize="true" size="2"/>
+                      </FontInfo>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                      <Table columnCount="5" rowCount="1">
+                        <Column editable="true" title="Nombre" type="java.lang.Object"/>
+                        <Column editable="true" title="Cantidad" type="java.lang.Object"/>
+                        <Column editable="true" title="Precio" type="java.lang.Object"/>
+                        <Column editable="true" title="Empacado" type="java.lang.Object"/>
+                        <Column editable="true" title="Preparado" type="java.lang.Object"/>
+                      </Table>
+                    </Property>
+                    <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+                      <TableColumnModel selectionModel="0">
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                          <Title/>
+                          <Editor/>
+                          <Renderer/>
+                        </Column>
+                      </TableColumnModel>
+                    </Property>
+                    <Property name="selectionBackground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="72" green="39" red="0" type="rgb"/>
+                    </Property>
+                    <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
+                      <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+                    </Property>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
+            <Component class="javax.swing.JLabel" name="LblCarritoCompras">
               <Properties>
-                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/icon/185101_shopping_caddie_icon.png"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.editors2.FontEditor">
+                  <FontInfo relative="true">
+                    <Font component="LblCarritoCompras" property="font" relativeSize="true" size="2"/>
+                  </FontInfo>
                 </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="72" green="39" red="0" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Monto Compra :"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="infoMontoCompra">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.editors2.FontEditor">
+                  <FontInfo relative="true">
+                    <Font component="infoMontoCompra" property="font" relativeSize="true" size="2"/>
+                  </FontInfo>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="72" green="39" red="0" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Info"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="BtnPagarCompras">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.editors2.FontEditor">
+                  <FontInfo relative="true">
+                    <Font component="BtnPagarCompras" property="font" relativeSize="true" size="2"/>
+                  </FontInfo>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Pagar"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -790,7 +929,7 @@
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" attributes="0">
-                                              <Component id="BtnAgregarProducto" min="-2" max="-2" attributes="0"/>
+                                              <Component id="BtnAgregar" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace type="separate" max="-2" attributes="0"/>
                                               <Component id="BtnEliminarProductos" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -834,7 +973,7 @@
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="BtnAgregarProducto" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="BtnAgregar" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="BtnEliminarProductos" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="BtnEditar" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -919,11 +1058,11 @@
                 <Property name="text" type="java.lang.String" value="Info"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="BtnAgregarProducto">
+            <Component class="javax.swing.JButton" name="BtnAgregar">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.editors2.FontEditor">
                   <FontInfo relative="true">
-                    <Font component="BtnAgregarProducto" property="font" relativeSize="true" size="2"/>
+                    <Font component="BtnAgregar" property="font" relativeSize="true" size="2"/>
                   </FontInfo>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -935,7 +1074,7 @@
                 <Property name="text" type="java.lang.String" value="Agregra"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnAgregarProductoActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnAgregarActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="BtnEliminarProductos">
@@ -953,6 +1092,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Eliminar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnEliminarProductosActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="BtnEditar">
               <Properties>
@@ -988,7 +1130,7 @@
                       </FontInfo>
                     </Property>
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                      <Color blue="0" green="0" red="0" type="rgb"/>
                     </Property>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="4" rowCount="1">
@@ -1310,31 +1452,38 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="LblImpuesto" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="TxtImpuestoProducto" min="-2" pref="121" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="LblPerecedero" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="RdoEmpacado" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="RdoPreparado" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Component id="LblPrecio" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="TxtPrecioProducto" min="-2" pref="121" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Component id="LblNombreProducto" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="TxtNombreProducto" max="32767" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="LblImpuesto" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="TxtImpuestoProducto" min="-2" pref="121" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                           <Group type="102" attributes="0">
-                              <Component id="LblPerecedero" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jRadioButton1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jRadioButton2" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <Component id="LblPrecio" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="TxtPrecioProducto" min="-2" pref="121" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <Component id="LblNombreProducto" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="TxtNombreProducto" max="32767" attributes="0"/>
+                              <Component id="BtnAgregarProducto" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="BtnEditarProducto" min="-2" pref="79" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="312" max="32767" attributes="0"/>
+                      <EmptySpace pref="344" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1354,15 +1503,20 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="LblPerecedero" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="RdoEmpacado" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="RdoPreparado" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="LblImpuesto" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="TxtImpuestoProducto" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="375" max="32767" attributes="0"/>
+                      <EmptySpace pref="342" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="BtnAgregarProducto" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="BtnEditarProducto" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1456,37 +1610,69 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JRadioButton" name="jRadioButton1">
+            <Component class="javax.swing.JRadioButton" name="RdoEmpacado">
               <Properties>
                 <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                   <ComponentRef name="BtgTipoEmpacado"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.editors2.FontEditor">
                   <FontInfo relative="true">
-                    <Font component="jRadioButton1" property="font" relativeSize="true" size="2"/>
+                    <Font component="RdoEmpacado" property="font" relativeSize="true" size="2"/>
                   </FontInfo>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="72" green="39" red="0" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Perecedero"/>
+                <Property name="text" type="java.lang.String" value="Empacado"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JRadioButton" name="jRadioButton2">
+            <Component class="javax.swing.JRadioButton" name="RdoPreparado">
               <Properties>
                 <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                   <ComponentRef name="BtgTipoEmpacado"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.editors2.FontEditor">
                   <FontInfo relative="true">
-                    <Font component="jRadioButton2" property="font" relativeSize="true" size="2"/>
+                    <Font component="RdoPreparado" property="font" relativeSize="true" size="2"/>
                   </FontInfo>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="72" green="39" red="0" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="No Perecedero"/>
+                <Property name="text" type="java.lang.String" value="Prepadaro"/>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="BtnAgregarProducto">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.editors2.FontEditor">
+                  <FontInfo relative="true">
+                    <Font component="BtnAgregarProducto" property="font" relativeSize="true" size="2"/>
+                  </FontInfo>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Agregar"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnAgregarProductoActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="BtnEditarProducto">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.editors2.FontEditor">
+                  <FontInfo relative="true">
+                    <Font component="BtnEditarProducto" property="font" relativeSize="true" size="2"/>
+                  </FontInfo>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Editar"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnEditarProductoActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

@@ -4,41 +4,41 @@
  */
 package LogicaNegocio;
 
-/**
- *
- * @author Usuario
- */
 public class Usuario {
 
     private final String Correo;
     private String NumTar;
-    private String constraseña;
+    private String contraseña;
     private String nombre;
     private TipoUsuario rol;
     private TipoTarjeta tarjeta;
 
-    public Usuario(String login, String constraseña, String nombre, TipoUsuario rol) {
+    public Usuario(String login, String contraseña, String nombre, TipoUsuario rol) {
         this.Correo = login;
-        this.constraseña = constraseña;
+        this.contraseña = contraseña;
         this.nombre = nombre;
         this.rol = rol;
     }
 
-    public Usuario(String login, String constraseña, String nombre, TipoUsuario rol,TipoTarjeta tarjeta,String NumTarjeta) {
+    public Usuario(String login, String contraseña, String nombre, TipoUsuario rol, TipoTarjeta tarjeta, String NumTarjeta) {
         this.Correo = login;
-        this.constraseña = constraseña;
+        this.contraseña = contraseña;
         this.nombre = nombre;
         this.rol = rol;
         this.tarjeta = tarjeta;
         this.NumTar = NumTarjeta;
     }
 
-    public String getConstraseña() {
-        return constraseña;
+    public String getContraseña() {
+        return contraseña;
     }
 
-    public void setConstraseña(String constraseña) {
-        this.constraseña = constraseña;
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
+    }
+
+    public String getConstraseña() {
+        return contraseña;
     }
 
     public String getNombre() {
@@ -72,5 +72,4 @@ public class Usuario {
     public String getNumTarjeta() {
         return NumTar;
     }
-    
 }
