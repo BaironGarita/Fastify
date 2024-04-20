@@ -12,23 +12,26 @@ import java.util.List;
 public class Negocio implements Serializable {
 
     private final TipoEmpresa Tipo;
+    private final int Codigo;
     private List<Producto> arrayProductos;
     private final Usuario Gerente;
     private String Nombre;
     private TipoRestaurante TipoRest;
 
-    public Negocio(TipoEmpresa Tipo, Usuario Gerente, String Nombre) {
+    public Negocio(TipoEmpresa Tipo, Usuario Gerente, String Nombre, int Codigo) {
         this.Tipo = Tipo;
         this.Gerente = Gerente;
         this.Nombre = Nombre;
+        this.Codigo = Codigo;
         this.arrayProductos = new ArrayList<Producto>();
     }
 
-    public Negocio(TipoEmpresa Tipo, Usuario Gerente, String Nombre, TipoRestaurante TipoRest) {
+    public Negocio(TipoEmpresa Tipo, Usuario Gerente, String Nombre, TipoRestaurante TipoRest, int codigo) {
         this.Tipo = Tipo;
         this.Gerente = Gerente;
         this.Nombre = Nombre;
         this.TipoRest = TipoRest;
+        this.Codigo = codigo;
         this.arrayProductos = new ArrayList<Producto>();
     }
 
@@ -42,6 +45,14 @@ public class Negocio implements Serializable {
 
     public Usuario getGerente() {
         return Gerente;
+    }
+
+    public int getCodigo() {
+        return Codigo;
+    }
+
+    public List<Producto> getArrayProductos() {
+        return arrayProductos;
     }
 
     public void setNombre(String Nombre) {

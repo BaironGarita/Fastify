@@ -34,7 +34,7 @@ public final class MainMenu extends javax.swing.JFrame {
 
     public MainMenu() throws Exception {
         initComponents();
-        modeloTabla = (DefaultTableModel) TblProductoRestaurantes.getModel();
+        modeloTabla = (DefaultTableModel) TblGerneteProductos.getModel();
         modeloTablaProductos = (DefaultTableModel) TblProductosRestaurantes.getModel();
         ColoresBotones();
         llenarNegocios();
@@ -108,7 +108,7 @@ public final class MainMenu extends javax.swing.JFrame {
         BtnEliminarProductos = new javax.swing.JButton();
         BtnEditar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        TblProductoRestaurantes = new javax.swing.JTable();
+        TblGerneteProductos = new javax.swing.JTable();
         jScrollPane1 = new javax.swing.JScrollPane();
         TxaInformacion = new javax.swing.JTextArea();
         PnlMantenimiento = new javax.swing.JPanel();
@@ -460,8 +460,7 @@ public final class MainMenu extends javax.swing.JFrame {
                                 .addComponent(LblProductos))
                             .addGroup(PnlRestauranteLayout.createSequentialGroup()
                                 .addGap(22, 22, 22)
-                                .addComponent(CboTipoRestaurante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(86, 86, 86))))
+                                .addComponent(CboTipoRestaurante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(PnlRestauranteLayout.createSequentialGroup()
                         .addComponent(BtnComprarProducto)
                         .addGap(18, 18, 18)
@@ -631,9 +630,9 @@ public final class MainMenu extends javax.swing.JFrame {
             }
         });
 
-        TblProductoRestaurantes.setFont(TblProductoRestaurantes.getFont().deriveFont(TblProductoRestaurantes.getFont().getSize()+2f));
-        TblProductoRestaurantes.setForeground(new java.awt.Color(0, 0, 0));
-        TblProductoRestaurantes.setModel(new javax.swing.table.DefaultTableModel(
+        TblGerneteProductos.setFont(TblGerneteProductos.getFont().deriveFont(TblGerneteProductos.getFont().getSize()+2f));
+        TblGerneteProductos.setForeground(new java.awt.Color(0, 0, 0));
+        TblGerneteProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null}
             },
@@ -641,8 +640,8 @@ public final class MainMenu extends javax.swing.JFrame {
                 "Nombre", "Precio", "Impuesto", "Perecedero"
             }
         ));
-        TblProductoRestaurantes.setSelectionBackground(new java.awt.Color(0, 57, 114));
-        jScrollPane2.setViewportView(TblProductoRestaurantes);
+        TblGerneteProductos.setSelectionBackground(new java.awt.Color(0, 57, 114));
+        jScrollPane2.setViewportView(TblGerneteProductos);
 
         TxaInformacion.setColumns(20);
         TxaInformacion.setRows(5);
@@ -1028,19 +1027,15 @@ public final class MainMenu extends javax.swing.JFrame {
 
     private void llenarTablasRestaurantes() throws Exception {
         try {
-            ArrayList<Producto> listProd = (ArrayList<Producto>) Producto.listadoProductos();
-            modeloTabla.setRowCount(0);
-            Object[] datos = new Object[4];
-            HashSet<Producto> setProd = new HashSet<>(listProd);
-            for (Producto producto : setProd) {
-                if (producto.getNegocio().getNombre().equalsIgnoreCase(Negocio.consultarNegocio(useradmin.getCorreo()).getNombre())) {
+                ArrayList<Producto> listProd = (ArrayList<Producto>) Producto.listadoProductos();
+                modeloTablaProductos.setRowCount(0);
+                Object[] datos = new Object[2];
+//                HashSet<Producto> setProd = new HashSet<>(listProd);
+                for (Producto producto : listProd) {
                     datos[0] = producto.getNombre();
                     datos[1] = producto.getPrecio();
-                    datos[2] = producto.getImpuestos();
-                    datos[3] = producto.isEmpacado();
                     modeloTabla.addRow(datos);
                 }
-            }
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error al listar el Producto\n"
@@ -1098,7 +1093,7 @@ public final class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void BtnRestauranteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRestauranteActionPerformed
-        TpnVentanas.setSelectedIndex(1);
+            TpnVentanas.setSelectedIndex(1);
     }//GEN-LAST:event_BtnRestauranteActionPerformed
 
     private void BtnMantenimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnMantenimientoActionPerformed
@@ -1165,11 +1160,6 @@ public final class MainMenu extends javax.swing.JFrame {
             Logger.getLogger(MainMenu.class
                     .getName()).log(Level.SEVERE, null, ex);
         }
-        try {
-            llenarTablasRestaurantes();
-        } catch (Exception ex) {
-            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }//GEN-LAST:event_CboTipoDeEmpresaActionPerformed
 
     private void BtnMenosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnMenosActionPerformed
@@ -1225,9 +1215,9 @@ public final class MainMenu extends javax.swing.JFrame {
         TpnVentanas.setSelectedIndex(6);
         BtnAgregarProducto.setVisible(false);
         BtnEditarProducto.setVisible(true);
-        nombreProducto = TblProductoRestaurantes.getValueAt(TblProductoRestaurantes.getSelectedRow(), 0).toString();
-        PrecioProducto = TblProductoRestaurantes.getValueAt(TblProductoRestaurantes.getSelectedRow(), 1).toString();
-        ImpuestoProducto = TblProductoRestaurantes.getValueAt(TblProductoRestaurantes.getSelectedRow(), 2).toString();
+        nombreProducto = TblGerneteProductos.getValueAt(TblGerneteProductos.getSelectedRow(), 0).toString();
+        PrecioProducto = TblGerneteProductos.getValueAt(TblGerneteProductos.getSelectedRow(), 1).toString();
+        ImpuestoProducto = TblGerneteProductos.getValueAt(TblGerneteProductos.getSelectedRow(), 2).toString();
     }//GEN-LAST:event_BtnEditarActionPerformed
 
     private void LblExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LblExitMouseClicked
@@ -1295,8 +1285,8 @@ public final class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnAgregarProductoActionPerformed
 
     private void BtnEditarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditarProductoActionPerformed
-        if (TblProductoRestaurantes.getSelectedRow() >= 0) {
-            String codigo = TblProductoRestaurantes.getValueAt(TblProductoRestaurantes.getSelectedRow(), 0).toString();
+        if (TblGerneteProductos.getSelectedRow() >= 0) {
+            String codigo = TblGerneteProductos.getValueAt(TblGerneteProductos.getSelectedRow(), 0).toString();
             try {
                 ProductMantenimiento = Negocio.consultarNegocio(useradmin.getCorreo()).Buscar(codigo);
 
@@ -1315,7 +1305,7 @@ public final class MainMenu extends javax.swing.JFrame {
                 }
                 llenaTablaDeProductos(); //actualiza la tabla con el nuevo departamento
             }
-            TblProductoRestaurantes.clearSelection();//Quita la selección de la fila en la tabla 
+            TblGerneteProductos.clearSelection();//Quita la selección de la fila en la tabla 
         } else {
             JOptionPane.showMessageDialog(null, "Debe seleccionar el departamento a modificar");
             return;
@@ -1323,11 +1313,11 @@ public final class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnEditarProductoActionPerformed
 
     private void BtnEliminarProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarProductosActionPerformed
-        if (TblProductoRestaurantes.getSelectedRow() == -1) {
+        if (TblGerneteProductos.getSelectedRow() == -1) {
             JOptionPane.showMessageDialog(null, "Debe seleccionar el departamento a eliminar");
             return;
         } else {
-            String NombreProducto = TblProductoRestaurantes.getValueAt(TblProductoRestaurantes.getSelectedRow(), 0).toString();
+            String NombreProducto = TblGerneteProductos.getValueAt(TblGerneteProductos.getSelectedRow(), 0).toString();
             try {
                 Producto.eliminarProducto(NombreProducto);
             } catch (Exception e) {
@@ -1464,7 +1454,7 @@ public final class MainMenu extends javax.swing.JFrame {
     private javax.swing.JRadioButton RdoPreparado;
     private javax.swing.JRadioButton RdoPreparadoCompra;
     private javax.swing.JTable TblCarritoCompras;
-    private javax.swing.JTable TblProductoRestaurantes;
+    private javax.swing.JTable TblGerneteProductos;
     private javax.swing.JTable TblProductosRestaurantes;
     private javax.swing.JTabbedPane TpnVentanas;
     private javax.swing.JTextArea TxaInformacion;

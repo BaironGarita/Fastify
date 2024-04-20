@@ -156,6 +156,12 @@ public class NegocioBD {
         }
     }
 
+    /**
+     *
+     * @param nombreTienda
+     * @return
+     * @throws Exception
+     */
     public Negocio consultarTienda(String nombreTienda) throws Exception {
         Negocio depto, deptoBuscado = null;
         try {

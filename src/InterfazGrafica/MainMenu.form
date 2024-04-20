@@ -376,7 +376,6 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                                       <Component id="CboTipoRestaurante" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -1157,11 +1156,11 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="TblProductoRestaurantes">
+                <Component class="javax.swing.JTable" name="TblGerneteProductos">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.editors2.FontEditor">
                       <FontInfo relative="true">
-                        <Font component="TblProductoRestaurantes" property="font" relativeSize="true" size="2"/>
+                        <Font component="TblGerneteProductos" property="font" relativeSize="true" size="2"/>
                       </FontInfo>
                     </Property>
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">

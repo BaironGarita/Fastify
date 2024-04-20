@@ -59,37 +59,37 @@ public static void main(String[] args) throws Exception {
     public static void CrearRestaurantes() throws Exception {
         Negocio.agregarNegocio(new Negocio(TipoEmpresa.RESTAURANTE, 
                 PersistenciaUsuarios.getUsuario("gerenterest@gmail.com"),
-                "Las Catrinas", TipoRestaurante.MEXICANA));
+                "Las Catrinas", TipoRestaurante.MEXICANA,0));
         Negocio.agregarNegocio(new Negocio(TipoEmpresa.RESTAURANTE, 
                 PersistenciaUsuarios.getUsuario("gerenterest1@gmail.com"),
-                "Lleguele", TipoRestaurante.COMIDARAPIDA));
+                "Lleguele", TipoRestaurante.COMIDARAPIDA,1));
         Negocio.agregarNegocio(new Negocio(TipoEmpresa.RESTAURANTE, 
                 PersistenciaUsuarios.getUsuario("gerenterest2@gmail.com"),
-                "Mama-mia", TipoRestaurante.ITALIANO));
+                "Mama-mia", TipoRestaurante.ITALIANO,2));
         Negocio.agregarNegocio(new Negocio(TipoEmpresa.RESTAURANTE, 
                 PersistenciaUsuarios.getUsuario("gerenterest3@gmail.com"),
-                "Don Jose", TipoRestaurante.ITALIANO));
+                "Don Jose", TipoRestaurante.ITALIANO,3));
         Negocio.agregarNegocio(new Negocio(TipoEmpresa.RESTAURANTE, 
                 PersistenciaUsuarios.getUsuario("gerenterest4@gmail.com"),
-                "Primer Sabor", TipoRestaurante.ASIATICA));
+                "Primer Sabor", TipoRestaurante.ASIATICA,4));
     }
 
     public static void CrearCafeterias() throws Exception {
         Negocio.agregarNegocio(new Negocio(TipoEmpresa.CAFETERIA,
-                PersistenciaUsuarios.getUsuario("gerentecaf@gmail.com"), "starbucks"));
+                PersistenciaUsuarios.getUsuario("gerentecaf@gmail.com"), "starbucks",5));
         Negocio.agregarNegocio(new Negocio(TipoEmpresa.CAFETERIA,
-                PersistenciaUsuarios.getUsuario("gerentecaf1@gmail.com"), "Cafe a la moda"));
+                PersistenciaUsuarios.getUsuario("gerentecaf1@gmail.com"), "Cafe a la moda",6));
         Negocio.agregarNegocio(new Negocio(TipoEmpresa.CAFETERIA,
-                PersistenciaUsuarios.getUsuario("gerentecaf2@gmail.com"), "Kawah Cafe"));
+                PersistenciaUsuarios.getUsuario("gerentecaf2@gmail.com"), "Kawah Cafe",7));
         Negocio.agregarNegocio(new Negocio(TipoEmpresa.CAFETERIA,
-                PersistenciaUsuarios.getUsuario("gerentecaf3@gmail.com"), "Mocapan"));
+                PersistenciaUsuarios.getUsuario("gerentecaf3@gmail.com"), "Mocapan",8));
     }
 
     public static void CrearTiendas() throws Exception {
         Negocio.agregarNegocio(new Negocio(TipoEmpresa.EMPRESA,
-                PersistenciaUsuarios.getUsuario("gerentetind@gmail.com"), "Walmart"));
+                PersistenciaUsuarios.getUsuario("gerentetind@gmail.com"), "Walmart",9));
         Negocio.agregarNegocio(new Negocio(TipoEmpresa.EMPRESA,
-                PersistenciaUsuarios.getUsuario("gerentetind1@gmail.com"), "Pequeño Mundo"));
+                PersistenciaUsuarios.getUsuario("gerentetind1@gmail.com"), "Pequeño Mundo",10));
     }
     
     public static void CrearProductos(Usuario oUsuario) throws Exception {
