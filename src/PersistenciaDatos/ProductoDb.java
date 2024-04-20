@@ -141,7 +141,7 @@ public class ProductoDb {
             //Si no hay más datos que leer el método available retorna cero
              while(true){
                 prod = (Producto)oLector.readObject();  //Lee un objeto a la vez             
-                if(prod.getNombre().equalsIgnoreCase(NombreProducto)) {
+                if(prod.getNegocio().getNombre().equalsIgnoreCase(NombreProducto)) {
                     ProducBuscado = prod;
                 }
              }            

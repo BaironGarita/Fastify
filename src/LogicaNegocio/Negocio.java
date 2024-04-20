@@ -54,6 +54,17 @@ public class Negocio implements Serializable {
     public List<Producto> getArrayProductos() {
         return arrayProductos;
     }
+    
+    public void llenarTienda() throws Exception{
+        arrayProductos.removeAll(arrayProductos);
+        ArrayList<Producto> general = (ArrayList<Producto>) Producto.listadoProductos();
+        for (Producto producto : general) {
+            if (producto.getNegocio().equals(this)) {
+                arrayProductos.add(producto);
+            }
+            
+        }
+    }
 
     public void setNombre(String Nombre) {
         this.Nombre = Nombre;

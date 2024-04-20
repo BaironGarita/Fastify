@@ -123,7 +123,7 @@ public class login extends javax.swing.JFrame {
 
         TxtUsuario.setFont(TxtUsuario.getFont().deriveFont(TxtUsuario.getFont().getSize()+2f));
         TxtUsuario.setForeground(new java.awt.Color(255, 255, 255));
-        TxtUsuario.setText("gerenterest1@gmail.com");
+        TxtUsuario.setText("gerentetind@gmail.com");
         TxtUsuario.setBorder(null);
         TxtUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
