@@ -41,7 +41,6 @@ public class login extends javax.swing.JFrame {
 //        PrincipalFastify.CrearTiendas();
 //        PrincipalFastify.CrearRestaurantes();
 //        PrincipalFastify.CrearCafeterias();
-//        PrincipalFastify.CrearProductos();
     }
 
     /**

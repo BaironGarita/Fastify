@@ -33,7 +33,7 @@ public class PersistenciaEmpresa {
                 return negocio;
             }
         }
-        return null; // Si no se encuentra ningún negocio asociado al gerente
+        return null;
     }
 
     public static List<Negocio> getListado() {

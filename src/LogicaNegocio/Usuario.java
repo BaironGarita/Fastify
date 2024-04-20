@@ -5,6 +5,9 @@
 package LogicaNegocio;
 
 import java.io.Serializable;
+import java.util.AbstractList;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Usuario implements Serializable{
 
@@ -14,6 +17,7 @@ public class Usuario implements Serializable{
     private String nombre;
     private TipoUsuario rol;
     private TipoTarjeta tarjeta;
+    private ArrayList<Producto> listaProductos = new ArrayList<>();
 
     public Usuario(String login, String contraseña, String nombre, TipoUsuario rol) {
         this.Correo = login;

@@ -41,7 +41,7 @@ public class Negocio implements Serializable {
     public Usuario getGerente() {
         return Gerente;
     }
-    
+
     public void setNombre(String Nombre) {
         this.Nombre = Nombre;
     }
@@ -85,5 +85,24 @@ public class Negocio implements Serializable {
     public void agregarProductos(List<Producto> productos) {
         ListaProductos = productos;
     }
-}
 
+    public void modificar(Producto productoEditar) {
+        for (int i = 0; i < ListaProductos.size(); i++) {
+            Producto producto = ListaProductos.get(i);
+            if (producto.getNombre().equals(productoEditar.getNombre())) {
+                ListaProductos.set(i, productoEditar);
+                break;
+            }
+        }
+    }
+
+    public Producto Buscar(String ProductoBuscar) {
+        for (int i = 0; i < ListaProductos.size(); i++) {
+            Producto producto = ListaProductos.get(i);
+            if (producto.getNombre().equals(ProductoBuscar)) {
+                return producto;
+            }
+        }
+        return null;
+    }
+}

@@ -6,8 +6,9 @@ package LogicaNegocio;
 
 import PersistenciaDatos.ProductoDb;
 import java.io.Serializable;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class Producto implements Serializable {
 
@@ -15,6 +16,7 @@ public class Producto implements Serializable {
     private final String Nombre;
     private final int Precio;
     private final double Impuestos;
+    private ArrayList<Negocio> ListaNegocio = new ArrayList<>();
 
     public Producto(boolean empacado, String Nombre, int Precio, double Impuesto) {
         this.Empacado = empacado;
@@ -58,5 +60,5 @@ public class Producto implements Serializable {
     public static List<Producto> listadoProductos() throws Exception {
         return ProductoDb.getInstance().listaProductos();
     }
-}
 
+}

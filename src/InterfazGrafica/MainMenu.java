@@ -26,6 +26,9 @@ public final class MainMenu extends javax.swing.JFrame {
     private Negocio SucursalGerente = login.Gerente;
     private TipoEmpresa Empresa;
     private TipoRestaurante Restaurate;
+    private String nombreProducto;
+    private String PrecioProducto;
+    private String ImpuestoProducto;
 
     public MainMenu() throws Exception {
         initComponents();
@@ -330,7 +333,6 @@ public final class MainMenu extends javax.swing.JFrame {
         CboProductos.setBackground(new java.awt.Color(255, 255, 255));
         CboProductos.setFont(CboProductos.getFont().deriveFont(CboProductos.getFont().getSize()+2f));
         CboProductos.setForeground(new java.awt.Color(0, 57, 114));
-        CboProductos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         CboProductos.setBorder(null);
 
         LblCantidad.setFont(LblCantidad.getFont().deriveFont(LblCantidad.getFont().getSize()+2f));
@@ -979,9 +981,10 @@ public final class MainMenu extends javax.swing.JFrame {
         }
     }
 
-    private void ContadorProductos() {
+    private void ContadorProductos() throws Exception {
         int contador = 0;
-        List<Producto> lista = SucursalGerente.getListaProductos();
+        Negocio negocio = Negocio.consultarNegocio(useradmin.getCorreo());
+        List<Producto> lista = negocio.getListaProductos();
         for (Producto producto : lista) {
             if (producto != null) {
                 contador++;
@@ -1086,7 +1089,11 @@ public final class MainMenu extends javax.swing.JFrame {
         } catch (Exception ex) {
             Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
         }
-        ContadorProductos();
+        try {
+            ContadorProductos();
+        } catch (Exception ex) {
+            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
         llenaTablaDeProductos();
     }//GEN-LAST:event_BtnGerenteActionPerformed
 
@@ -1178,6 +1185,9 @@ public final class MainMenu extends javax.swing.JFrame {
         TpnVentanas.setSelectedIndex(6);
         BtnAgregarProducto.setVisible(false);
         BtnEditarProducto.setVisible(true);
+        nombreProducto = TblProductoRestaurantes.getValueAt(TblProductoRestaurantes.getSelectedRow(), 0).toString();
+        PrecioProducto = TblProductoRestaurantes.getValueAt(TblProductoRestaurantes.getSelectedRow(), 1).toString();
+        ImpuestoProducto = TblProductoRestaurantes.getValueAt(TblProductoRestaurantes.getSelectedRow(), 2).toString();
     }//GEN-LAST:event_BtnEditarActionPerformed
 
     private void LblExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LblExitMouseClicked
@@ -1191,76 +1201,60 @@ public final class MainMenu extends javax.swing.JFrame {
         double impuestoProducto = Double.parseDouble(TxtImpuestoProducto.getText());
 
         if (TxtNombreProducto.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Debes Indicar el nombre del producto");
+            JOptionPane.showMessageDialog(this, "Debes indicar el nombre del producto");
             return;
         }
         if (TxtPrecioProducto.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Debes Indicar el precio del producto");
+            JOptionPane.showMessageDialog(this, "Debes indicar el precio del producto");
             return;
         }
         if (TxtImpuestoProducto.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Debes Indicar el Impuesto del producto");
+            JOptionPane.showMessageDialog(this, "Debes indicar el impuesto del producto");
             return;
         }
         if (BtgTipoEmpacado.getSelection() == null) {
-            JOptionPane.showMessageDialog(this, "Debes Indicar si es empacado o preparado del producto");
+            JOptionPane.showMessageDialog(this, "Debes indicar si el producto es empacado o preparado");
             return;
         }
         if (RdoEmpacado.isSelected()) {
             empacado = true;
         }
-        setProductMantenimiento(new Producto(empacado, nombreProducto, precioProducto, impuestoProducto));
-        if (ProductMantenimiento != null) {
+        Producto productoMantenimiento = new Producto(empacado, nombreProducto, precioProducto, impuestoProducto);
+
+        if (productoMantenimiento != null) {
             try {
-                Producto.agregarProducto(ProductMantenimiento);
-                Negocio.consultarNegocio(useradmin.getCorreo()).agregarProducto(ProductMantenimiento);
+                Negocio negocio = Negocio.consultarNegocio(useradmin.getCorreo());
+                negocio.agregarProducto(productoMantenimiento);
+                // También puedes agregar el producto directamente a la clase Producto
+                Producto.agregarProducto(productoMantenimiento);
             } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "Error al guardar el Producto\n"
-                        + "el programa se cerrará consulte con el administrador\n"
+                JOptionPane.showMessageDialog(this, "Error al guardar el producto\n"
+                        + "El programa se cerrará, consulte con el administrador\n"
                         + e.toString());
-                //e.printStackTrace();
                 System.exit(0);
             }
-            //actualiza la tabla de manera que se vea el nuevo departamento
-            llenaTablaDeProductos();
+            llenaTablaDeProductos(); // Actualiza la tabla con el nuevo producto
             TpnVentanas.setSelectedIndex(3);
-            ContadorProductos();
+            try {
+                ContadorProductos();
+            } catch (Exception ex) {
+                Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
+
     }//GEN-LAST:event_BtnAgregarProductoActionPerformed
 
     private void BtnEditarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditarProductoActionPerformed
-        boolean empacado = false;
-        String nombre = TxtNombreProducto.getText();
-        int precio = Integer.parseInt(TxtPrecioProducto.getText());
-        double impuesto = Double.parseDouble(TxtImpuestoProducto.getText());
-        if (TxtNombreProducto.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Debes Indicar el nombre del producto");
-            return;
-        } else if (TxtPrecioProducto.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Debes Indicar el precio del producto");
-            return;
-        } else if (TxtImpuestoProducto.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Debes Indicar el Impuesto del producto");
-            return;
-        } else if (BtgTipoEmpacado.getSelection() == null) {
-            JOptionPane.showMessageDialog(this, "Debes Indicar si es empacado o preparado del producto");
-            return;
-        }
-        if (RdoEmpacado.isSelected()) {
-            empacado = true;
-        }
-        setProductMantenimiento(new Producto(empacado, nombre, precio, impuesto));
         if (TblProductoRestaurantes.getSelectedRow() >= 0) {
-            String Nombre = TblProductoRestaurantes.getValueAt(TblProductoRestaurantes.getSelectedRow(), 0).toString();
-            String Precio = TblProductoRestaurantes.getValueAt(TblProductoRestaurantes.getSelectedRow(), 1).toString();
-            String Impuesto = TblProductoRestaurantes.getValueAt(TblProductoRestaurantes.getSelectedRow(), 2).toString();
-            TxtNombreProducto.setText(Nombre);
-            TxtPrecioProducto.setText(Precio);
-            TxtImpuestoProducto.setText(Impuesto);
+            String codigo = TblProductoRestaurantes.getValueAt(TblProductoRestaurantes.getSelectedRow(), 0).toString();
+            try {
+                ProductMantenimiento = Negocio.consultarNegocio(useradmin.getCorreo()).Buscar(codigo);
+            } catch (Exception ex) {
+                Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
+            }
             if (this.ProductMantenimiento != null) {
-                //Modifica el producto del archivo
                 try {
-                    Producto.modificarProducto(ProductMantenimiento);
+                    SucursalGerente.modificar(ProductMantenimiento);
                 } catch (Exception e) {
                     JOptionPane.showMessageDialog(this, "Error al modificar el Producto\n"
                             + "el programa se cerrará consulte con el administrador\n"
@@ -1268,8 +1262,6 @@ public final class MainMenu extends javax.swing.JFrame {
                     System.exit(0);
                 }
                 llenaTablaDeProductos(); //actualiza la tabla con el nuevo departamento
-                TpnVentanas.setSelectedIndex(3);
-                ContadorProductos();
             }
             TblProductoRestaurantes.clearSelection();//Quita la selección de la fila en la tabla 
         } else {
@@ -1297,9 +1289,8 @@ public final class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnEliminarProductosActionPerformed
 
     private void CboRestauranteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CboRestauranteActionPerformed
-        String nombre = (String) CboRestaurante.getSelectedItem();
         try {
-            llenarCboRestaurante(nombre);
+            llenarCboRestaurante((String) CboRestaurante.getSelectedItem());
         } catch (Exception ex) {
             Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
         }

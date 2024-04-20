@@ -100,7 +100,7 @@ public static void main(String[] args) throws Exception {
     }
     
     public static void AgregarProducto(Usuario oUsuario) throws Exception{
-//        CrearProductos();
+        CrearProductos();
         Negocio.consultarNegocio(oUsuario.getCorreo()).agregarProductos(Producto.listadoProductos());
     }
 
