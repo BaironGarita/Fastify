@@ -123,7 +123,7 @@ public class login extends javax.swing.JFrame {
 
         TxtUsuario.setFont(TxtUsuario.getFont().deriveFont(TxtUsuario.getFont().getSize()+2f));
         TxtUsuario.setForeground(new java.awt.Color(255, 255, 255));
-        TxtUsuario.setText("gerentetind@gmail.com");
+        TxtUsuario.setText("gerenterest1@gmail.com");
         TxtUsuario.setBorder(null);
         TxtUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -264,6 +264,11 @@ public class login extends javax.swing.JFrame {
             this.nombre = oUsuario.getNombre();
             this.rol = oUsuario.getRol();
             this.Usuariolog = oUsuario;
+//            try {
+//                PrincipalFastify.CrearProductos(Usuariolog);
+//            } catch (Exception ex) {
+//                Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+//            }
             Utilitario.UtilitarioVentana.fadeOutAndClose(this);
             try {
                 UtilitarioVentana.centrarVentanaJFrame(this.Main = new MainMenu(), false);

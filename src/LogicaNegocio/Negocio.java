@@ -12,7 +12,7 @@ import java.util.List;
 public class Negocio implements Serializable {
 
     private final TipoEmpresa Tipo;
-    private List<Producto> ListaProductos = new ArrayList<>();
+    private List<Producto> arrayProductos;
     private final Usuario Gerente;
     private String Nombre;
     private TipoRestaurante TipoRest;
@@ -21,6 +21,7 @@ public class Negocio implements Serializable {
         this.Tipo = Tipo;
         this.Gerente = Gerente;
         this.Nombre = Nombre;
+        this.arrayProductos = new ArrayList<Producto>();
     }
 
     public Negocio(TipoEmpresa Tipo, Usuario Gerente, String Nombre, TipoRestaurante TipoRest) {
@@ -28,6 +29,7 @@ public class Negocio implements Serializable {
         this.Gerente = Gerente;
         this.Nombre = Nombre;
         this.TipoRest = TipoRest;
+        this.arrayProductos = new ArrayList<Producto>();
     }
 
     public String getNombre() {
@@ -55,11 +57,15 @@ public class Negocio implements Serializable {
     }
 
     public List<Producto> getListaProductos() {
-        return ListaProductos;
+        return arrayProductos;
     }
 
     public static Negocio consultarNegocio(String codigo) throws Exception {
         return NegocioBD.getInstance().consultarNegocios(codigo);
+    }
+
+    public static Negocio consultarTienda(String codigo) throws Exception {
+        return NegocioBD.getInstance().consultarTienda(codigo);
     }
 
     public static void agregarNegocio(Negocio oNegocio) throws Exception {
@@ -79,26 +85,26 @@ public class Negocio implements Serializable {
     }
 
     public void agregarProducto(Producto producto) {
-        ListaProductos.add(producto);
+        arrayProductos.add(producto);
     }
 
     public void agregarProductos(List<Producto> productos) {
-        ListaProductos = productos;
+        arrayProductos = productos;
     }
 
     public void modificar(Producto productoEditar) {
-        for (int i = 0; i < ListaProductos.size(); i++) {
-            Producto producto = ListaProductos.get(i);
+        for (int i = 0; i < arrayProductos.size(); i++) {
+            Producto producto = arrayProductos.get(i);
             if (producto.getNombre().equals(productoEditar.getNombre())) {
-                ListaProductos.set(i, productoEditar);
+                arrayProductos.set(i, productoEditar);
                 break;
             }
         }
     }
 
     public Producto Buscar(String ProductoBuscar) {
-        for (int i = 0; i < ListaProductos.size(); i++) {
-            Producto producto = ListaProductos.get(i);
+        for (int i = 0; i < arrayProductos.size(); i++) {
+            Producto producto = arrayProductos.get(i);
             if (producto.getNombre().equals(ProductoBuscar)) {
                 return producto;
             }

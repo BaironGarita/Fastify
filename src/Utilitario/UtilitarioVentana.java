@@ -198,7 +198,7 @@ public class UtilitarioVentana {
         componente.setVisible(false);
     }
 
-    public static void fadeRegistro(JFrame componente) {
+    public static void fadeRegistro(JFrame componente) throws Exception {
         componente.dispose();
         JFrame nuevoComponente = new InterfazGrafica.login();
         nuevoComponente.setVisible(true); // Muestra el nuevo JFrame

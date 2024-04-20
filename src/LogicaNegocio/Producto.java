@@ -16,13 +16,14 @@ public class Producto implements Serializable {
     private final String Nombre;
     private final int Precio;
     private final double Impuestos;
-    private ArrayList<Negocio> ListaNegocio = new ArrayList<>();
+    private Negocio Negocio = null;
 
-    public Producto(boolean empacado, String Nombre, int Precio, double Impuesto) {
-        this.Empacado = empacado;
+    public Producto(boolean Empacado, String Nombre, int Precio, double Impuestos,Negocio negocio) {
+        this.Empacado = Empacado;
         this.Nombre = Nombre;
         this.Precio = Precio;
-        this.Impuestos = Impuesto;
+        this.Impuestos = Impuestos;
+        this.Negocio = negocio;
     }
 
     public String getNombre() {
@@ -41,6 +42,10 @@ public class Producto implements Serializable {
         return Impuestos;
     }
 
+    public Negocio getNegocio() {
+        return Negocio;
+    }
+    
     public static Producto consultarProducto(String Nombre) throws Exception {
         return ProductoDb.getInstance().consultarProductos(Nombre);
     }

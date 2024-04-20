@@ -10,7 +10,6 @@ import LogicaNegocio.TipoRestaurante;
 import LogicaNegocio.TipoUsuario;
 import LogicaNegocio.TipoEmpresa;
 import LogicaNegocio.Usuario;
-import PersistenciaDatos.PersistenciaEmpresa;
 import PersistenciaDatos.PersistenciaUsuarios;
 import java.util.ArrayList;
 
@@ -93,17 +92,12 @@ public static void main(String[] args) throws Exception {
                 PersistenciaUsuarios.getUsuario("gerentetind1@gmail.com"), "Pequeño Mundo"));
     }
     
-    public static void CrearProductos() throws Exception {
-        Producto.agregarProducto(new Producto(true, "Coca-Cola", 1000, 0.13));
-        Producto.agregarProducto(new Producto(true, "Helado", 500, 0.13));
-        Producto.agregarProducto(new Producto(true, "Pizza de congelador", 12000, 0.13));    
+    public static void CrearProductos(Usuario oUsuario) throws Exception {
+        Producto.agregarProducto(new Producto(true, "Coca-Cola", 1000, 0.13,Negocio.consultarNegocio(oUsuario.getCorreo())));
+        Producto.agregarProducto(new Producto(true, "Helado", 500, 0.13,Negocio.consultarNegocio(oUsuario.getCorreo())));
+        Producto.agregarProducto(new Producto(true, "Pizza de congelador", 12000, 0.13,Negocio.consultarNegocio(oUsuario.getCorreo())));    
     }
     
-    public static void AgregarProducto(Usuario oUsuario) throws Exception{
-        CrearProductos();
-        Negocio.consultarNegocio(oUsuario.getCorreo()).agregarProductos(Producto.listadoProductos());
-    }
-
     public static Usuario getoUsuario() {
         return oUsuario;
     }

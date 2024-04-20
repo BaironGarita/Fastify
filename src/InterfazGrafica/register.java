@@ -10,6 +10,8 @@ import LogicaNegocio.Usuario;
 import LogicaNegocio.ValidarTarjeta;
 import Utilitario.UtilitarioVentana;
 import java.awt.Color;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -286,7 +288,11 @@ public class register extends javax.swing.JFrame {
         Usuario Usuario = new Usuario(TxtCorreo.getText(), String.valueOf(contra), TxtUsuario.getText(), TipoUsuario.REGULAR, tarjeta, TxtNumTarjeta.getText());
         PersistenciaDatos.PersistenciaUsuarios.setUsuario(Usuario);
         Utilitario.UtilitarioVentana.fadeOutAndClose(this);
-        UtilitarioVentana.fadeRegistro(Login);
+        try {
+            UtilitarioVentana.fadeRegistro(Login);
+        } catch (Exception ex) {
+            Logger.getLogger(register.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_BtnRegistroActionPerformed
 
     /**
