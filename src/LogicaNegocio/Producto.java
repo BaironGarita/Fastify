@@ -16,11 +16,11 @@ public class Producto implements Serializable {
     private final int Precio;
     private final double Impuestos;
 
-    public Producto(boolean empacado, String Nombre, int Precio, double Impuestos) {
+    public Producto(boolean empacado, String Nombre, int Precio, double Impuesto) {
         this.Empacado = empacado;
         this.Nombre = Nombre;
         this.Precio = Precio;
-        this.Impuestos = Impuestos;
+        this.Impuestos = Impuesto;
     }
 
     public String getNombre() {

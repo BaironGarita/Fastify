@@ -12,7 +12,6 @@ import Utilitario.UtilitarioVentana;
 import javax.swing.JOptionPane;
 import PersistenciaDatos.PersistenciaUsuarios;
 import LogicaNegocio.TipoUsuario;
-import PersistenciaDatos.PersistenciaEmpresa;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -29,18 +28,20 @@ public class login extends javax.swing.JFrame {
     private int intentos = 0;
     static JFrame Registro;
     static JFrame Main;
+    public static Usuario Usuario;
 
     /**
      * Creates new form login
      */
-    public login() {
+    public login() throws Exception {
         initComponents();
         TxtUsuario.setBackground(new java.awt.Color(0, 0, 0, 1));
         TxtContra.setBackground(new java.awt.Color(0, 0, 0, 1));
         PrincipalFastify.CrearUsuarios();
-        PrincipalFastify.CrearTiendas();
-        PrincipalFastify.CrearRestaurantes();
-        PrincipalFastify.CrearCafeterias();
+//        PrincipalFastify.CrearTiendas();
+//        PrincipalFastify.CrearRestaurantes();
+//        PrincipalFastify.CrearCafeterias();
+//        PrincipalFastify.CrearProductos();
     }
 
     /**
@@ -256,7 +257,11 @@ public class login extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Supero la cantidad de intentos");
             System.exit(0);
         } else if (oUsuario.getConstraseña().equals(String.valueOf(contraseña))&& oUsuario.getRol().equals(TipoUsuario.GERENTE)) {
-            Gerente = PersistenciaEmpresa.getNegocioPorGerente(oUsuario.getCorreo());
+            try {
+                Gerente = Negocio.consultarNegocio(oUsuario.getCorreo());
+            } catch (Exception ex) {
+                Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+            }
             this.nombre = oUsuario.getNombre();
             this.rol = oUsuario.getRol();
             this.Usuariolog = oUsuario;
@@ -269,7 +274,7 @@ public class login extends javax.swing.JFrame {
         }else if (oUsuario.getConstraseña().equals(String.valueOf(contraseña))) {
             this.nombre = oUsuario.getNombre();
             this.rol = oUsuario.getRol();
-            this.Usuariolog = oUsuario;
+            this.Usuario = oUsuario;
             Utilitario.UtilitarioVentana.fadeOutAndClose(this);
             try {
                 UtilitarioVentana.centrarVentanaJFrame(this.Main = new MainMenu(), false);
@@ -318,7 +323,11 @@ public class login extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new login().setVisible(true);
+                try {
+                    new login().setVisible(true);
+                } catch (Exception ex) {
+                    Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

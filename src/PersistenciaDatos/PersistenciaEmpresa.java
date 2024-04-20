@@ -8,7 +8,7 @@ import LogicaNegocio.Negocio;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import LogicaNegocio.Tipoempresa;
+import LogicaNegocio.TipoEmpresa;
 import LogicaNegocio.Usuario;
 
 /**

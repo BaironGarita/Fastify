@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package PersistenciaDatos;
 
 import LogicaNegocio.Negocio;
@@ -13,10 +10,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-/**
- *
- * @author Usuario
- */
 public class NegocioBD {
     private final String RUTA_ARCHIVO = System.getProperty("user.dir")+ "\\src\\Archivo\\Departamento.txt";
     private FileOutputStream archivoSalida;
@@ -172,7 +165,7 @@ public class NegocioBD {
      * @param negocio Objeto Departamento a agregar
      * @throws java.lang.Exception
      */
-    public  void agregarDepartamento(Negocio negocio)throws Exception {        
+    public  void agregarProducto(Negocio negocio)throws Exception {        
         try {
             this.abrirArchivoOutput(); //se coloca al final del archivo
             if (oEscritor != null) {

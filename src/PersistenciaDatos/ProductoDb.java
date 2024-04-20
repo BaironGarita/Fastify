@@ -26,12 +26,10 @@ public class ProductoDb {
     //Instancia privada de la misma clase
     //implementa el patrón Singleton
     private static ProductoDb instance = null;
-
     //Constructor privado, se implementa el patrón Singleton
     private ProductoDb() {
        
     }
-
     //Método público que retorna una única instancia de la 
     //clase, únicamnete se construye la primera vez.
     public static ProductoDb getInstance() {
@@ -70,7 +68,6 @@ public class ProductoDb {
             throw e; //Se lanza al método que invocó al método en que estoy
         }
     }
-
     /**
      * Abre  el archivo de datos, para lectura (de tipo input) El
      * apuntador del archivo se coloca al inicio del archivo 
@@ -87,8 +84,6 @@ public class ProductoDb {
             throw e;
         }
     }
-
-   
     public void cerrarArchivoOutput() throws Exception {
         try {
             if (oEscritor != null) {
@@ -99,7 +94,6 @@ public class ProductoDb {
             throw e;
         }
     }
-    
      /**
      * Permite cerrar el archivo de datos que se abrió para lectura
      */
@@ -113,7 +107,6 @@ public class ProductoDb {
             throw e;
         }
     }
-
     /**
      * Lista de todos los Departamentos que se encuentran en el archivo
      * @return ArrayList
@@ -131,17 +124,14 @@ public class ProductoDb {
                 listaDeptos.add(depto1);
             }
          } //No se indica el catch ya que no se hará nada, solamente se lanzará por medio del throws  
-        catch(Exception ex ){
-            
+        catch(Exception ex ){  
        }
         finally{
            //Ocurra o no ocurra la excepción se cierra el archivo
            cerrarArchivoInput();   
            return listaDeptos;
-        } 
-       
+        }   
     }
-
    //Busca y retorna el objeto Departamento de acuerdo al código que recibe como 
    //parámetro, en caso de que no lo encuentre retorna null
     public Producto consultarProductos(String NombreProducto)throws Exception {
@@ -155,16 +145,13 @@ public class ProductoDb {
                     ProducBuscado = prod;
                 }
              }            
-        }catch(Exception e){
-            
+        }catch(Exception e){       
         }
         finally{ //Suceda o no suceda la excepción se deben cerrar los archivos
              cerrarArchivoInput();    
              return ProducBuscado;
         }       
     }
-
-
     /**
      * Agregar un nuevo Departamento al final del archivo
      * @param Producto Objeto Departamento a agregar
@@ -178,8 +165,7 @@ public class ProductoDb {
                oEscritor.writeObject(Producto); //Serializa el objeto y lo graba en el archivo
                oEscritor.flush();  //Envía el contenido del buffer al archivo
                oEscritor.reset();//Se requiere para cuando se reciben subclases de Departamento, es obligatorio si hay herencia
-            }
-        
+            }   
         } catch (Exception e) {
             throw e;
         }
@@ -188,7 +174,6 @@ public class ProductoDb {
             this.cerrarArchivoOutput(); //Cierra el archivo
         }        
     }
-
     /**
      * Agregar un nuevo Departamento al archivo
      * @param producto Objeto Departamento a agregar
@@ -210,18 +195,13 @@ public class ProductoDb {
                  arrayProductoTemp.add(depto1);
              }  
         }
-        catch(Exception ex){
-            
+        catch(Exception ex){   
         }
         finally{
             cerrarArchivoInput();
             pasarArrayTemporal_Archivo();        
-        }
-        
-    }
-    
-    
-    
+        }   
+    } 
     public void eliminarProducto(String Nombre) throws Exception {
         arrayProductoTemp = new ArrayList<Producto>();
         try {            
@@ -243,8 +223,6 @@ public class ProductoDb {
             pasarArrayTemporal_Archivo(); 
         }               
     }
-    
-
     private void pasarArrayTemporal_Archivo() throws Exception {       
        File archivoOriginal = new File(RUTA_ARCHIVO);
        //Si hay departamentos en el ArrayList y el archivo existe

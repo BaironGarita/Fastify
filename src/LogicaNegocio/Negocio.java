@@ -11,19 +11,19 @@ import java.util.List;
 
 public class Negocio implements Serializable {
 
-    private final Tipoempresa Tipo;
+    private final TipoEmpresa Tipo;
     private List<Producto> ListaProductos = new ArrayList<>();
     private final Usuario Gerente;
     private String Nombre;
     private TipoRestaurante TipoRest;
 
-    public Negocio(Tipoempresa Tipo, Usuario Gerente, String Nombre) {
+    public Negocio(TipoEmpresa Tipo, Usuario Gerente, String Nombre) {
         this.Tipo = Tipo;
         this.Gerente = Gerente;
         this.Nombre = Nombre;
     }
 
-    public Negocio(Tipoempresa Tipo, Usuario Gerente, String Nombre, TipoRestaurante TipoRest) {
+    public Negocio(TipoEmpresa Tipo, Usuario Gerente, String Nombre, TipoRestaurante TipoRest) {
         this.Tipo = Tipo;
         this.Gerente = Gerente;
         this.Nombre = Nombre;
@@ -34,7 +34,7 @@ public class Negocio implements Serializable {
         return Nombre;
     }
 
-    public Tipoempresa getTipo() {
+    public TipoEmpresa getTipo() {
         return Tipo;
     }
 
@@ -62,8 +62,8 @@ public class Negocio implements Serializable {
         return NegocioBD.getInstance().consultarNegocios(codigo);
     }
 
-    public static void agregarNegocio(Negocio negocio) throws Exception {
-        NegocioBD.getInstance().agregarDepartamento(negocio);
+    public static void agregarNegocio(Negocio oNegocio) throws Exception {
+        NegocioBD.getInstance().agregarProducto(oNegocio);
     }
 
     public static void eliminarDepartamento(String codigo) throws Exception {
@@ -74,12 +74,16 @@ public class Negocio implements Serializable {
         NegocioBD.getInstance().modificarNegocio(negocio);
     }
 
-    public static List<Negocio> listadoDepartamentos() throws Exception {
+    public static List<Negocio> listadoNegocios() throws Exception {
         return NegocioBD.getInstance().listaNegocios();
     }
 
     public void agregarProducto(Producto producto) {
-        ListaProductos.add(producto); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        ListaProductos.add(producto);
+    }
+
+    public void agregarProductos(List<Producto> productos) {
+        ListaProductos = productos;
     }
 }
 

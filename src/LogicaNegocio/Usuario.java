@@ -4,7 +4,9 @@
  */
 package LogicaNegocio;
 
-public class Usuario {
+import java.io.Serializable;
+
+public class Usuario implements Serializable{
 
     private final String Correo;
     private String NumTar;

@@ -8,27 +8,25 @@ import LogicaNegocio.Negocio;
 import LogicaNegocio.Producto;
 import LogicaNegocio.TipoRestaurante;
 import LogicaNegocio.TipoUsuario;
-import LogicaNegocio.Tipoempresa;
+import LogicaNegocio.TipoEmpresa;
 import LogicaNegocio.Usuario;
 import PersistenciaDatos.PersistenciaEmpresa;
-import PersistenciaDatos.PersistenciaProductos;
 import PersistenciaDatos.PersistenciaUsuarios;
 import java.util.ArrayList;
 
-/**
- *
- * @author Usuario
- */
 public class PrincipalFastify {
     
     private static Usuario oUsuario = null;
     private static ArrayList<Negocio> ListaNegocios = new ArrayList<>();
 
-    public static void main(String[] args) {
+public static void main(String[] args) throws Exception {
         CrearUsuarios();
+        CrearRestaurantes();
+        CrearCafeterias();
         login Login = new login();
         Login.setVisible(true);
     }
+
 
     public static void CrearUsuarios() {
         PersistenciaUsuarios.setUsuario(new Usuario("admin@gmail.com",
@@ -59,39 +57,39 @@ public class PrincipalFastify {
                 "1234", "Bairon Garita", TipoUsuario.REGULAR));
     }
 
-    public static void CrearRestaurantes() {
-        PersistenciaEmpresa.setNegocio(new Negocio(Tipoempresa.RESTAURANTE, 
+    public static void CrearRestaurantes() throws Exception {
+        Negocio.agregarNegocio(new Negocio(TipoEmpresa.RESTAURANTE, 
                 PersistenciaUsuarios.getUsuario("gerenterest@gmail.com"),
                 "Las Catrinas", TipoRestaurante.MEXICANA));
-        PersistenciaEmpresa.setNegocio(new Negocio(Tipoempresa.RESTAURANTE, 
+        Negocio.agregarNegocio(new Negocio(TipoEmpresa.RESTAURANTE, 
                 PersistenciaUsuarios.getUsuario("gerenterest1@gmail.com"),
                 "Lleguele", TipoRestaurante.COMIDARAPIDA));
-        PersistenciaEmpresa.setNegocio(new Negocio(Tipoempresa.RESTAURANTE, 
+        Negocio.agregarNegocio(new Negocio(TipoEmpresa.RESTAURANTE, 
                 PersistenciaUsuarios.getUsuario("gerenterest2@gmail.com"),
                 "Mama-mia", TipoRestaurante.ITALIANO));
-        PersistenciaEmpresa.setNegocio(new Negocio(Tipoempresa.RESTAURANTE, 
+        Negocio.agregarNegocio(new Negocio(TipoEmpresa.RESTAURANTE, 
                 PersistenciaUsuarios.getUsuario("gerenterest3@gmail.com"),
                 "Don Jose", TipoRestaurante.ITALIANO));
-        PersistenciaEmpresa.setNegocio(new Negocio(Tipoempresa.RESTAURANTE, 
+        Negocio.agregarNegocio(new Negocio(TipoEmpresa.RESTAURANTE, 
                 PersistenciaUsuarios.getUsuario("gerenterest4@gmail.com"),
                 "Primer Sabor", TipoRestaurante.ASIATICA));
     }
 
-    public static void CrearCafeterias() {
-        PersistenciaEmpresa.setNegocio(new Negocio(Tipoempresa.CAFETERIA,
+    public static void CrearCafeterias() throws Exception {
+        Negocio.agregarNegocio(new Negocio(TipoEmpresa.CAFETERIA,
                 PersistenciaUsuarios.getUsuario("gerentecaf@gmail.com"), "starbucks"));
-        PersistenciaEmpresa.setNegocio(new Negocio(Tipoempresa.CAFETERIA,
+        Negocio.agregarNegocio(new Negocio(TipoEmpresa.CAFETERIA,
                 PersistenciaUsuarios.getUsuario("gerentecaf1@gmail.com"), "Cafe a la moda"));
-        PersistenciaEmpresa.setNegocio(new Negocio(Tipoempresa.CAFETERIA,
+        Negocio.agregarNegocio(new Negocio(TipoEmpresa.CAFETERIA,
                 PersistenciaUsuarios.getUsuario("gerentecaf2@gmail.com"), "Kawah Cafe"));
-        PersistenciaEmpresa.setNegocio(new Negocio(Tipoempresa.CAFETERIA,
+        Negocio.agregarNegocio(new Negocio(TipoEmpresa.CAFETERIA,
                 PersistenciaUsuarios.getUsuario("gerentecaf3@gmail.com"), "Mocapan"));
     }
 
-    public static void CrearTiendas() {
-        PersistenciaEmpresa.setNegocio(new Negocio(Tipoempresa.EMPRESA,
+    public static void CrearTiendas() throws Exception {
+        Negocio.agregarNegocio(new Negocio(TipoEmpresa.EMPRESA,
                 PersistenciaUsuarios.getUsuario("gerentetind@gmail.com"), "Walmart"));
-        PersistenciaEmpresa.setNegocio(new Negocio(Tipoempresa.EMPRESA,
+        Negocio.agregarNegocio(new Negocio(TipoEmpresa.EMPRESA,
                 PersistenciaUsuarios.getUsuario("gerentetind1@gmail.com"), "Pequeño Mundo"));
     }
     
@@ -102,8 +100,8 @@ public class PrincipalFastify {
     }
     
     public static void AgregarProducto(Usuario oUsuario) throws Exception{
-        PersistenciaEmpresa.getNegocioPorGerente(oUsuario.getCorreo()).agregarProducto(
-                new Producto(true, "Coca-Cola", 1000, 0.13));
+//        CrearProductos();
+        Negocio.consultarNegocio(oUsuario.getCorreo()).agregarProductos(Producto.listadoProductos());
     }
 
     public static Usuario getoUsuario() {

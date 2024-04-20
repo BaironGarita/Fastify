@@ -1,20 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Enum.java to edit this template
- */
+
 package LogicaNegocio;
 
-/**
- *
- * @author Estudiante
- */
-public enum Tipoempresa {
+
+public enum TipoEmpresa {
     RESTAURANTE("Restaurante"),
     CAFETERIA("Cafeteria"),
     EMPRESA("Empresa");
     private String nombreTipo;
 
-    private Tipoempresa(String nombreTipo) {
+    private TipoEmpresa(String nombreTipo) {
         this.nombreTipo = nombreTipo;
     }
 

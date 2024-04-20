@@ -3,8 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Usuario/OneDrive/Documentos/Dev/Proyecto%20Progra%202/Fastify/src/Archivo/Producto.txt</file>
             <file>file:/C:/Users/Usuario/OneDrive/Documentos/Dev/Proyecto%20Progra%202/Fastify/src/InterfazGrafica/MainMenu.java</file>
+            <file>file:/C:/Users/Usuario/OneDrive/Documentos/Dev/Proyecto%20Progra%202/Fastify/src/InterfazGrafica/login.java</file>
+            <file>file:/C:/Users/Usuario/OneDrive/Documentos/Dev/Proyecto%20Progra%202/Fastify/src/LogicaNegocio/Negocio.java</file>
+            <file>file:/C:/Users/Usuario/OneDrive/Documentos/Dev/Proyecto%20Progra%202/Fastify/src/LogicaNegocio/TipoRestaurante.java</file>
+            <file>file:/C:/Users/Usuario/OneDrive/Documentos/Dev/Proyecto%20Progra%202/Fastify/src/LogicaNegocio/TipoEmpresa.java</file>
+            <file>file:/C:/Users/Usuario/OneDrive/Documentos/Dev/Proyecto%20Progra%202/Fastify/src/PersistenciaDatos/NegocioBD.java</file>
+            <file>file:/C:/Users/Usuario/OneDrive/Documentos/Dev/Proyecto%20Progra%202/Fastify/src/LogicaNegocio/Producto.java</file>
             <file>file:/C:/Users/Usuario/OneDrive/Documentos/Dev/Proyecto%20Progra%202/Fastify/src/InterfazGrafica/PrincipalFastify.java</file>
         </group>
     </open-files>
