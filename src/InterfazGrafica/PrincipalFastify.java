@@ -93,9 +93,23 @@ public static void main(String[] args) throws Exception {
     }
     
     public static void CrearProductos(Usuario oUsuario) throws Exception {
-        Producto.agregarProducto(new Producto(true, "Coca-Cola", 1000, 0.13,Negocio.consultarNegocio(oUsuario.getCorreo())));
-        Producto.agregarProducto(new Producto(true, "Helado", 500, 0.13,Negocio.consultarNegocio(oUsuario.getCorreo())));
-        Producto.agregarProducto(new Producto(true, "Pizza de congelador", 12000, 0.13,Negocio.consultarNegocio(oUsuario.getCorreo())));    
+        Producto.agregarProducto(new Producto(true, "Coca-Cola", 1000, 0.13,Negocio.consultarNegocio("gerenterest@gmail.com")));
+        Producto.agregarProducto(new Producto(true, "Tacos de Birria", 3500, 0.13,Negocio.consultarNegocio("gerenterest@gmail.com")));
+        Producto.agregarProducto(new Producto(true, "Orden de Pollo",2500, 0.13,Negocio.consultarNegocio("gerenterest1@gmail.com")));
+        Producto.agregarProducto(new Producto(true, "Hamburguesa lleguele", 4500, 0.13,Negocio.consultarNegocio("gerenterest1@gmail.com")));
+        Producto.agregarProducto(new Producto(true, "Pizza Suprema", 10000, 0.13,Negocio.consultarNegocio("gerenterest2@gmail.com")));
+        Producto.agregarProducto(new Producto(true, "Napolitana", 8300, 0.13,Negocio.consultarNegocio("gerenterest2@gmail.com")));
+        Producto.agregarProducto(new Producto(true, "Pollo en salsa Blanca", 5000, 0.13,Negocio.consultarNegocio("gerenterest3@gmail.com")));
+        Producto.agregarProducto(new Producto(true, "La Don Jose", 8300, 0.13,Negocio.consultarNegocio("gerenterest3@gmail.com")));
+        Producto.agregarProducto(new Producto(true, "Entero de Cantones", 3500, 0.13,Negocio.consultarNegocio("gerenterest4@gmail.com")));
+        Producto.agregarProducto(new Producto(true, "chopsuey", 4000, 0.13,Negocio.consultarNegocio("gerenterest4@gmail.com")));
+        Producto.agregarProducto(new Producto(true, "Mocca", 2500, 0.13,Negocio.consultarNegocio("gerentecaf@gmail.com")));
+        Producto.agregarProducto(new Producto(true, "Latte", 3000, 0.13,Negocio.consultarNegocio("gerentecaf@gmail.com")));
+        Producto.agregarProducto(new Producto(true, "Espresso", 2500, 0.13,Negocio.consultarNegocio("gerentecaf@gmail.com")));
+        Producto.agregarProducto(new Producto(true, "Cappuccino", 3000, 0.13,Negocio.consultarNegocio("gerentecaf@gmail.com")));
+        Producto.agregarProducto(new Producto(true, "Coca-Cola", 1000, 0.13,Negocio.consultarNegocio("gerentetind@gmail.com")));
+        Producto.agregarProducto(new Producto(true, "Helado", 500, 0.13,Negocio.consultarNegocio("gerentetind@gmail.com")));
+        Producto.agregarProducto(new Producto(true, "Pizza de congelador", 12000, 0.13,Negocio.consultarNegocio("gerentetind@gmail.com")));    
     }
     
     public static Usuario getoUsuario() {

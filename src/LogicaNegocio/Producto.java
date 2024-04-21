@@ -17,6 +17,7 @@ public class Producto implements Serializable {
     private final int Precio;
     private final double Impuestos;
     private Negocio Negocio = null;
+    private int cantidad;
 
     public Producto(boolean Empacado, String Nombre, int Precio, double Impuestos,Negocio negocio) {
         this.Empacado = Empacado;
@@ -45,6 +46,15 @@ public class Producto implements Serializable {
     public Negocio getNegocio() {
         return Negocio;
     }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+    
     
     public static Producto consultarProducto(String Nombre) throws Exception {
         return ProductoDb.getInstance().consultarProductos(Nombre);

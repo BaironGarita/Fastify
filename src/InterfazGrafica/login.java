@@ -28,7 +28,7 @@ public class login extends javax.swing.JFrame {
     private int intentos = 0;
     static JFrame Registro;
     static JFrame Main;
-    public static Usuario Usuario;
+    public static Usuario oUsuario;
 
     /**
      * Creates new form login
@@ -41,6 +41,7 @@ public class login extends javax.swing.JFrame {
 //        PrincipalFastify.CrearTiendas();
 //        PrincipalFastify.CrearRestaurantes();
 //        PrincipalFastify.CrearCafeterias();
+//        PrincipalFastify.CrearProductos(Usuariolog);
     }
 
     /**
@@ -264,11 +265,6 @@ public class login extends javax.swing.JFrame {
             this.nombre = oUsuario.getNombre();
             this.rol = oUsuario.getRol();
             this.Usuariolog = oUsuario;
-//            try {
-//                PrincipalFastify.CrearProductos(Usuariolog);
-//            } catch (Exception ex) {
-//                Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
-//            }
             Utilitario.UtilitarioVentana.fadeOutAndClose(this);
             try {
                 UtilitarioVentana.centrarVentanaJFrame(this.Main = new MainMenu(), false);
@@ -278,7 +274,7 @@ public class login extends javax.swing.JFrame {
         }else if (oUsuario.getConstraseña().equals(String.valueOf(contraseña))) {
             this.nombre = oUsuario.getNombre();
             this.rol = oUsuario.getRol();
-            this.Usuario = oUsuario;
+            this.oUsuario = oUsuario;
             Utilitario.UtilitarioVentana.fadeOutAndClose(this);
             try {
                 UtilitarioVentana.centrarVentanaJFrame(this.Main = new MainMenu(), false);

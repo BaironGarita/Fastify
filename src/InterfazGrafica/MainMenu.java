@@ -24,7 +24,9 @@ public final class MainMenu extends javax.swing.JFrame {
     private Producto ProductMantenimiento = null;
     DefaultTableModel modeloTabla = new DefaultTableModel();
     DefaultTableModel modeloTablaProductos = new DefaultTableModel();
+    DefaultTableModel modeloTablaCarrito = new DefaultTableModel();
     private Usuario useradmin = login.Usuariolog;
+    private Usuario user = login.oUsuario;
     private Negocio SucursalGerente = login.Gerente;
     private TipoEmpresa Empresa;
     private TipoRestaurante Restaurate;
@@ -36,12 +38,14 @@ public final class MainMenu extends javax.swing.JFrame {
         initComponents();
         modeloTabla = (DefaultTableModel) TblGerneteProductos.getModel();
         modeloTablaProductos = (DefaultTableModel) TblRestauranteProductos.getModel();
+        modeloTablaCarrito = (DefaultTableModel) TblCarritoCompras.getModel();
         ColoresBotones();
         llenarNegocios();
         llenarRestaurantes();
         LblUsuario.setText(login.nombre);
         switch (login.rol) {
             case REGULAR -> {
+                BtnCarritoCompras.setVisible(false);
                 BtnGerente.setVisible(false);
                 BtnMantenimiento.setVisible(false);
             }
@@ -522,16 +526,17 @@ public final class MainMenu extends javax.swing.JFrame {
         PnlCarritoCompras.setBackground(new java.awt.Color(255, 255, 255));
 
         TblCarritoCompras.setFont(TblCarritoCompras.getFont().deriveFont(TblCarritoCompras.getFont().getSize()+2f));
-        TblCarritoCompras.setForeground(new java.awt.Color(255, 255, 255));
+        TblCarritoCompras.setForeground(new java.awt.Color(0, 0, 0));
         TblCarritoCompras.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null}
+
             },
             new String [] {
-                "Nombre", "Cantidad", "Precio", "Empacado", "Preparado"
+                "Nombre", "Cantidad", "Precio"
             }
         ));
         TblCarritoCompras.setSelectionBackground(new java.awt.Color(0, 57, 114));
+        TblCarritoCompras.setSelectionForeground(new java.awt.Color(255, 255, 255));
         jScrollPane3.setViewportView(TblCarritoCompras);
 
         LblCarritoCompras.setFont(LblCarritoCompras.getFont().deriveFont(LblCarritoCompras.getFont().getSize()+2f));
@@ -551,17 +556,19 @@ public final class MainMenu extends javax.swing.JFrame {
         PnlCarritoComprasLayout.setHorizontalGroup(
             PnlCarritoComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PnlCarritoComprasLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(30, 30, 30)
                 .addGroup(PnlCarritoComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 627, Short.MAX_VALUE)
-                    .addGroup(PnlCarritoComprasLayout.createSequentialGroup()
-                        .addComponent(LblCarritoCompras)
-                        .addGap(18, 18, 18)
-                        .addComponent(infoMontoCompra)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PnlCarritoComprasLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(BtnPagarCompras)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 531, Short.MAX_VALUE)
+                        .addComponent(BtnPagarCompras))
+                    .addGroup(PnlCarritoComprasLayout.createSequentialGroup()
+                        .addGroup(PnlCarritoComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(PnlCarritoComprasLayout.createSequentialGroup()
+                                .addComponent(LblCarritoCompras)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(infoMontoCompra))
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         PnlCarritoComprasLayout.setVerticalGroup(
@@ -1077,7 +1084,6 @@ public final class MainMenu extends javax.swing.JFrame {
         }
     }
 
-
     private void BtnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSalirActionPerformed
         try {
             Login = new login();
@@ -1118,6 +1124,12 @@ public final class MainMenu extends javax.swing.JFrame {
 
     private void BtnCarritoComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCarritoComprasActionPerformed
         TpnVentanas.setSelectedIndex(2);
+        int montoTotal=0;
+        ArrayList<Producto> listaCompras = user.getListaProductos();
+        for (Producto listaProductos : listaCompras) {
+            montoTotal += listaProductos.getPrecio()*listaProductos.getCantidad();
+        }
+        infoMontoCompra.setText(String.valueOf(montoTotal));
     }//GEN-LAST:event_BtnCarritoComprasActionPerformed
 
     private void BtnGerenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGerenteActionPerformed
@@ -1360,7 +1372,41 @@ public final class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_CboRestauranteActionPerformed
 
     private void BtnComprarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnComprarProductoActionPerformed
-        // TODO add your handling code here:
+        try {
+            // Obtener el nombre del producto y el nombre del restaurante seleccionado
+            String nombreProducto = (String) TblRestauranteProductos.getValueAt(TblRestauranteProductos.getSelectedRow(), 0);
+            String nombreRestauranteSeleccionado = (String) CboRestaurante.getSelectedItem();
+
+            // Buscar el producto en los archivos (asumiendo que los archivos son la fuente de datos)
+            Producto productoEncontrado = null;
+            for (Producto producto : Producto.listadoProductos()) {
+                if (producto.getNombre().equals(nombreProducto) && producto.getNegocio().getNombre().equals(nombreRestauranteSeleccionado)) {
+                    productoEncontrado = producto;
+                    productoEncontrado.setCantidad(Integer.parseInt(TxtCantidadProductos.getText()));
+                    break;  // Salir del bucle una vez que se encuentre el producto
+                }
+            }
+//            modeloTablaCarrito.setRowCount(0);
+            // Verificar si se encontró el producto
+            if (productoEncontrado != null) {
+                // Agregar el producto al array de productos del usuario (asumiendo que tienes un array llamado productosUsuario)
+                user.agregrarCarrito(productoEncontrado);
+                
+                // Agregar el producto a la tabla (si es necesario)
+                Object[] datos = new Object[3];
+                datos[0] = productoEncontrado.getNombre();
+                datos[1] = productoEncontrado.getCantidad();
+                datos[2] = productoEncontrado.getPrecio();
+                modeloTablaCarrito.addRow(datos);
+                JOptionPane.showMessageDialog(this, "Producto agregado al carrito de compras del usuario");
+                BtnCarritoCompras.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(this, "Producto no encontrado para el restaurante seleccionado");
+            }
+
+        } catch (Exception ex) {
+            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_BtnComprarProductoActionPerformed
 
     /**

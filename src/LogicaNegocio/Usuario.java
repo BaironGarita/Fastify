@@ -46,6 +46,10 @@ public class Usuario implements Serializable{
     public String getConstraseña() {
         return contraseña;
     }
+    
+    public void agregrarCarrito(Producto oProducto){
+        listaProductos.add(oProducto); 
+    }
 
     public String getNombre() {
         return nombre;
@@ -78,4 +82,14 @@ public class Usuario implements Serializable{
     public String getNumTarjeta() {
         return NumTar;
     }
+
+    public String getNumTar() {
+        return NumTar;
+    }
+
+    public ArrayList<Producto> getListaProductos() {
+        return listaProductos;
+    }
+    
+    
 }
