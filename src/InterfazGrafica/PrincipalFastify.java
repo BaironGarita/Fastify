@@ -92,7 +92,7 @@ public static void main(String[] args) throws Exception {
                 PersistenciaUsuarios.getUsuario("gerentetind1@gmail.com"), "Pequeño Mundo",10));
     }
     
-    public static void CrearProductos(Usuario oUsuario) throws Exception {
+    public static void CrearProductos() throws Exception {
         Producto.agregarProducto(new Producto(true, "Coca-Cola", 1000, 0.13,Negocio.consultarNegocio("gerenterest@gmail.com")));
         Producto.agregarProducto(new Producto(true, "Tacos de Birria", 3500, 0.13,Negocio.consultarNegocio("gerenterest@gmail.com")));
         Producto.agregarProducto(new Producto(true, "Orden de Pollo",2500, 0.13,Negocio.consultarNegocio("gerenterest1@gmail.com")));

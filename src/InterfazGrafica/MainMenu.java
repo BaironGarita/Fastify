@@ -1070,7 +1070,7 @@ public final class MainMenu extends javax.swing.JFrame {
             for (Producto producto : setProd) {
                 if (producto.getNegocio().getNombre().equalsIgnoreCase(Negocio.consultarNegocio(useradmin.getCorreo()).getNombre())) {
                     datos[0] = producto.getNombre();
-                    datos[1] = producto.getPrecio();
+                    datos[1] = producto.PrecioTotal();
                     datos[2] = producto.getImpuestos();
                     datos[3] = producto.isEmpacado();
                     modeloTabla.addRow(datos);
@@ -1127,7 +1127,7 @@ public final class MainMenu extends javax.swing.JFrame {
         int montoTotal=0;
         ArrayList<Producto> listaCompras = user.getListaProductos();
         for (Producto listaProductos : listaCompras) {
-            montoTotal += listaProductos.getPrecio()*listaProductos.getCantidad();
+            montoTotal += listaProductos.PrecioTotal();
         }
         infoMontoCompra.setText(String.valueOf(montoTotal));
     }//GEN-LAST:event_BtnCarritoComprasActionPerformed
@@ -1266,7 +1266,7 @@ public final class MainMenu extends javax.swing.JFrame {
         boolean empacado = false;
         String nombreProducto = TxtNombreProducto.getText();
         int precioProducto = Integer.parseInt(TxtPrecioProducto.getText());
-        double impuestoProducto = Double.parseDouble(TxtImpuestoProducto.getText());
+        Double impuestoProducto =(double) Integer.parseInt(TxtImpuestoProducto.getText())/100;
 
         if (TxtNombreProducto.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Debes indicar el nombre del producto");
@@ -1288,7 +1288,7 @@ public final class MainMenu extends javax.swing.JFrame {
             empacado = true;
         }
         try {
-            ProductMantenimiento = new Producto(empacado, nombreProducto, precioProducto, impuestoProducto, Negocio.consultarNegocio(useradmin.getCorreo()));
+            ProductMantenimiento = new Producto(empacado, nombreProducto, precioProducto,impuestoProducto, Negocio.consultarNegocio(useradmin.getCorreo()));
 
         } catch (Exception ex) {
             Logger.getLogger(MainMenu.class
