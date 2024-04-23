@@ -4,12 +4,11 @@
  */
 package LogicaNegocio;
 
+import PersistenciaDatos.UsuarioBD;
 import java.io.Serializable;
-import java.util.AbstractList;
 import java.util.ArrayList;
-import java.util.List;
 
-public class Usuario implements Serializable{
+public class Usuario implements Serializable {
 
     private final String Correo;
     private String NumTar;
@@ -46,9 +45,9 @@ public class Usuario implements Serializable{
     public String getConstraseña() {
         return contraseña;
     }
-    
-    public void agregrarCarrito(Producto oProducto){
-        listaProductos.add(oProducto); 
+
+    public void agregrarCarrito(Producto oProducto) {
+        listaProductos.add(oProducto);
     }
 
     public String getNombre() {
@@ -90,6 +89,25 @@ public class Usuario implements Serializable{
     public ArrayList<Producto> getListaProductos() {
         return listaProductos;
     }
-    
-    
+
+    public static Usuario consultar(String correo) throws Exception {
+        return UsuarioBD.getInstance().consultar(correo);
+    }
+
+    public static void agregar(Usuario usuario) throws Exception {
+        UsuarioBD.getInstance().agregar(usuario);
+    }
+
+    public static void eliminar(String correo) throws Exception {
+        UsuarioBD.getInstance().eliminar(correo);
+    }
+
+    public static void modificar(Usuario usuario) throws Exception {
+        UsuarioBD.getInstance().modificar(usuario);
+    }
+
+    public static ArrayList<Usuario> listado() throws Exception {
+        return UsuarioBD.getInstance().lista();
+    }
+
 }

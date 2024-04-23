@@ -286,7 +286,11 @@ public class register extends javax.swing.JFrame {
             return;
         }
         Usuario Usuario = new Usuario(TxtCorreo.getText(), String.valueOf(contra), TxtUsuario.getText(), TipoUsuario.REGULAR, tarjeta, TxtNumTarjeta.getText());
-        PersistenciaDatos.PersistenciaUsuarios.setUsuario(Usuario);
+        try {
+            Usuario.agregar(Usuario);
+        } catch (Exception ex) {
+            Logger.getLogger(register.class.getName()).log(Level.SEVERE, null, ex);
+        }
         Utilitario.UtilitarioVentana.fadeOutAndClose(this);
         try {
             UtilitarioVentana.fadeRegistro(Login);

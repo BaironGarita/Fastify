@@ -11,7 +11,6 @@ import LogicaNegocio.TipoRestaurante;
 import LogicaNegocio.TipoEmpresa;
 import LogicaNegocio.Usuario;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.logging.Level;

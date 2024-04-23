@@ -10,7 +10,6 @@ import LogicaNegocio.Usuario;
 import javax.swing.JFrame;
 import Utilitario.UtilitarioVentana;
 import javax.swing.JOptionPane;
-import PersistenciaDatos.PersistenciaUsuarios;
 import LogicaNegocio.TipoUsuario;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,11 +23,12 @@ public class login extends javax.swing.JFrame {
     public static String nombre;
     public static TipoUsuario rol;
     public static Usuario Usuariolog;
-    public static Negocio Gerente; 
+    public static Negocio Gerente;
     private int intentos = 0;
     static JFrame Registro;
     static JFrame Main;
     public static Usuario oUsuario;
+    private Usuario user; 
 
     /**
      * Creates new form login
@@ -37,7 +37,7 @@ public class login extends javax.swing.JFrame {
         initComponents();
         TxtUsuario.setBackground(new java.awt.Color(0, 0, 0, 1));
         TxtContra.setBackground(new java.awt.Color(0, 0, 0, 1));
-        PrincipalFastify.CrearUsuarios();
+//        PrincipalFastify.CrearUsuarios();
 //        PrincipalFastify.CrearTiendas();
 //        PrincipalFastify.CrearRestaurantes();
 //        PrincipalFastify.CrearCafeterias();
@@ -238,7 +238,12 @@ public class login extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void BtnInicioSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnInicioSesionActionPerformed
-        Usuario oUsuario = PersistenciaUsuarios.getUsuario(TxtUsuario.getText().trim());
+        Usuario oUsuario = null;
+        try {
+            oUsuario = Usuario.consultar(TxtUsuario.getText().trim());
+        } catch (Exception ex) {
+            Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+        }
         char[] contraseña = TxtContra.getPassword();
         if (oUsuario != null) {
             if (oUsuario.getConstraseña().equals(String.valueOf(contraseña))) {
@@ -256,7 +261,7 @@ public class login extends javax.swing.JFrame {
         if (intentos == 3) {
             JOptionPane.showMessageDialog(this, "Supero la cantidad de intentos");
             System.exit(0);
-        } else if (oUsuario.getConstraseña().equals(String.valueOf(contraseña))&& oUsuario.getRol().equals(TipoUsuario.GERENTE)) {
+        } else if (oUsuario.getConstraseña().equals(String.valueOf(contraseña)) && oUsuario.getRol().equals(TipoUsuario.GERENTE)) {
             try {
                 Gerente = Negocio.consultarNegocio(oUsuario.getCorreo());
             } catch (Exception ex) {
@@ -271,7 +276,7 @@ public class login extends javax.swing.JFrame {
             } catch (Exception ex) {
                 Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }else if (oUsuario.getConstraseña().equals(String.valueOf(contraseña))) {
+        } else if (oUsuario.getConstraseña().equals(String.valueOf(contraseña))) {
             this.nombre = oUsuario.getNombre();
             this.rol = oUsuario.getRol();
             this.oUsuario = oUsuario;
