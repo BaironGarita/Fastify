@@ -86,6 +86,12 @@ public class Usuario implements Serializable {
         return NumTar;
     }
 
+    public void setListaProductos(ArrayList<Producto> listaProductos) {
+        this.listaProductos = listaProductos;
+    }
+
+    
+    
     public ArrayList<Producto> getListaProductos() {
         return listaProductos;
     }

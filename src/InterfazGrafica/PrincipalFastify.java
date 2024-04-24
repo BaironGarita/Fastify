@@ -57,37 +57,37 @@ public class PrincipalFastify {
     public static void CrearRestaurantes() throws Exception {
         Negocio.agregarNegocio(new Negocio(TipoEmpresa.RESTAURANTE,
                 Usuario.consultar("gerenterest@gmail.com"),
-                "Las Catrinas", TipoRestaurante.MEXICANA, 0));
+                "Las Catrinas", TipoRestaurante.MEXICANA));
         Negocio.agregarNegocio(new Negocio(TipoEmpresa.RESTAURANTE,
                 Usuario.consultar("gerenterest1@gmail.com"),
-                "Lleguele", TipoRestaurante.COMIDARAPIDA, 1));
+                "Lleguele", TipoRestaurante.COMIDARAPIDA));
         Negocio.agregarNegocio(new Negocio(TipoEmpresa.RESTAURANTE,
                 Usuario.consultar("gerenterest2@gmail.com"),
-                "Mama-mia", TipoRestaurante.ITALIANO, 2));
+                "Mama-mia", TipoRestaurante.ITALIANO));
         Negocio.agregarNegocio(new Negocio(TipoEmpresa.RESTAURANTE,
                 Usuario.consultar("gerenterest3@gmail.com"),
-                "Don Jose", TipoRestaurante.ITALIANO, 3));
+                "Don Jose", TipoRestaurante.ITALIANO));
         Negocio.agregarNegocio(new Negocio(TipoEmpresa.RESTAURANTE,
                 Usuario.consultar("gerenterest4@gmail.com"),
-                "Primer Sabor", TipoRestaurante.ASIATICA, 4));
+                "Primer Sabor", TipoRestaurante.ASIATICA));
     }
 
     public static void CrearCafeterias() throws Exception {
         Negocio.agregarNegocio(new Negocio(TipoEmpresa.CAFETERIA,
-                Usuario.consultar("gerentecaf@gmail.com"), "starbucks", 5));
+                Usuario.consultar("gerentecaf@gmail.com"), "starbucks"));
         Negocio.agregarNegocio(new Negocio(TipoEmpresa.CAFETERIA,
-                Usuario.consultar("gerentecaf1@gmail.com"), "Cafe a la moda", 6));
+                Usuario.consultar("gerentecaf1@gmail.com"), "Cafe a la moda"));
         Negocio.agregarNegocio(new Negocio(TipoEmpresa.CAFETERIA,
-                Usuario.consultar("gerentecaf2@gmail.com"), "Kawah Cafe", 7));
+                Usuario.consultar("gerentecaf2@gmail.com"), "Kawah Cafe"));
         Negocio.agregarNegocio(new Negocio(TipoEmpresa.CAFETERIA,
-                Usuario.consultar("gerentecaf3@gmail.com"), "Mocapan", 8));
+                Usuario.consultar("gerentecaf3@gmail.com"), "Mocapan"));
     }
 
     public static void CrearTiendas() throws Exception {
         Negocio.agregarNegocio(new Negocio(TipoEmpresa.EMPRESA,
-                Usuario.consultar("gerentetind@gmail.com"), "Walmart", 9));
+                Usuario.consultar("gerentetind@gmail.com"), "Walmart"));
         Negocio.agregarNegocio(new Negocio(TipoEmpresa.EMPRESA,
-                Usuario.consultar("gerentetind1@gmail.com"), "Pequeño Mundo", 10));
+                Usuario.consultar("gerentetind1@gmail.com"), "Pequeño Mundo"));
     }
 
     public static void CrearProductos() throws Exception {

@@ -20,5 +20,4 @@ public enum TipoEmpresa {
         this.nombreTipo = nombreTipo;
     }
     
-    
 }

@@ -24,11 +24,14 @@ public final class MainMenu extends javax.swing.JFrame {
     DefaultTableModel modeloTabla = new DefaultTableModel();
     DefaultTableModel modeloTablaProductos = new DefaultTableModel();
     DefaultTableModel modeloTablaCarrito = new DefaultTableModel();
+    DefaultTableModel modeloTablaRest = new DefaultTableModel();
+    DefaultTableModel modeloTablaClientes = new DefaultTableModel();
     private Usuario useradmin = login.Usuariolog;
     private Usuario user = login.oUsuario;
     private Negocio SucursalGerente = login.Gerente;
     private TipoEmpresa Empresa;
     private TipoRestaurante Restaurate;
+    private Producto productoMant;
     private String nombreProducto;
     private String PrecioProducto;
     private String ImpuestoProducto;
@@ -38,6 +41,8 @@ public final class MainMenu extends javax.swing.JFrame {
         modeloTabla = (DefaultTableModel) TblGerneteProductos.getModel();
         modeloTablaProductos = (DefaultTableModel) TblRestauranteProductos.getModel();
         modeloTablaCarrito = (DefaultTableModel) TblCarritoCompras.getModel();
+        modeloTablaRest = (DefaultTableModel) TblRestaurantes.getModel();
+        modeloTablaClientes = (DefaultTableModel) TblClientes.getModel();
         ColoresBotones();
         llenarNegocios();
         llenarRestaurantes();
@@ -53,6 +58,7 @@ public final class MainMenu extends javax.swing.JFrame {
                 BtnMantenimiento.setVisible(false);
             }
             default -> {
+                BtnGerente.setVisible(false);
             }
         }
     }
@@ -109,11 +115,23 @@ public final class MainMenu extends javax.swing.JFrame {
         InfoCantidadDeProductos = new javax.swing.JLabel();
         BtnAgregar = new javax.swing.JButton();
         BtnEliminarProductos = new javax.swing.JButton();
-        BtnEditar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         TblGerneteProductos = new javax.swing.JTable();
         PnlMantenimiento = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
+        LblImgAdmin = new javax.swing.JLabel();
+        LblAdministrador = new javax.swing.JLabel();
+        LblAdministradorInfo = new javax.swing.JLabel();
+        LblInfoAdmin = new javax.swing.JLabel();
+        LblInfoRestaurantes = new javax.swing.JLabel();
+        LblInfoRest = new javax.swing.JLabel();
+        BtnAgregarRest = new javax.swing.JButton();
+        BtnEliminarRest = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        TblRestaurantes = new javax.swing.JTable();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        TblClientes = new javax.swing.JTable();
+        BtnAgregarCliente = new javax.swing.JButton();
+        BtnEliminarCliente = new javax.swing.JButton();
         PnlInfoUsuario = new javax.swing.JPanel();
         LblInfoNameUser = new javax.swing.JLabel();
         LtlCorreo = new javax.swing.JLabel();
@@ -137,6 +155,7 @@ public final class MainMenu extends javax.swing.JFrame {
         RdoPreparado = new javax.swing.JRadioButton();
         BtnAgregarProducto = new javax.swing.JButton();
         BtnEditarProducto = new javax.swing.JButton();
+        PnlMantenimientoAdministrador = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(830, 530));
@@ -305,7 +324,7 @@ public final class MainMenu extends javax.swing.JFrame {
         PnlDefault.setLayout(PnlDefaultLayout);
         PnlDefaultLayout.setHorizontalGroup(
             PnlDefaultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(LblImgDefault, javax.swing.GroupLayout.DEFAULT_SIZE, 639, Short.MAX_VALUE)
+            .addComponent(LblImgDefault, javax.swing.GroupLayout.DEFAULT_SIZE, 635, Short.MAX_VALUE)
         );
         PnlDefaultLayout.setVerticalGroup(
             PnlDefaultLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -549,6 +568,11 @@ public final class MainMenu extends javax.swing.JFrame {
         BtnPagarCompras.setFont(BtnPagarCompras.getFont().deriveFont(BtnPagarCompras.getFont().getSize()+2f));
         BtnPagarCompras.setForeground(new java.awt.Color(255, 255, 255));
         BtnPagarCompras.setText("Pagar");
+        BtnPagarCompras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnPagarComprasActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout PnlCarritoComprasLayout = new javax.swing.GroupLayout(PnlCarritoCompras);
         PnlCarritoCompras.setLayout(PnlCarritoComprasLayout);
@@ -558,7 +582,7 @@ public final class MainMenu extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addGroup(PnlCarritoComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PnlCarritoComprasLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 531, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 527, Short.MAX_VALUE)
                         .addComponent(BtnPagarCompras))
                     .addGroup(PnlCarritoComprasLayout.createSequentialGroup()
                         .addGroup(PnlCarritoComprasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -631,16 +655,6 @@ public final class MainMenu extends javax.swing.JFrame {
             }
         });
 
-        BtnEditar.setFont(BtnEditar.getFont().deriveFont(BtnEditar.getFont().getSize()+2f));
-        BtnEditar.setForeground(new java.awt.Color(255, 255, 255));
-        BtnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/edit.png"))); // NOI18N
-        BtnEditar.setText("Editar");
-        BtnEditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnEditarActionPerformed(evt);
-            }
-        });
-
         TblGerneteProductos.setFont(TblGerneteProductos.getFont().deriveFont(TblGerneteProductos.getFont().getSize()+2f));
         TblGerneteProductos.setForeground(new java.awt.Color(0, 0, 0));
         TblGerneteProductos.setModel(new javax.swing.table.DefaultTableModel(
@@ -672,15 +686,13 @@ public final class MainMenu extends javax.swing.JFrame {
                     .addGroup(PnlGerenteLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addGroup(PnlGerenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 615, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 611, Short.MAX_VALUE)
                             .addGroup(PnlGerenteLayout.createSequentialGroup()
                                 .addGroup(PnlGerenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(PnlGerenteLayout.createSequentialGroup()
                                         .addComponent(BtnAgregar)
                                         .addGap(18, 18, 18)
-                                        .addComponent(BtnEliminarProductos)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(BtnEditar))
+                                        .addComponent(BtnEliminarProductos))
                                     .addGroup(PnlGerenteLayout.createSequentialGroup()
                                         .addComponent(LblNumeroDeProductos)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -689,7 +701,7 @@ public final class MainMenu extends javax.swing.JFrame {
                                         .addComponent(LblRestauranteCargo)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(InfoGenteNegocio)))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                .addGap(0, 380, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         PnlGerenteLayout.setVerticalGroup(
@@ -709,10 +721,9 @@ public final class MainMenu extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(PnlGerenteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnAgregar)
-                    .addComponent(BtnEliminarProductos)
-                    .addComponent(BtnEditar))
+                    .addComponent(BtnEliminarProductos))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -721,22 +732,150 @@ public final class MainMenu extends javax.swing.JFrame {
         PnlMantenimiento.setBackground(new java.awt.Color(255, 255, 255));
         PnlMantenimiento.setDoubleBuffered(false);
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/10384008_digital_maintenance_cmms_system_management_icon.png"))); // NOI18N
+        LblImgAdmin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LblImgAdmin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/10384008_digital_maintenance_cmms_system_management_icon.png"))); // NOI18N
+
+        LblAdministrador.setFont(LblAdministrador.getFont().deriveFont(LblAdministrador.getFont().getSize()+2f));
+        LblAdministrador.setForeground(new java.awt.Color(0, 57, 114));
+        LblAdministrador.setText("Administrador");
+
+        LblAdministradorInfo.setFont(LblAdministradorInfo.getFont().deriveFont(LblAdministradorInfo.getFont().getSize()+2f));
+        LblAdministradorInfo.setForeground(new java.awt.Color(0, 57, 114));
+        LblAdministradorInfo.setText("Nombre del administrador :");
+
+        LblInfoAdmin.setFont(LblInfoAdmin.getFont().deriveFont(LblInfoAdmin.getFont().getSize()+2f));
+        LblInfoAdmin.setForeground(new java.awt.Color(0, 57, 114));
+        LblInfoAdmin.setText("Info");
+
+        LblInfoRestaurantes.setFont(LblInfoRestaurantes.getFont().deriveFont(LblInfoRestaurantes.getFont().getSize()+2f));
+        LblInfoRestaurantes.setForeground(new java.awt.Color(0, 57, 114));
+        LblInfoRestaurantes.setText("Nombre del administrador :");
+
+        LblInfoRest.setFont(LblInfoRest.getFont().deriveFont(LblInfoRest.getFont().getSize()+2f));
+        LblInfoRest.setForeground(new java.awt.Color(0, 57, 114));
+        LblInfoRest.setText("Info");
+
+        BtnAgregarRest.setFont(BtnAgregarRest.getFont().deriveFont(BtnAgregarRest.getFont().getSize()+2f));
+        BtnAgregarRest.setForeground(new java.awt.Color(255, 255, 255));
+        BtnAgregarRest.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Agregar.png"))); // NOI18N
+        BtnAgregarRest.setText("Agregar");
+
+        BtnEliminarRest.setFont(BtnEliminarRest.getFont().deriveFont(BtnEliminarRest.getFont().getSize()+2f));
+        BtnEliminarRest.setForeground(new java.awt.Color(255, 255, 255));
+        BtnEliminarRest.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Remover.png"))); // NOI18N
+        BtnEliminarRest.setText("Eliminar");
+        BtnEliminarRest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnEliminarRestActionPerformed(evt);
+            }
+        });
+
+        TblRestaurantes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Nombre", "Tipo", "Gerente"
+            }
+        ));
+        jScrollPane1.setViewportView(TblRestaurantes);
+
+        TblClientes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Nombre", "Tipo"
+            }
+        ));
+        jScrollPane5.setViewportView(TblClientes);
+
+        BtnAgregarCliente.setFont(BtnAgregarCliente.getFont().deriveFont(BtnAgregarCliente.getFont().getSize()+2f));
+        BtnAgregarCliente.setForeground(new java.awt.Color(255, 255, 255));
+        BtnAgregarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Agregar.png"))); // NOI18N
+        BtnAgregarCliente.setText("Agregar");
+
+        BtnEliminarCliente.setFont(BtnEliminarCliente.getFont().deriveFont(BtnEliminarCliente.getFont().getSize()+2f));
+        BtnEliminarCliente.setForeground(new java.awt.Color(255, 255, 255));
+        BtnEliminarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Remover.png"))); // NOI18N
+        BtnEliminarCliente.setText("Eliminar");
+        BtnEliminarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnEliminarClienteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout PnlMantenimientoLayout = new javax.swing.GroupLayout(PnlMantenimiento);
         PnlMantenimiento.setLayout(PnlMantenimientoLayout);
         PnlMantenimientoLayout.setHorizontalGroup(
             PnlMantenimientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PnlMantenimientoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel3)
-                .addContainerGap(585, Short.MAX_VALUE))
+                .addGroup(PnlMantenimientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PnlMantenimientoLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(PnlMantenimientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(LblAdministrador)
+                            .addComponent(LblImgAdmin, javax.swing.GroupLayout.DEFAULT_SIZE, 623, Short.MAX_VALUE)))
+                    .addGroup(PnlMantenimientoLayout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addGroup(PnlMantenimientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(PnlMantenimientoLayout.createSequentialGroup()
+                                .addComponent(BtnAgregarRest)
+                                .addGap(18, 18, 18)
+                                .addComponent(BtnEliminarRest))
+                            .addGroup(PnlMantenimientoLayout.createSequentialGroup()
+                                .addComponent(LblInfoRestaurantes)
+                                .addGap(18, 18, 18)
+                                .addComponent(LblInfoRest))
+                            .addGroup(PnlMantenimientoLayout.createSequentialGroup()
+                                .addComponent(LblAdministradorInfo)
+                                .addGap(18, 18, 18)
+                                .addComponent(LblInfoAdmin)))
+                        .addGap(74, 74, 74)
+                        .addComponent(BtnAgregarCliente)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(BtnEliminarCliente)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PnlMantenimientoLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10))
         );
         PnlMantenimientoLayout.setVerticalGroup(
             PnlMantenimientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PnlMantenimientoLayout.createSequentialGroup()
-                .addComponent(jLabel3)
-                .addGap(0, 483, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(LblImgAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(LblAdministrador)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(PnlMantenimientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LblAdministradorInfo)
+                    .addComponent(LblInfoAdmin))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(PnlMantenimientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LblInfoRestaurantes)
+                    .addComponent(LblInfoRest))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(PnlMantenimientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BtnAgregarRest)
+                    .addComponent(BtnEliminarRest)
+                    .addComponent(BtnAgregarCliente)
+                    .addComponent(BtnEliminarCliente))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(PnlMantenimientoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         TpnVentanas.addTab("5", PnlMantenimiento);
@@ -814,7 +953,7 @@ public final class MainMenu extends javax.swing.JFrame {
                                         .addGap(18, 18, 18)
                                         .addComponent(LblInfoRol)))))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(LblDecoUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 633, Short.MAX_VALUE))
+                    .addComponent(LblDecoUsuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 629, Short.MAX_VALUE))
                 .addContainerGap())
         );
         PnlInfoUsuarioLayout.setVerticalGroup(
@@ -927,7 +1066,7 @@ public final class MainMenu extends javax.swing.JFrame {
                         .addComponent(BtnAgregarProducto)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(BtnEditarProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(348, Short.MAX_VALUE))
+                .addContainerGap(344, Short.MAX_VALUE))
         );
         PnlAgregarEditarLayout.setVerticalGroup(
             PnlAgregarEditarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -958,6 +1097,19 @@ public final class MainMenu extends javax.swing.JFrame {
 
         TpnVentanas.addTab("7", PnlAgregarEditar);
 
+        javax.swing.GroupLayout PnlMantenimientoAdministradorLayout = new javax.swing.GroupLayout(PnlMantenimientoAdministrador);
+        PnlMantenimientoAdministrador.setLayout(PnlMantenimientoAdministradorLayout);
+        PnlMantenimientoAdministradorLayout.setHorizontalGroup(
+            PnlMantenimientoAdministradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 635, Short.MAX_VALUE)
+        );
+        PnlMantenimientoAdministradorLayout.setVerticalGroup(
+            PnlMantenimientoAdministradorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 530, Short.MAX_VALUE)
+        );
+
+        TpnVentanas.addTab("8", PnlMantenimientoAdministrador);
+
         getContentPane().add(TpnVentanas, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, 670, 530));
 
         pack();
@@ -973,14 +1125,16 @@ public final class MainMenu extends javax.swing.JFrame {
         BtnMas.setBackground(new java.awt.Color(0, 114, 255, 255));
         BtnComprarProducto.setBackground(new java.awt.Color(0, 114, 255, 255));
         BtnAgregar.setBackground(new java.awt.Color(0, 114, 255, 255));
-        BtnEditar.setBackground(new java.awt.Color(0, 114, 255, 255));
         BtnEliminarProductos.setBackground(new java.awt.Color(0, 114, 255, 255));
         TxtNombreProducto.setBackground(new java.awt.Color(255, 255, 255, 1));
         TxtPrecioProducto.setBackground(new java.awt.Color(255, 255, 255, 1));
         TxtImpuestoProducto.setBackground(new java.awt.Color(255, 255, 255, 1));
         BtnAgregarProducto.setBackground(new java.awt.Color(0, 114, 255, 255));
         BtnEditarProducto.setBackground(new java.awt.Color(0, 114, 255, 255));
-
+        BtnEliminarRest.setBackground(new java.awt.Color(0, 114, 255, 255));
+        BtnAgregarRest.setBackground(new java.awt.Color(0, 114, 255, 255));
+        BtnEliminarCliente.setBackground(new java.awt.Color(0, 114, 255, 255));
+        BtnAgregarCliente.setBackground(new java.awt.Color(0, 114, 255, 255));
     }
 
     private void ActivaroDesactivarRest(boolean bool) {
@@ -1083,6 +1237,43 @@ public final class MainMenu extends javax.swing.JFrame {
         }
     }
 
+    private void llenarAdministrador() {
+        try {
+            ArrayList<Negocio> listProd = (ArrayList<Negocio>) Negocio.listadoNegocios();
+            modeloTablaRest.setRowCount(0);
+            Object[] datos = new Object[3];
+            HashSet<Negocio> setNeg = new HashSet<>(listProd);
+            for (Negocio negocio : setNeg) {
+                datos[0] = negocio.getNombre();
+                datos[1] = negocio.getTipo();
+                datos[2] = negocio.getGerente().getNombre();
+                modeloTablaRest.addRow(datos);
+
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al listar los Restaurantes\n"
+                    + "el programa se cerrará consulte con el administrador\n"
+                    + e.toString());
+        }
+        try {
+            ArrayList<Usuario> listProd = (ArrayList<Usuario>) Usuario.listado();
+            modeloTablaClientes.setRowCount(0);
+            Object[] datos = new Object[3];
+            HashSet<Usuario> setUser = new HashSet<>(listProd);
+            for (Usuario user : setUser) {
+                datos[0] = user.getNombre();
+                datos[1] = user.getRol();
+                modeloTablaClientes.addRow(datos);
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al listar el Producto\n"
+                    + "el programa se cerrará consulte con el administrador\n"
+                    + e.toString());
+        }
+    }
+
     private void BtnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSalirActionPerformed
         try {
             Login = new login();
@@ -1119,11 +1310,12 @@ public final class MainMenu extends javax.swing.JFrame {
 
     private void BtnMantenimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnMantenimientoActionPerformed
         TpnVentanas.setSelectedIndex(4);
+        llenarAdministrador();
     }//GEN-LAST:event_BtnMantenimientoActionPerformed
 
     private void BtnCarritoComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCarritoComprasActionPerformed
         TpnVentanas.setSelectedIndex(2);
-        int montoTotal=0;
+        int montoTotal = 0;
         ArrayList<Producto> listaCompras = user.getListaProductos();
         for (Producto listaProductos : listaCompras) {
             montoTotal += listaProductos.PrecioTotal();
@@ -1238,25 +1430,6 @@ public final class MainMenu extends javax.swing.JFrame {
         BtnEditarProducto.setVisible(false);
     }//GEN-LAST:event_BtnAgregarActionPerformed
 
-    private void BtnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditarActionPerformed
-        if (TblGerneteProductos.getSelectedRow() >= 0) {
-            TpnVentanas.setSelectedIndex(6);
-            BtnAgregarProducto.setVisible(false);
-            BtnEditarProducto.setVisible(true);
-
-            Object nombreObj = TblGerneteProductos.getValueAt(TblGerneteProductos.getSelectedRow(), 0);
-            Object precioObj = TblGerneteProductos.getValueAt(TblGerneteProductos.getSelectedRow(), 1);
-            Object impuestoObj = TblGerneteProductos.getValueAt(TblGerneteProductos.getSelectedRow(), 2);
-
-            nombreProducto = (nombreObj != null) ? nombreObj.toString() : "";
-            PrecioProducto = (precioObj != null) ? precioObj.toString() : "";
-            ImpuestoProducto = (impuestoObj != null) ? impuestoObj.toString() : "";
-        } else {
-            JOptionPane.showMessageDialog(null, "Debe seleccionar el producto");
-        }
-
-    }//GEN-LAST:event_BtnEditarActionPerformed
-
     private void LblExitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LblExitMouseClicked
         Utilitario.UtilitarioVentana.fadeOutAndExit(this);
     }//GEN-LAST:event_LblExitMouseClicked
@@ -1265,7 +1438,7 @@ public final class MainMenu extends javax.swing.JFrame {
         boolean empacado = false;
         String nombreProducto = TxtNombreProducto.getText();
         int precioProducto = Integer.parseInt(TxtPrecioProducto.getText());
-        Double impuestoProducto =(double) Integer.parseInt(TxtImpuestoProducto.getText())/100;
+        Double impuestoProducto = (double) Integer.parseInt(TxtImpuestoProducto.getText()) / 100;
 
         if (TxtNombreProducto.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Debes indicar el nombre del producto");
@@ -1287,7 +1460,7 @@ public final class MainMenu extends javax.swing.JFrame {
             empacado = true;
         }
         try {
-            ProductMantenimiento = new Producto(empacado, nombreProducto, precioProducto,impuestoProducto, Negocio.consultarNegocio(useradmin.getCorreo()));
+            ProductMantenimiento = new Producto(empacado, nombreProducto, precioProducto, impuestoProducto, Negocio.consultarNegocio(useradmin.getCorreo()));
 
         } catch (Exception ex) {
             Logger.getLogger(MainMenu.class
@@ -1322,26 +1495,32 @@ public final class MainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnAgregarProductoActionPerformed
 
     private void BtnEditarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditarProductoActionPerformed
-        if (TblGerneteProductos.getSelectedRow() >= 0) {
-            String codigo = TblGerneteProductos.getValueAt(TblGerneteProductos.getSelectedRow(), 0).toString();
-            try {
-                ProductMantenimiento = Negocio.consultarNegocio(useradmin.getCorreo()).Buscar(codigo);
-
-                if (this.ProductMantenimiento != null) {
-                    SucursalGerente.modificar(ProductMantenimiento);
-                    llenaTablaDeProductos(); // Actualiza la tabla con el nuevo producto
+        try {
+            if (productoMant != null) {
+                // Modificar el producto
+                boolean empacado;
+                String nombre = TxtNombreProducto.getText();
+                int precio = Integer.parseInt(TxtPrecioProducto.getText());
+                double impuesto = Double.valueOf(TxtImpuestoProducto.getText());
+                if (RdoEmpacado.isSelected()) {
+                    empacado = true;
                 } else {
-                    JOptionPane.showMessageDialog(this, "Producto no encontrado");
+                    empacado = false;
                 }
-            } catch (Exception ex) {
-                Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
-                JOptionPane.showMessageDialog(this, "Error al modificar el Producto\n" + ex.toString());
+                productoMant = new Producto(empacado, nombre, precio, impuesto, SucursalGerente);
+                SucursalGerente.modificar(productoMant);
+                // Actualizar la tabla con el nuevo producto
+                llenaTablaDeProductos();
+                // Limpia la selección de la fila en la tabla
+                TblGerneteProductos.clearSelection();
+                TpnVentanas.setSelectedIndex(3);
+            } else {
+                JOptionPane.showMessageDialog(this, "Producto no modificado");
             }
-            TblGerneteProductos.clearSelection(); // Quita la selección de la fila en la tabla 
-        } else {
-            JOptionPane.showMessageDialog(null, "Debe seleccionar el producto a modificar");
+        } catch (Exception ex) {
+            Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Error al modificar el Producto\n" + ex.getMessage());
         }
-
     }//GEN-LAST:event_BtnEditarProductoActionPerformed
 
     private void BtnEliminarProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarProductosActionPerformed
@@ -1390,7 +1569,7 @@ public final class MainMenu extends javax.swing.JFrame {
             if (productoEncontrado != null) {
                 // Agregar el producto al array de productos del usuario (asumiendo que tienes un array llamado productosUsuario)
                 user.agregrarCarrito(productoEncontrado);
-                
+
                 // Agregar el producto a la tabla (si es necesario)
                 Object[] datos = new Object[3];
                 datos[0] = productoEncontrado.getNombre();
@@ -1399,6 +1578,7 @@ public final class MainMenu extends javax.swing.JFrame {
                 modeloTablaCarrito.addRow(datos);
                 JOptionPane.showMessageDialog(this, "Producto agregado al carrito de compras del usuario");
                 BtnCarritoCompras.setVisible(true);
+                TxtCantidadProductos.setText("1");
             } else {
                 JOptionPane.showMessageDialog(this, "Producto no encontrado para el restaurante seleccionado");
             }
@@ -1407,6 +1587,49 @@ public final class MainMenu extends javax.swing.JFrame {
             Logger.getLogger(MainMenu.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_BtnComprarProductoActionPerformed
+
+    private void BtnEliminarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarClienteActionPerformed
+        if (TblClientes.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar el Cliente a eliminar");
+            return;
+        } else {
+            String NombreCliente = TblClientes.getValueAt(TblClientes.getSelectedRow(), 0).toString();
+            try {
+                Usuario.eliminar(NombreCliente);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Error al eliminar al usuario\n"
+                        + "el programa se cerrará consulte con el administrador\n"
+                        + e.toString());
+                System.exit(0);
+            }
+            llenarAdministrador();
+        }
+    }//GEN-LAST:event_BtnEliminarClienteActionPerformed
+
+    private void BtnEliminarRestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarRestActionPerformed
+        if (TblRestaurantes.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar el Cliente a eliminar");
+            return;
+        } else {
+            String NombreCliente = TblRestaurantes.getValueAt(TblRestaurantes.getSelectedRow(), 0).toString();
+            try {
+                Negocio.eliminarDepartamento(NombreCliente);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Error al eliminar el Negocio\n"
+                        + "el programa se cerrará consulte con el administrador\n"
+                        + e.toString());
+                System.exit(0);
+            }
+            llenarAdministrador();
+        }
+    }//GEN-LAST:event_BtnEliminarRestActionPerformed
+
+    private void BtnPagarComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPagarComprasActionPerformed
+        JOptionPane.showMessageDialog(this, "Gracias por tu compra vuelve pronto : "+user.getNombre());
+        modeloTablaCarrito.setRowCount(0);
+        user.setListaProductos(new ArrayList<>());
+        TpnVentanas.setSelectedIndex(0);
+    }//GEN-LAST:event_BtnPagarComprasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1464,12 +1687,15 @@ public final class MainMenu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup BtgTipoEmpacado;
     private javax.swing.JButton BtnAgregar;
+    private javax.swing.JButton BtnAgregarCliente;
     private javax.swing.JButton BtnAgregarProducto;
+    private javax.swing.JButton BtnAgregarRest;
     private javax.swing.JButton BtnCarritoCompras;
     private javax.swing.JButton BtnComprarProducto;
-    private javax.swing.JButton BtnEditar;
     private javax.swing.JButton BtnEditarProducto;
+    private javax.swing.JButton BtnEliminarCliente;
     private javax.swing.JButton BtnEliminarProductos;
+    private javax.swing.JButton BtnEliminarRest;
     private javax.swing.JButton BtnGerente;
     private javax.swing.JButton BtnMantenimiento;
     private javax.swing.JButton BtnMas;
@@ -1483,6 +1709,8 @@ public final class MainMenu extends javax.swing.JFrame {
     private javax.swing.JLabel InfoCantidadDeProductos;
     private javax.swing.JLabel InfoGenteNegocio;
     private javax.swing.JLabel LTlContra;
+    private javax.swing.JLabel LblAdministrador;
+    private javax.swing.JLabel LblAdministradorInfo;
     private javax.swing.JLabel LblCantidad;
     private javax.swing.JLabel LblCarritoCompras;
     private javax.swing.JLabel LblDecoUsuario;
@@ -1490,12 +1718,16 @@ public final class MainMenu extends javax.swing.JFrame {
     private javax.swing.JLabel LblGerente;
     private javax.swing.JLabel LblIconUsuario;
     private javax.swing.JLabel LblImagenRestaurante;
+    private javax.swing.JLabel LblImgAdmin;
     private javax.swing.JLabel LblImgDefault;
     private javax.swing.JLabel LblImgGerente;
     private javax.swing.JLabel LblImpuesto;
+    private javax.swing.JLabel LblInfoAdmin;
     private javax.swing.JLabel LblInfoContra;
     private javax.swing.JLabel LblInfoNameUser;
     private javax.swing.JLabel LblInfoNumTar;
+    private javax.swing.JLabel LblInfoRest;
+    private javax.swing.JLabel LblInfoRestaurantes;
     private javax.swing.JLabel LblInfoRol;
     private javax.swing.JLabel LblNombreProducto;
     private javax.swing.JLabel LblNumeroDeProductos;
@@ -1517,6 +1749,7 @@ public final class MainMenu extends javax.swing.JFrame {
     private javax.swing.JPanel PnlGerente;
     private javax.swing.JPanel PnlInfoUsuario;
     private javax.swing.JPanel PnlMantenimiento;
+    private javax.swing.JPanel PnlMantenimientoAdministrador;
     private javax.swing.JPanel PnlRestaurante;
     private javax.swing.JPanel PnlUsuario;
     private javax.swing.JRadioButton RdoEmpacado;
@@ -1524,19 +1757,22 @@ public final class MainMenu extends javax.swing.JFrame {
     private javax.swing.JRadioButton RdoPreparado;
     private javax.swing.JRadioButton RdoPreparadoCompra;
     private javax.swing.JTable TblCarritoCompras;
+    private javax.swing.JTable TblClientes;
     private javax.swing.JTable TblGerneteProductos;
     private javax.swing.JTable TblRestauranteProductos;
+    private javax.swing.JTable TblRestaurantes;
     private javax.swing.JTabbedPane TpnVentanas;
     private javax.swing.JTextField TxtCantidadProductos;
     private javax.swing.JTextField TxtImpuestoProducto;
     private javax.swing.JTextField TxtNombreProducto;
     private javax.swing.JTextField TxtPrecioProducto;
     private javax.swing.JLabel infoMontoCompra;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JLabel lblInfoCorreo;
     // End of variables declaration//GEN-END:variables
 }

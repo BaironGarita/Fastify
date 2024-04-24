@@ -12,26 +12,23 @@ import java.util.List;
 public class Negocio implements Serializable {
 
     private final TipoEmpresa Tipo;
-    private final int Codigo;
     private List<Producto> arrayProductos;
     private final Usuario Gerente;
     private String Nombre;
     private TipoRestaurante TipoRest;
 
-    public Negocio(TipoEmpresa Tipo, Usuario Gerente, String Nombre, int Codigo) {
+    public Negocio(TipoEmpresa Tipo, Usuario Gerente, String Nombre) {
         this.Tipo = Tipo;
         this.Gerente = Gerente;
         this.Nombre = Nombre;
-        this.Codigo = Codigo;
         this.arrayProductos = new ArrayList<Producto>();
     }
 
-    public Negocio(TipoEmpresa Tipo, Usuario Gerente, String Nombre, TipoRestaurante TipoRest, int codigo) {
+    public Negocio(TipoEmpresa Tipo, Usuario Gerente, String Nombre, TipoRestaurante TipoRest) {
         this.Tipo = Tipo;
         this.Gerente = Gerente;
         this.Nombre = Nombre;
         this.TipoRest = TipoRest;
-        this.Codigo = codigo;
         this.arrayProductos = new ArrayList<Producto>();
     }
 
@@ -47,22 +44,18 @@ public class Negocio implements Serializable {
         return Gerente;
     }
 
-    public int getCodigo() {
-        return Codigo;
-    }
-
     public List<Producto> getArrayProductos() {
         return arrayProductos;
     }
-    
-    public void llenarTienda() throws Exception{
+
+    public void llenarTienda() throws Exception {
         arrayProductos.removeAll(arrayProductos);
         ArrayList<Producto> general = (ArrayList<Producto>) Producto.listadoProductos();
         for (Producto producto : general) {
             if (producto.getNegocio().equals(this)) {
                 arrayProductos.add(producto);
             }
-            
+
         }
     }
 
@@ -125,12 +118,19 @@ public class Negocio implements Serializable {
     }
 
     public Producto Buscar(String ProductoBuscar) {
+        // Verificar que arrayProductos no sea null
+        if (arrayProductos == null) {
+            return null;
+        }
+
+        // Comparación de nombres sin distinguir mayúsculas y minúsculas
         for (int i = 0; i < arrayProductos.size(); i++) {
             Producto producto = arrayProductos.get(i);
-            if (producto.getNombre().equals(ProductoBuscar)) {
+            if (producto.getNombre().equalsIgnoreCase(ProductoBuscar)) {
                 return producto;
             }
         }
         return null;
     }
+
 }

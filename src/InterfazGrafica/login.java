@@ -25,13 +25,13 @@ public class login extends javax.swing.JFrame {
     public static Usuario Usuariolog;
     public static Negocio Gerente;
     private int intentos = 0;
-    static JFrame Registro;
-    static JFrame Main;
     public static Usuario oUsuario;
-    private Usuario user; 
+    private Usuario user;
 
     /**
      * Creates new form login
+     *
+     * @throws java.lang.Exception
      */
     public login() throws Exception {
         initComponents();
@@ -238,60 +238,63 @@ public class login extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void BtnInicioSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnInicioSesionActionPerformed
-        Usuario oUsuario = null;
         try {
-            oUsuario = Usuario.consultar(TxtUsuario.getText().trim());
+            Usuario usuario1;
+            usuario1 = Usuario.consultar(TxtUsuario.getText().trim());
+
+            char[] contraseña = TxtContra.getPassword();
+            String contraseñaString = String.valueOf(contraseña); // Convertir a String
+
+            if (usuario1 != null) {
+                if (usuario1.getConstraseña().equals(contraseñaString)) {
+                    PrincipalFastify.setoUsuario(usuario1);
+                    this.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(this, "Contraseña incorrecta");
+                    ++intentos;
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "El usuario no existe");
+                ++intentos;
+            }
+
+            // Validar los intentos
+            if (intentos == 3) {
+                JOptionPane.showMessageDialog(this, "Supero la cantidad de intentos");
+                System.exit(0);
+            } else if (usuario1 != null && usuario1.getConstraseña().equals(contraseñaString)) {
+                try {
+                    if (usuario1.getRol().equals(TipoUsuario.GERENTE)) {
+                        Gerente = Negocio.consultarNegocio(usuario1.getCorreo());
+                        this.nombre = usuario1.getNombre();
+                        this.rol = usuario1.getRol();
+                        this.Usuariolog = usuario1;
+                    }else{
+                        this.nombre = usuario1.getNombre();
+                        this.rol = usuario1.getRol();
+                        this.oUsuario = usuario1;
+                    }
+                } catch (Exception ex) {
+                    Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                Utilitario.UtilitarioVentana.fadeOutAndClose(this);
+
+                try {
+                    UtilitarioVentana.centrarVentanaJFrame(new MainMenu(), false);
+                } catch (Exception ex) {
+                    Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         } catch (Exception ex) {
             Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
         }
-        char[] contraseña = TxtContra.getPassword();
-        if (oUsuario != null) {
-            if (oUsuario.getConstraseña().equals(String.valueOf(contraseña))) {
-                PrincipalFastify.setoUsuario(oUsuario);
-                this.dispose();
-            } else {
-                JOptionPane.showMessageDialog(this, "Contraseña invalida");
-                ++intentos;
-            }
-        } else {
-            JOptionPane.showMessageDialog(this, "El usuario no existe");
-            ++intentos;
-        }
-        //validar los intentos
-        if (intentos == 3) {
-            JOptionPane.showMessageDialog(this, "Supero la cantidad de intentos");
-            System.exit(0);
-        } else if (oUsuario.getConstraseña().equals(String.valueOf(contraseña)) && oUsuario.getRol().equals(TipoUsuario.GERENTE)) {
-            try {
-                Gerente = Negocio.consultarNegocio(oUsuario.getCorreo());
-            } catch (Exception ex) {
-                Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            this.nombre = oUsuario.getNombre();
-            this.rol = oUsuario.getRol();
-            this.Usuariolog = oUsuario;
-            Utilitario.UtilitarioVentana.fadeOutAndClose(this);
-            try {
-                UtilitarioVentana.centrarVentanaJFrame(this.Main = new MainMenu(), false);
-            } catch (Exception ex) {
-                Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } else if (oUsuario.getConstraseña().equals(String.valueOf(contraseña))) {
-            this.nombre = oUsuario.getNombre();
-            this.rol = oUsuario.getRol();
-            this.oUsuario = oUsuario;
-            Utilitario.UtilitarioVentana.fadeOutAndClose(this);
-            try {
-                UtilitarioVentana.centrarVentanaJFrame(this.Main = new MainMenu(), false);
-            } catch (Exception ex) {
-                Logger.getLogger(login.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+
     }//GEN-LAST:event_BtnInicioSesionActionPerformed
 
     private void LblRegistroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LblRegistroMouseClicked
         Utilitario.UtilitarioVentana.fadeOutAndClose(this);
-        UtilitarioVentana.centrarVentanaJFrame(this.Registro = new register(this), false);
+        UtilitarioVentana.centrarVentanaJFrame(new register(this), false);
     }//GEN-LAST:event_LblRegistroMouseClicked
 
     private void TxtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TxtUsuarioActionPerformed

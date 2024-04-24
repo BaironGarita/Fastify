@@ -22,6 +22,7 @@ import javax.swing.JOptionPane;
 public class register extends javax.swing.JFrame {
 
     Usuario oUsuario = null;
+    static Usuario Registrado;
     static JFrame Login;
 
     /**
@@ -48,6 +49,7 @@ public class register extends javax.swing.JFrame {
     private void initComponents() {
 
         BtgTipoTarjeta = new javax.swing.ButtonGroup();
+        BtgTipoUsuario = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         LblUsuario = new javax.swing.JLabel();
         TxtUsuario = new javax.swing.JTextField();
@@ -72,6 +74,8 @@ public class register extends javax.swing.JFrame {
         TxtCcv = new javax.swing.JTextField();
         LbCcv = new javax.swing.JLabel();
         BtnRegistro = new javax.swing.JButton();
+        RdoRegular = new javax.swing.JRadioButton();
+        RdoGerente = new javax.swing.JRadioButton();
         jPanel2 = new javax.swing.JPanel();
         LblUser = new javax.swing.JLabel();
 
@@ -79,7 +83,6 @@ public class register extends javax.swing.JFrame {
         setAutoRequestFocus(false);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(920, 530));
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
@@ -213,6 +216,18 @@ public class register extends javax.swing.JFrame {
         });
         jPanel1.add(BtnRegistro, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 450, 341, 40));
 
+        BtgTipoUsuario.add(RdoRegular);
+        RdoRegular.setFont(RdoRegular.getFont().deriveFont(RdoRegular.getFont().getSize()+2f));
+        RdoRegular.setForeground(new java.awt.Color(255, 255, 255));
+        RdoRegular.setText("Usuario Regular");
+        jPanel1.add(RdoRegular, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, -1, -1));
+
+        BtgTipoUsuario.add(RdoGerente);
+        RdoGerente.setFont(RdoGerente.getFont().deriveFont(RdoGerente.getFont().getSize()+2f));
+        RdoGerente.setForeground(new java.awt.Color(255, 255, 255));
+        RdoGerente.setText("Gerente");
+        jPanel1.add(RdoGerente, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 210, -1, -1));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 360, 530));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -249,6 +264,7 @@ public class register extends javax.swing.JFrame {
 
     private void BtnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRegistroActionPerformed
         TipoTarjeta tarjeta;
+        TipoUsuario user;
         char[] contra = TxtContra.getPassword();
         if (TxtUsuario.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Debe indicar el nombre de usuario ");
@@ -270,7 +286,14 @@ public class register extends javax.swing.JFrame {
             LbCcv.setForeground(Color.red);
             return;
         }
-
+        if (RdoRegular.isSelected()) {
+            user = TipoUsuario.REGULAR;
+        } else if (RdoGerente.isSelected()) {
+            user = TipoUsuario.GERENTE;
+        } else {
+            JOptionPane.showMessageDialog(this, "Debe digitar el tipo de Usuario");
+            return;
+        }
         if (RdoVisa.isSelected()) {
             tarjeta = TipoTarjeta.VISA;
         } else if (RdoMastercard.isSelected()) {
@@ -285,13 +308,24 @@ public class register extends javax.swing.JFrame {
             LbCcv.setForeground(Color.red);
             return;
         }
-        Usuario Usuario = new Usuario(TxtCorreo.getText(), String.valueOf(contra), TxtUsuario.getText(), TipoUsuario.REGULAR, tarjeta, TxtNumTarjeta.getText());
+        Usuario Usuario = new Usuario(TxtCorreo.getText(), String.valueOf(contra), TxtUsuario.getText(), user, tarjeta, TxtNumTarjeta.getText());
+        Registrado = Usuario;
         try {
             Usuario.agregar(Usuario);
         } catch (Exception ex) {
             Logger.getLogger(register.class.getName()).log(Level.SEVERE, null, ex);
         }
         Utilitario.UtilitarioVentana.fadeOutAndClose(this);
+        if (Usuario.getRol().equals(TipoUsuario.GERENTE)) {
+            try {
+                CreacionNegocio DlgRestaurante = new CreacionNegocio(this, true);
+                DlgRestaurante.setModal(true);//Indica que no se puede pasar a la ventana anterior mientras no se cierre esta
+                DlgRestaurante.setLocationRelativeTo(null);
+                DlgRestaurante.setVisible(true); //Presenta el JDialog
+            } catch (Exception ex) {
+                Logger.getLogger(register.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         try {
             UtilitarioVentana.fadeRegistro(Login);
         } catch (Exception ex) {
@@ -336,6 +370,7 @@ public class register extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup BtgTipoTarjeta;
+    private javax.swing.ButtonGroup BtgTipoUsuario;
     private javax.swing.JButton BtnRegistro;
     private javax.swing.JLabel LbCcv;
     private javax.swing.JLabel LbContra;
@@ -353,7 +388,9 @@ public class register extends javax.swing.JFrame {
     private javax.swing.JLabel LblUser;
     private javax.swing.JLabel LblUsuario;
     private javax.swing.JLabel LblVisa;
+    private javax.swing.JRadioButton RdoGerente;
     private javax.swing.JRadioButton RdoMastercard;
+    private javax.swing.JRadioButton RdoRegular;
     private javax.swing.JRadioButton RdoVisa;
     private javax.swing.JTextField TxtCcv;
     private javax.swing.JPasswordField TxtContra;
